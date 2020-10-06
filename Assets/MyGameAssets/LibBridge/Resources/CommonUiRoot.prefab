@@ -224,8 +224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256106d6bd3c83144bf92e35f8bc1ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nativeView: {fileID: 114978325799587698}
-  native: {fileID: 114740638807462900}
 --- !u!1 &1108664114912600
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,9 +332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbbc9f82a9b9a04ba0d218203cab9dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topBanner: {fileID: 114575378562213892}
-  bottomBanner: {fileID: 114640458897296896}
-  inter: {fileID: 114565476353410254}
 --- !u!1 &1189872380867746
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,6 +574,7 @@ MonoBehaviour:
   CorrectAlignmentForRTL: 1
   AddSpacesToJoinedLanguages: 0
   AllowLocalizedParameters: 1
+  AllowParameters: 1
   TranslatedObjects: []
   LocalizeEvent:
     m_PersistentCalls:
@@ -639,9 +635,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbbc9f82a9b9a04ba0d218203cab9dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topBanner: {fileID: 114626988823816096}
-  bottomBanner: {fileID: 114244163037143620}
-  inter: {fileID: 114601848156351934}
 --- !u!1 &1424455927038270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1279,7 +1272,6 @@ GameObject:
   - component: {fileID: 224379809504043168}
   - component: {fileID: 114858080452234906}
   - component: {fileID: 2027158502891356148}
-  - component: {fileID: 4121976050035231256}
   m_Layer: 0
   m_Name: AdMobManager
   m_TagString: Untagged
@@ -1332,30 +1324,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Android_Banner:
-  - ca-app-pub-3940256099942544/6300978111
-  - ca-app-pub-3940256099942544/6300978111
-  Android_Interstitial: ca-app-pub-3940256099942544/1033173712
-  Android_NativeExpress: ca-app-pub-3940256099942544/2247696110
+  - ca-app-pub-4943898464524496/9747742408
+  - ca-app-pub-4943898464524496/9747742408
+  Android_Interstitial: ca-app-pub-4943898464524496/9747742408
+  Android_NativeExpress: ca-app-pub-4943898464524496/9747742408
   ios_Banner:
-  - ca-app-pub-3940256099942544/6300978111
-  - ca-app-pub-3940256099942544/6300978111
+  - ca-app-pub-4943898464524496/9747742408
+  - ca-app-pub-4943898464524496/9747742408
   ios_Interstitial: ca-app-pub-3940256099942544/4411468910
   ios_NativeExpress: ca-app-pub-3940256099942544/3986624511
   myNendNative: {fileID: 114763152679354838}
---- !u!114 &4121976050035231256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1610163025218330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 645a65ea50d9042968e9d2990dea407f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameId: 3842262
-  testMode: 0
 --- !u!1 &1640017550533942
 GameObject:
   m_ObjectHideFlags: 0

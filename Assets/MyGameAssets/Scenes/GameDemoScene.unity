@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 716796119}
   - component: {fileID: 716796121}
   - component: {fileID: 716796120}
+  - component: {fileID: 716796122}
   m_Layer: 5
   m_Name: GameDemo
   m_TagString: Untagged
@@ -203,8 +204,8 @@ MonoBehaviour:
   onFinished:
     m_PersistentCalls:
       m_Calls: []
-  from: 0
-  to: 0
+  from: 1
+  to: 1
   includeChilds: 0
   overrideOriginalAlpha: 1
 --- !u!114 &716796121
@@ -219,6 +220,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6f364dd58ed014394815f229da6cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterTweenKind: 0
+  autoClose: 0
+  autoCloseTime: 0
+  onFinishAutoClose:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &716796122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716796118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef79f8545565bf14ba0028a1ea869f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneName: root
+  FadeType: 2
+  FadeColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &856612358
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +296,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!114 &856612361
 MonoBehaviour:
   m_ObjectHideFlags: 0

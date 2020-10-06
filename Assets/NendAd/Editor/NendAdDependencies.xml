@@ -1,0 +1,13 @@
+<dependencies>
+  <androidPackages>
+    <!-- <androidPackage spec="androidx.legacy:legacy-support-v4:1.0.0"/> -->
+    <androidPackage spec="androidx.appcompat:appcompat:1.1.0"/>
+    <androidPackage spec="androidx.constraintlayout:constraintlayout:1.1.3"/>
+    <androidPackage spec="androidx.preference:preference:1.1.1"/>
+    <androidPackage spec="com.google.android.gms:play-services-ads-identifier:17.0.0"/>
+    <androidPackage spec="com.google.android.gms:play-services-location:17.0.0"/>
+  </androidPackages>
+  <iosPods>
+    <iosPod name="NendSDK_iOS" minTargetSdk="9.0" version="6.0.3"/>
+  </iosPods>
+</dependencies>

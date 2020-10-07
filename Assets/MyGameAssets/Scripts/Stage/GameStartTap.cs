@@ -12,8 +12,8 @@ public class GameStartTap : MonoBehaviour
     // ステートマシーンの状態遷移に使用する列挙型
     enum StateEventId
     {
-        StartGame,
-        Restart
+        StartGame,          //ゲームがスタートされた時
+        Restart             //ゲームがリスタートされた時
     }
     ImtStateMachine<GameStartTap> stateMachine;                         //ステートマシン
     Subject<Unit> gameStartSubject = new Subject<Unit>();               //ゲームが開始したことを知らせるSubject

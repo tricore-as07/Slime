@@ -16,7 +16,7 @@ public class GameStartTap : MonoBehaviour
         Restart
     }
     ImtStateMachine<GameStartTap> stateMachine;                         //ステートマシン
-    Subject<Unit> gameStartSubject = new Subject<Unit>();       //ゲームが開始したことを知らせるSubject
+    Subject<Unit> gameStartSubject = new Subject<Unit>();               //ゲームが開始したことを知らせるSubject
     public IObservable<Unit> OnGameStarted => gameStartSubject;         //ゲームが開始されたら呼ばれるイベント　※購読側だけを公開
 
     // インスペクターに表示する変数
@@ -27,9 +27,28 @@ public class GameStartTap : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        Initialize();
+        CreateStateTable();
+    }
+
+    /// <summary>
+    /// 初期化処理
+    /// </summary>
+    void Initialize()
+    {
+        //nullチェックとキャッシュ
+        topToStartText = topToStartText ?? GetComponent<TMP_Text>();
+    }
+
+    /// <summary>
+    /// ステートマシーンの遷移テーブルの作成
+    /// </summary>
+    void CreateStateTable()
+    {
         // ステートマシンのインスタンスを生成して遷移テーブルを構築
         stateMachine = new ImtStateMachine<GameStartTap>(this); // 自身がコンテキストになるので自身のインスタンスを渡す
         stateMachine.AddTransition<BeforeGameStartState, AfterGameStartState>((int)StateEventId.StartGame);
+        stateMachine.AddTransition<AfterGameStartState, BeforeGameStartState>((int)StateEventId.Restart);
         // 起動ステートを設定（起動ステートは EnableState）
         stateMachine.SetStartState<BeforeGameStartState>();
     }

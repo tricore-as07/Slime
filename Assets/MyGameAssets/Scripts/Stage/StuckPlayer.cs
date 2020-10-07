@@ -2,17 +2,17 @@
 using UniRx;
 
 /// <summary>
-/// プレイヤーに関する処理を行う
+/// プレイヤーをゲーム開始まで足止めする
 /// </summary>
-public class Player : MonoBehaviour
+public class StuckPlayer : MonoBehaviour
 {
-    [SerializeField] new Rigidbody rigidbody = default;
+    // インスペクターに表示する変数
     [SerializeField] GameStartTap gameStartTap = default;
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
     /// </summary>
-    void Awake()
+    private void Awake()
     {
         Initialize();
     }
@@ -23,12 +23,8 @@ public class Player : MonoBehaviour
     void Initialize()
     {
         //nullチェックとキャッシュ
-        rigidbody = rigidbody ?? GetComponent<Rigidbody>();
         gameStartTap = gameStartTap ?? GameObject.FindGameObjectWithTag("TapToStart").GetComponent<GameStartTap>();
-
-        //ゲームが開始するまで重力が働かないようにする
-        rigidbody.useGravity = false;
-        //ゲームが開始されたら重力を有効にする
-        gameStartTap?.OnGameStarted.Subscribe(Unit => rigidbody.useGravity = true);
+        //ゲームが開始されたら自分を非アクティブにする
+        gameStartTap?.OnGameStarted.Subscribe(Unit => gameObject.SetActive(false));
     }
 }

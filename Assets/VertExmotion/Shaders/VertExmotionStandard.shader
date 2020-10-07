@@ -62,7 +62,7 @@ Shader "VertExmotion/Standard"
 			Pass
 			{
 				Name "FORWARD"
-				Tags { "LightMode" = "ForwardBase" }
+				Tags { "LightMode" = "UniversalForward" }
 
 				Blend[_SrcBlend][_DstBlend]
 				ZWrite[_ZWrite]
@@ -99,7 +99,7 @@ Shader "VertExmotion/Standard"
 			Pass
 			{
 				Name "FORWARD_DELTA"
-				Tags { "LightMode" = "ForwardAdd" }
+				Tags { "LightMode" = "UniversalForward" }
 				Blend[_SrcBlend] One
 				Fog { Color(0,0,0,0) } // in additive pass fog should be black
 				ZWrite Off

@@ -2,6 +2,8 @@
 using UnityEngine;
 using UniRx;
 using System;
+using System.Collections.Generic;
+
 
 /// <summary>
 /// プレイヤーに関する処理を行う
@@ -13,14 +15,16 @@ public partial class Player : MonoBehaviour
     /// </summary>
     public class PlayerNormalState : ImtStateMachine<Player>.State
     {
-        IDisposable disposable;
+        List<IDisposable> disposableList = new List<IDisposable>();         //購読を解除するために使用
+        bool canJump = false;                                               //ジャンプできるかどうか
 
         /// <summary>
         /// 状態へ突入時の処理はこのEnterで行う
         /// </summary>
         protected internal override void Enter()
         {
-            disposable = Context.OnCollisionExitEvent.Subscribe(obj => OnCollisionExit(obj));
+            disposableList.Add(Context.OnCollisionExitEvent.Subscribe(obj => OnCollisionExit(obj)));
+            disposableList.Add(Context.OnCollisionEnterEvent.Subscribe(obj => OnCollisionEnter(obj)));
         }
 
         /// <summary>
@@ -28,7 +32,7 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && canJump)
             {
                 stateMachine.SendEvent((int)PlayerStateEventId.Jump);
             }
@@ -39,7 +43,11 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Exit()
         {
-            disposable.Dispose();
+            foreach(var disposable in disposableList)
+            {
+                disposable.Dispose();
+            }
+            disposableList.Clear();
         }
 
         /// <summary>
@@ -48,6 +56,22 @@ public partial class Player : MonoBehaviour
         /// <param name="gameObject">衝突したゲームオブジェクト</param>
         void OnCollisionExit(GameObject gameObject)
         {
+            if(gameObject.tag == "Ground")
+            {
+                canJump = false;
+            }
+        }
+
+        /// <summary>
+        /// 他のオブジェクトと衝突した時に呼ばれる
+        /// </summary>
+        /// <param name="gameObject">衝突したゲームオブジェクト</param>
+        void OnCollisionEnter(GameObject gameObject)
+        {
+            if (gameObject.tag == "Ground")
+            {
+                canJump = true;
+            }
         }
     }
 }

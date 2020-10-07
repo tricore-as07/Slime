@@ -25,6 +25,7 @@ public partial class Player : MonoBehaviour
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
     [SerializeField] GameStartTap gameStartTap = default;                       //ゲーム開始を知るためのクラス
+    [SerializeField] float jumpPower = 0f;                                      //ジャンプする時の力
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される

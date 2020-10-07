@@ -246,6 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 535927950}
   gameStartTap: {fileID: 1278265910}
+  jumpPower: 500
 --- !u!1 &626044246
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public partial class Player : MonoBehaviour
     /// </summary>
     public class PlayerJumpState : ImtStateMachine<Player>.State
     {
-        IDisposable disposable;
+        IDisposable disposable;         //購読を解除するために使用
 
         /// <summary>
         /// 状態へ突入時の処理はこのEnterで行う
@@ -22,7 +22,7 @@ public partial class Player : MonoBehaviour
         {
             //タップを促すためのテキストをアクティブにする
             disposable = Context.OnCollisionEnterEvent.Subscribe(obj => OnCollisionEnter(obj));
-            Context.rigidbody.AddForce(Vector3.up * 500);
+            Context.rigidbody.AddForce(Vector3.up * Context.jumpPower);
         }
 
         /// <summary>

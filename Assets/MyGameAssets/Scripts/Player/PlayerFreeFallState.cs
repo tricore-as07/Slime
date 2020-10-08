@@ -8,12 +8,10 @@ using System;
 /// </summary>
 public partial class Player : MonoBehaviour
 {
-    /// <summary>
-    /// プレイヤーがジャンプしている時ステート
-    /// </summary>
-    public class PlayerJumpState : ImtStateMachine<Player>.State
+    public class PlayerFreeFallState : ImtStateMachine<Player>.State
     {
         IDisposable disposable;         //購読を解除するために使用
+        Vector3 dir;
 
         /// <summary>
         /// 状態へ突入時の処理はこのEnterで行う
@@ -23,7 +21,7 @@ public partial class Player : MonoBehaviour
             // 自分のOnCollisionが呼ばれるように、状態が変化した時には呼ばれないように購読解除用の変数に保存
             disposable = Context.OnCollisionEnterEvent.Subscribe(obj => OnCollisionEnter(obj));
             // プレイヤーにジャンプのための力を加える
-            Context.rigidbody.AddForce(Vector3.up * Context.jumpPower);
+            dir = (Vector3.right + Vector3.up).normalized;
 
         }
 
@@ -32,10 +30,18 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Update()
         {
-            //ジャンプの入力がやめられたら自由落下に切り替える
-            if(!Input.GetKey(KeyCode.Space))
+            var isHookActionInput = Input.GetKeyDown(KeyCode.Space);              //ジャンプする入力がされたか
+            if (isHookActionInput)
             {
-                stateMachine.SendEvent((int)PlayerStateEventId.FreeFall);
+                RaycastHit hit;
+                if (Physics.Raycast(Context.transform.position, dir, out hit, 100))
+                {
+                    if (hit.transform.tag == "HookPoint")
+                    {
+                        Context.hit = hit;
+                        stateMachine.SendEvent((int)PlayerStateEventId.Hook);
+                    }
+                }
             }
         }
 
@@ -55,7 +61,7 @@ public partial class Player : MonoBehaviour
         void OnCollisionEnter(Collision collision)
         {
             // 接地したとき
-            if(collision.gameObject.tag == "Ground")
+            if (collision.gameObject.tag == "Ground")
             {
                 // 何もしてない状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.Normal);
@@ -63,4 +69,3 @@ public partial class Player : MonoBehaviour
         }
     }
 }
-

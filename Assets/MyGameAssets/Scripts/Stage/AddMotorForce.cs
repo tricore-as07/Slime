@@ -13,7 +13,7 @@ public class AddMotorForce : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(joint.autoConfigureConnectedAnchor)
+        if(joint.connectedBody != null)
         {
             var motor = joint.motor;
             if (joint.connectedBody.velocity.x > deadZoneVelocity)

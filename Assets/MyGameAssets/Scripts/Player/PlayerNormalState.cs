@@ -4,7 +4,6 @@ using UniRx;
 using System;
 using System.Collections.Generic;
 
-
 /// <summary>
 /// プレイヤーに関する処理を行う
 /// </summary>

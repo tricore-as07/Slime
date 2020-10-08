@@ -12,7 +12,9 @@ public partial class Player : MonoBehaviour
     enum PlayerStateEventId
     {
         Normal,         //何もしてない状態
-        Jump            //ジャンプしている状態
+        Jump,           //ジャンプしている状態
+        Hook,
+        FreeFall
     }
     ImtStateMachine<Player> stateMachine = default;                             //ステートマシン
     Subject<Collision> onCollisionStaySubject = new Subject<Collision>();       //プレイヤーが何かに衝突したことを知らせるSubject
@@ -21,12 +23,12 @@ public partial class Player : MonoBehaviour
     IObservable<Collision> OnCollisionEnterEvent => onCollisionEnterSubject;    //プレイヤーが何かに衝突したら呼ばれるイベント
     Subject<Collision> onCollisionExitSubject = new Subject<Collision>();       //プレイヤーが何かに衝突したことを知らせるSubject
     IObservable<Collision> OnCollisionExitEvent => onCollisionExitSubject;      //プレイヤーが何かに衝突したら呼ばれるイベント
+    RaycastHit hit;
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
     [SerializeField] GameStartTap gameStartTap = default;                       //ゲーム開始を知るためのクラス
     [SerializeField] float jumpPower = 0f;                                      //ジャンプする時の力
-    [SerializeField] GameObject hookDiretionObj = default;                      //フックの判定をする方向 
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -59,8 +61,19 @@ public partial class Player : MonoBehaviour
     {
         // ステートマシンのインスタンスを生成して遷移テーブルを構築
         stateMachine = new ImtStateMachine<Player>(this);   // 自身がコンテキストになるので自身のインスタンスを渡す
+        // 通常状態からの状態遷移も記述
         stateMachine.AddTransition<PlayerNormalState, PlayerJumpState>((int)PlayerStateEventId.Jump);
+        // ジャンプしている状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerJumpState, PlayerNormalState>((int)PlayerStateEventId.Normal);
+        stateMachine.AddTransition<PlayerJumpState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
+        // フックを使用している状態からの状態遷移の記述
+        stateMachine.AddTransition<PlayerHookState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
+        stateMachine.AddTransition<PlayerHookState, PlayerJumpState>((int)PlayerStateEventId.Jump);
+        stateMachine.AddTransition<PlayerHookState, PlayerNormalState>((int)PlayerStateEventId.Normal);
+        // 自由落下している状態からの状態遷移の記述
+        stateMachine.AddTransition<PlayerFreeFallState, PlayerHookState>((int)PlayerStateEventId.Hook);
+        stateMachine.AddTransition<PlayerFreeFallState, PlayerNormalState>((int)PlayerStateEventId.Normal);
+
         // 起動ステートを設定（起動ステートは PlayerNormalState）
         stateMachine.SetStartState<PlayerNormalState>();
     }

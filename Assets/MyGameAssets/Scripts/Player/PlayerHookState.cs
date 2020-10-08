@@ -8,12 +8,11 @@ using System;
 /// </summary>
 public partial class Player : MonoBehaviour
 {
-    /// <summary>
-    /// プレイヤーがジャンプしている時ステート
-    /// </summary>
-    public class PlayerJumpState : ImtStateMachine<Player>.State
+    public class PlayerHookState : ImtStateMachine<Player>.State
     {
         IDisposable disposable;         //購読を解除するために使用
+        GameObject hookObj;
+        HingeJoint joint;
 
         /// <summary>
         /// 状態へ突入時の処理はこのEnterで行う
@@ -22,9 +21,18 @@ public partial class Player : MonoBehaviour
         {
             // 自分のOnCollisionが呼ばれるように、状態が変化した時には呼ばれないように購読解除用の変数に保存
             disposable = Context.OnCollisionEnterEvent.Subscribe(obj => OnCollisionEnter(obj));
-            // プレイヤーにジャンプのための力を加える
-            Context.rigidbody.AddForce(Vector3.up * Context.jumpPower);
 
+            hookObj = Context.hit.transform.gameObject;
+            joint = hookObj?.GetComponent<HingeJoint>();
+            if(joint != null)
+            {
+                joint.connectedBody = Context.rigidbody;
+            }
+            else
+            {
+                stateMachine.SendEvent((int)PlayerStateEventId.Jump);
+            }
+            joint.useMotor = true;
         }
 
         /// <summary>
@@ -32,9 +40,10 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Update()
         {
-            //ジャンプの入力がやめられたら自由落下に切り替える
-            if(!Input.GetKey(KeyCode.Space))
+            bool isDisconnectHook = Input.GetKeyDown(KeyCode.Space);
+            if (isDisconnectHook)
             {
+                joint.connectedBody = null;
                 stateMachine.SendEvent((int)PlayerStateEventId.FreeFall);
             }
         }
@@ -55,12 +64,12 @@ public partial class Player : MonoBehaviour
         void OnCollisionEnter(Collision collision)
         {
             // 接地したとき
-            if(collision.gameObject.tag == "Ground")
+            if (collision.gameObject.tag == "Ground")
             {
                 // 何もしてない状態に変化させる
+                joint.connectedBody = null;
                 stateMachine.SendEvent((int)PlayerStateEventId.Normal);
             }
         }
     }
 }
-

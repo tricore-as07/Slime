@@ -11,16 +11,16 @@ public partial class Player : MonoBehaviour
     // ステートマシーンの状態遷移に使用する列挙型
     enum PlayerStateEventId
     {
-        Normal,
-        Jump
+        Normal,         //何もしてない状態
+        Jump            //ジャンプしている状態
     }
     ImtStateMachine<Player> stateMachine = default;                             //ステートマシン
-    Subject<GameObject> onCollisionStaySubject = new Subject<GameObject>();     //プレイヤーが何かに衝突したことを知らせるSubject
-    IObservable<GameObject> OnCollisionStayEvent => onCollisionStaySubject;     //プレイヤーが何かに衝突したら呼ばれるイベント
-    Subject<GameObject> onCollisionEnterSubject = new Subject<GameObject>();     //プレイヤーが何かに衝突したことを知らせるSubject
-    IObservable<GameObject> OnCollisionEnterEvent => onCollisionEnterSubject;     //プレイヤーが何かに衝突したら呼ばれるイベント
-    Subject<GameObject> onCollisionExitSubject = new Subject<GameObject>();     //プレイヤーが何かに衝突したことを知らせるSubject
-    IObservable<GameObject> OnCollisionExitEvent => onCollisionExitSubject;     //プレイヤーが何かに衝突したら呼ばれるイベント
+    Subject<Collision> onCollisionStaySubject = new Subject<Collision>();       //プレイヤーが何かに衝突したことを知らせるSubject
+    IObservable<Collision> OnCollisionStayEvent => onCollisionStaySubject;      //プレイヤーが何かに衝突したら呼ばれるイベント
+    Subject<Collision> onCollisionEnterSubject = new Subject<Collision>();      //プレイヤーが何かに衝突したことを知らせるSubject
+    IObservable<Collision> OnCollisionEnterEvent => onCollisionEnterSubject;    //プレイヤーが何かに衝突したら呼ばれるイベント
+    Subject<Collision> onCollisionExitSubject = new Subject<Collision>();       //プレイヤーが何かに衝突したことを知らせるSubject
+    IObservable<Collision> OnCollisionExitEvent => onCollisionExitSubject;      //プレイヤーが何かに衝突したら呼ばれるイベント
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
@@ -41,13 +41,13 @@ public partial class Player : MonoBehaviour
     /// </summary>
     void Initialize()
     {
-        //nullチェックとキャッシュ
+        // nullチェックとキャッシュ
         rigidbody = rigidbody ?? GetComponent<Rigidbody>();
         gameStartTap = gameStartTap ?? GameObject.FindGameObjectWithTag("TapToStart").GetComponent<GameStartTap>();
 
-        //ゲームが開始するまで重力が働かないようにする
+        // ゲームが開始するまで重力が働かないようにする
         rigidbody.useGravity = false;
-        //ゲームが開始されたら重力を有効にする
+        // ゲームが開始されたら重力を有効にする
         gameStartTap?.OnGameStarted.Subscribe(Unit => rigidbody.useGravity = true);
     }
 
@@ -86,7 +86,7 @@ public partial class Player : MonoBehaviour
     /// <param name="collision">この衝突に含まれるその他のCollision</param>
     private void OnCollisionStay(Collision collision)
     {
-        onCollisionStaySubject.OnNext(collision.gameObject);
+        onCollisionStaySubject.OnNext(collision);
     }
 
     /// <summary>
@@ -95,7 +95,7 @@ public partial class Player : MonoBehaviour
     /// <param name="collision">この衝突に含まれるその他のCollision</param>
     private void OnCollisionEnter(Collision collision)
     {
-        onCollisionEnterSubject.OnNext(collision.gameObject);
+        onCollisionEnterSubject.OnNext(collision);
     }
 
     /// <summary>
@@ -104,6 +104,6 @@ public partial class Player : MonoBehaviour
     /// <param name="collision">この衝突に含まれるその他のCollision</param>
     private void OnCollisionExit(Collision collision)
     {
-        onCollisionExitSubject.OnNext(collision.gameObject);
+        onCollisionExitSubject.OnNext(collision);
     }
 }

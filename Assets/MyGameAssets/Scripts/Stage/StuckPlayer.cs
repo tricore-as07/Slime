@@ -22,9 +22,9 @@ public class StuckPlayer : MonoBehaviour
     /// </summary>
     void Initialize()
     {
-        //nullチェックとキャッシュ
+        // nullチェックとキャッシュ
         gameStartTap = gameStartTap ?? GameObject.FindGameObjectWithTag("TapToStart").GetComponent<GameStartTap>();
-        //ゲームが開始されたら自分を非アクティブにする
+        // ゲームが開始されたら自分を非アクティブにする
         gameStartTap?.OnGameStarted.Subscribe(Unit => gameObject.SetActive(false));
     }
 }

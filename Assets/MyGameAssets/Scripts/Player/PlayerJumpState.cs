@@ -20,8 +20,9 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Enter()
         {
-            //タップを促すためのテキストをアクティブにする
+            // 自分のOnCollisionが呼ばれるように、状態が変化した時には呼ばれないように購読解除用の変数に保存
             disposable = Context.OnCollisionEnterEvent.Subscribe(obj => OnCollisionEnter(obj));
+            // プレイヤーにジャンプのための力を加える
             Context.rigidbody.AddForce(Vector3.up * Context.jumpPower);
         }
 
@@ -30,17 +31,20 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Exit()
         {
+            // 購読解除
             disposable.Dispose();
         }
 
         /// <summary>
         /// 他のオブジェクトと衝突した時に呼ばれる
         /// </summary>
-        /// <param name="gameObject">衝突したゲームオブジェクト</param>
-        void OnCollisionEnter(GameObject gameObject)
+        /// <param name="collision">衝突に関する情報</param>
+        void OnCollisionEnter(Collision collision)
         {
-            if(gameObject.tag == "Ground")
+            // 接地したとき
+            if(collision.gameObject.tag == "Ground")
             {
+                // 何もしてない状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.Normal);
             }
         }

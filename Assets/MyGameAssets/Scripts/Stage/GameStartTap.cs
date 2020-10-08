@@ -36,7 +36,7 @@ public class GameStartTap : MonoBehaviour
     /// </summary>
     void Initialize()
     {
-        //nullチェックとキャッシュ
+        // nullチェックとキャッシュ
         topToStartText = topToStartText ?? GetComponent<TMP_Text>();
     }
 
@@ -79,7 +79,7 @@ public class GameStartTap : MonoBehaviour
         /// </summary>
         protected internal override void Enter()
         {
-            //タップを促すためのテキストをアクティブにする
+            // タップを促すためのテキストをアクティブにする
             Context.topToStartText.enabled = true;
         }
 
@@ -88,7 +88,7 @@ public class GameStartTap : MonoBehaviour
         /// </summary>
         protected internal override void Update()
         {
-            //タップされているか、何かのキーが入力されている時
+            // タップされているか、何かのキーが入力されている時
             if(Input.touchCount > 0 || Input.anyKey)
             {
                 stateMachine.SendEvent((int)StateEventId.StartGame);
@@ -106,9 +106,9 @@ public class GameStartTap : MonoBehaviour
         /// </summary>
         protected internal override void Enter()
         {
-            //タップを促すためのテキストを非アクティブにする
+            // タップを促すためのテキストを非アクティブにする
             Context.topToStartText.enabled = false;
-            //ゲームが開始したことを知らせる
+            // ゲームが開始したことを知らせる
             Context.gameStartSubject.OnNext(Unit.Default);
         }
     }

@@ -16,13 +16,14 @@ public partial class Player : MonoBehaviour
     public class PlayerNormalState : ImtStateMachine<Player>.State
     {
         List<IDisposable> disposableList = new List<IDisposable>();         //購読を解除するために使用
-        bool canJump = false;                                               //ジャンプできるかどうか
+        bool isOnGround = false;                                            //地面に接地しているかどうか
 
         /// <summary>
         /// 状態へ突入時の処理はこのEnterで行う
         /// </summary>
         protected internal override void Enter()
         {
+            // 自分のOnCollisionが呼ばれるように、状態が変化した時には呼ばれないように購読解除用のリストに追加
             disposableList.Add(Context.OnCollisionExitEvent.Subscribe(obj => OnCollisionExit(obj)));
             disposableList.Add(Context.OnCollisionEnterEvent.Subscribe(obj => OnCollisionEnter(obj)));
         }
@@ -32,8 +33,11 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && canJump)
+            var isJumpInput = Input.GetKeyDown(KeyCode.Space);              //ジャンプする入力がされたか
+            // ジャンプする入力がされていて、接地していたら
+            if (isJumpInput && isOnGround)
             {
+                // ジャンプしている状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.Jump);
             }
         }
@@ -43,7 +47,8 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Exit()
         {
-            foreach(var disposable in disposableList)
+            // 購読解除
+            foreach (var disposable in disposableList)
             {
                 disposable.Dispose();
             }
@@ -53,24 +58,26 @@ public partial class Player : MonoBehaviour
         /// <summary>
         /// 他のオブジェクトと衝突した時に呼ばれる
         /// </summary>
-        /// <param name="gameObject">衝突したゲームオブジェクト</param>
-        void OnCollisionExit(GameObject gameObject)
+        /// <param name="collision">衝突に関する情報</param>
+        void OnCollisionExit(Collision collision)
         {
-            if(gameObject.tag == "Ground")
+            //　接地状態じゃなくなったとき
+            if(collision.gameObject.tag == "Ground")
             {
-                canJump = false;
+                isOnGround = false;
             }
         }
 
         /// <summary>
         /// 他のオブジェクトと衝突した時に呼ばれる
         /// </summary>
-        /// <param name="gameObject">衝突したゲームオブジェクト</param>
-        void OnCollisionEnter(GameObject gameObject)
+        /// <param name="collision">衝突に関する情報</param>
+        void OnCollisionEnter(Collision collision)
         {
-            if (gameObject.tag == "Ground")
+            // 接地したとき
+            if (collision.gameObject.tag == "Ground")
             {
-                canJump = true;
+                isOnGround = true;
             }
         }
     }

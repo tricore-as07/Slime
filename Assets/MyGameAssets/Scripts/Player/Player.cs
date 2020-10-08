@@ -26,6 +26,7 @@ public partial class Player : MonoBehaviour
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
     [SerializeField] GameStartTap gameStartTap = default;                       //ゲーム開始を知るためのクラス
     [SerializeField] float jumpPower = 0f;                                      //ジャンプする時の力
+    [SerializeField] GameObject hookDiretionObj = default;                      //フックの判定をする方向 
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される

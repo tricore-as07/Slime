@@ -30,7 +30,7 @@ public partial class Player : MonoBehaviour
             }
             else
             {
-                stateMachine.SendEvent((int)PlayerStateEventId.Jump);
+                stateMachine.SendEvent((int)PlayerStateEventId.FreeFall);
             }
             joint.useMotor = true;
         }

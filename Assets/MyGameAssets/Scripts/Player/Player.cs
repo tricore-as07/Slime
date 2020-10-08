@@ -68,7 +68,6 @@ public partial class Player : MonoBehaviour
         stateMachine.AddTransition<PlayerJumpState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         // フックを使用している状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerHookState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
-        stateMachine.AddTransition<PlayerHookState, PlayerJumpState>((int)PlayerStateEventId.Jump);
         stateMachine.AddTransition<PlayerHookState, PlayerNormalState>((int)PlayerStateEventId.Normal);
         // 自由落下している状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerFreeFallState, PlayerHookState>((int)PlayerStateEventId.Hook);

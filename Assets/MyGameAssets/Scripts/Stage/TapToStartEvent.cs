@@ -1,13 +1,12 @@
 ﻿using IceMilkTea.Core;
 using UnityEngine;
 using UniRx;
-using System;
 using TMPro;
 
 /// <summary>
 /// タップされたらゲームが開始されるようにする
 /// </summary>
-public class GameStartTap : MonoBehaviour
+public class TapToStartEvent : MonoBehaviour
 {
     // ステートマシーンの状態遷移に使用する列挙型
     enum StateEventId
@@ -15,9 +14,8 @@ public class GameStartTap : MonoBehaviour
         StartGame,          //ゲームがスタートされた時
         Restart             //ゲームがリスタートされた時
     }
-    ImtStateMachine<GameStartTap> stateMachine;                         //ステートマシン
+    ImtStateMachine<TapToStartEvent> stateMachine;                      //ステートマシン
     Subject<Unit> gameStartSubject = new Subject<Unit>();               //ゲームが開始したことを知らせるSubject
-    public IObservable<Unit> OnGameStarted => gameStartSubject;         //ゲームが開始されたら呼ばれるイベント　※購読側だけを公開
 
     // インスペクターに表示する変数
     [SerializeField] TMP_Text topToStartText = default;                 //TMPのタップを促すために表示するテキスト
@@ -38,6 +36,8 @@ public class GameStartTap : MonoBehaviour
     {
         // nullチェックとキャッシュ
         topToStartText = topToStartText ?? GetComponent<TMP_Text>();
+        // イベントマネージャーに登録
+        EventManager.Inst.AddSubject(SubjectType.OnGameStart, gameStartSubject);
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ public class GameStartTap : MonoBehaviour
     void CreateStateTable()
     {
         // ステートマシンのインスタンスを生成して遷移テーブルを構築
-        stateMachine = new ImtStateMachine<GameStartTap>(this); // 自身がコンテキストになるので自身のインスタンスを渡す
+        stateMachine = new ImtStateMachine<TapToStartEvent>(this); // 自身がコンテキストになるので自身のインスタンスを渡す
         stateMachine.AddTransition<BeforeGameStartState, AfterGameStartState>((int)StateEventId.StartGame);
         stateMachine.AddTransition<AfterGameStartState, BeforeGameStartState>((int)StateEventId.Restart);
         // 起動ステートを設定（起動ステートは EnableState）
@@ -72,7 +72,7 @@ public class GameStartTap : MonoBehaviour
     /// <summary>
     /// ゲームが開始される前の処理
     /// </summary>
-    private class BeforeGameStartState : ImtStateMachine<GameStartTap>.State
+    private class BeforeGameStartState : ImtStateMachine<TapToStartEvent>.State
     {
         /// <summary>
         /// 状態へ突入時の処理はこのEnterで行う
@@ -89,7 +89,7 @@ public class GameStartTap : MonoBehaviour
         protected internal override void Update()
         {
             // タップされているか、何かのキーが入力されている時
-            if(Input.touchCount > 0 || Input.anyKey)
+            if (Input.touchCount > 0 || Input.anyKey)
             {
                 stateMachine.SendEvent((int)StateEventId.StartGame);
             }
@@ -99,7 +99,7 @@ public class GameStartTap : MonoBehaviour
     /// <summary>
     /// ゲームが開始された後の処理
     /// </summary>
-    private class AfterGameStartState : ImtStateMachine<GameStartTap>.State
+    private class AfterGameStartState : ImtStateMachine<TapToStartEvent>.State
     {
         /// <summary>
         /// 状態へ突入時の処理はこのEnterで行う

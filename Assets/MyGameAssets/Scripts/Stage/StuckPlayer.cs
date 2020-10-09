@@ -6,9 +6,6 @@ using UniRx;
 /// </summary>
 public class StuckPlayer : MonoBehaviour
 {
-    // インスペクターに表示する変数
-    [SerializeField] GameStartTap gameStartTap = default;
-
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
     /// </summary>
@@ -22,9 +19,7 @@ public class StuckPlayer : MonoBehaviour
     /// </summary>
     void Initialize()
     {
-        // nullチェックとキャッシュ
-        gameStartTap = gameStartTap ?? GameObject.FindGameObjectWithTag("TapToStart").GetComponent<GameStartTap>();
         // ゲームが開始されたら自分を非アクティブにする
-        gameStartTap?.OnGameStarted.Subscribe(Unit => gameObject.SetActive(false));
+        EventManager.Inst.GetObservable(SubjectType.OnGameStart)?.Subscribe(Unit => gameObject.SetActive(false));
     }
 }

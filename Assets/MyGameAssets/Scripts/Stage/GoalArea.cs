@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UniRx;
-using System;
 
 /// <summary>
 /// ゴールエリアに関する処理を行う
@@ -8,7 +7,15 @@ using System;
 public class GoalArea : MonoBehaviour
 {
     Subject<Unit> gameClearSubject = new Subject<Unit>();               //ゲームがクリアしたことを知らせるSubject
-    public IObservable<Unit> OnGameClear => gameClearSubject;           //ゲームがクリアされたら呼ばれるイベント　※購読側だけを公開
+
+    /// <summary>
+    /// スクリプトのインスタンスがロードされたときに呼び出される
+    /// </summary>
+    void Awake()
+    {
+        // イベントマネージャーに登録
+        EventManager.Inst.AddSubject(SubjectType.OnGameStart, gameClearSubject);
+    }
 
     /// <summary>
     /// ２つのColliderが衝突した時に呼び出される（片方はisTriggerがtrueである時）
@@ -16,6 +23,7 @@ public class GoalArea : MonoBehaviour
     /// <param name="other">この衝突に含まれるその他のCollider</param>
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.transform.tag == "Player")
         {
             gameClearSubject.OnNext(Unit.Default);

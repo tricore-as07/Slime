@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UniRx;
-using System;
 
 /// <summary>
 /// プレイヤーに関する処理を行う
@@ -15,18 +14,11 @@ public partial class Player : MonoBehaviour
         Hook,
         FreeFall
     }
-    PlayerStateMachine<Player> stateMachine = default;                           //ステートマシン
-    Subject<Collision> onCollisionStaySubject = new Subject<Collision>();       //プレイヤーが何かに衝突したことを知らせるSubject
-    IObservable<Collision> OnCollisionStayEvent => onCollisionStaySubject;      //プレイヤーが何かに衝突したら呼ばれるイベント
-    Subject<Collision> onCollisionEnterSubject = new Subject<Collision>();      //プレイヤーが何かに衝突したことを知らせるSubject
-    IObservable<Collision> OnCollisionEnterEvent => onCollisionEnterSubject;    //プレイヤーが何かに衝突したら呼ばれるイベント
-    Subject<Collision> onCollisionExitSubject = new Subject<Collision>();       //プレイヤーが何かに衝突したことを知らせるSubject
-    IObservable<Collision> OnCollisionExitEvent => onCollisionExitSubject;      //プレイヤーが何かに衝突したら呼ばれるイベント
+    PlayerStateMachine<Player> stateMachine = default;                          //ステートマシン
     RaycastHit hit;                                                             //プレイヤーステート間でRayに衝突したオブジェクトの情報を共有するための変数
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
-    [SerializeField] GameStartTap gameStartTap = default;                       //ゲーム開始を知るためのクラス
     [SerializeField] float jumpPower = 0f;                                      //ジャンプする時の力
 
     /// <summary>
@@ -45,12 +37,11 @@ public partial class Player : MonoBehaviour
     {
         // nullチェックとキャッシュ
         rigidbody = rigidbody ?? GetComponent<Rigidbody>();
-        gameStartTap = gameStartTap ?? GameObject.FindGameObjectWithTag("TapToStart").GetComponent<GameStartTap>();
 
         // ゲームが開始するまで重力が働かないようにする
         rigidbody.useGravity = false;
         // ゲームが開始されたら重力を有効にする
-        gameStartTap?.OnGameStarted.Subscribe(Unit => rigidbody.useGravity = true);
+        EventManager.Inst.GetObservable(SubjectType.OnGameStart)?.Subscribe(Unit => rigidbody.useGravity = true);
     }
 
     /// <summary>

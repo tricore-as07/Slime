@@ -1,5 +1,4 @@
-﻿using IceMilkTea.Core;
-using UnityEngine;
+﻿using UnityEngine;
 using UniRx;
 using System;
 
@@ -16,14 +15,14 @@ public partial class Player : MonoBehaviour
         Hook,
         FreeFall
     }
-    ImtStateMachine<Player> stateMachine = default;                             //ステートマシン
+    PlayerStateMachine<Player> stateMachine = default;                           //ステートマシン
     Subject<Collision> onCollisionStaySubject = new Subject<Collision>();       //プレイヤーが何かに衝突したことを知らせるSubject
     IObservable<Collision> OnCollisionStayEvent => onCollisionStaySubject;      //プレイヤーが何かに衝突したら呼ばれるイベント
     Subject<Collision> onCollisionEnterSubject = new Subject<Collision>();      //プレイヤーが何かに衝突したことを知らせるSubject
     IObservable<Collision> OnCollisionEnterEvent => onCollisionEnterSubject;    //プレイヤーが何かに衝突したら呼ばれるイベント
     Subject<Collision> onCollisionExitSubject = new Subject<Collision>();       //プレイヤーが何かに衝突したことを知らせるSubject
     IObservable<Collision> OnCollisionExitEvent => onCollisionExitSubject;      //プレイヤーが何かに衝突したら呼ばれるイベント
-    RaycastHit hit;
+    RaycastHit hit;                                                             //プレイヤーステート間でRayに衝突したオブジェクトの情報を共有するための変数
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
@@ -60,7 +59,7 @@ public partial class Player : MonoBehaviour
     void CreateStateTable()
     {
         // ステートマシンのインスタンスを生成して遷移テーブルを構築
-        stateMachine = new ImtStateMachine<Player>(this);   // 自身がコンテキストになるので自身のインスタンスを渡す
+        stateMachine = new PlayerStateMachine<Player>(this);   // 自身がコンテキストになるので自身のインスタンスを渡す
         // 通常状態からの状態遷移も記述
         stateMachine.AddTransition<PlayerNormalState, PlayerJumpState>((int)PlayerStateEventId.Jump);
         // ジャンプしている状態からの状態遷移の記述
@@ -72,7 +71,6 @@ public partial class Player : MonoBehaviour
         // 自由落下している状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerFreeFallState, PlayerHookState>((int)PlayerStateEventId.Hook);
         stateMachine.AddTransition<PlayerFreeFallState, PlayerNormalState>((int)PlayerStateEventId.Normal);
-
         // 起動ステートを設定（起動ステートは PlayerNormalState）
         stateMachine.SetStartState<PlayerNormalState>();
     }
@@ -99,7 +97,7 @@ public partial class Player : MonoBehaviour
     /// <param name="collision">この衝突に含まれるその他のCollision</param>
     private void OnCollisionStay(Collision collision)
     {
-        onCollisionStaySubject.OnNext(collision);
+        stateMachine.OnCollisionStay(collision);
     }
 
     /// <summary>
@@ -108,7 +106,7 @@ public partial class Player : MonoBehaviour
     /// <param name="collision">この衝突に含まれるその他のCollision</param>
     private void OnCollisionEnter(Collision collision)
     {
-        onCollisionEnterSubject.OnNext(collision);
+        stateMachine.OnCollisionEnter(collision);
     }
 
     /// <summary>
@@ -117,6 +115,6 @@ public partial class Player : MonoBehaviour
     /// <param name="collision">この衝突に含まれるその他のCollision</param>
     private void OnCollisionExit(Collision collision)
     {
-        onCollisionExitSubject.OnNext(collision);
+        stateMachine.OnCollisionExit(collision);
     }
 }

@@ -245,7 +245,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 535927950}
-  gameStartTap: {fileID: 1278265910}
   jumpPower: 500
 --- !u!1 &626044246
 GameObject:
@@ -446,7 +445,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e58b5deac0042328bfd758b9b1388b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameStartTap: {fileID: 1278265910}
 --- !u!1 &697787602
 GameObject:
   m_ObjectHideFlags: 0

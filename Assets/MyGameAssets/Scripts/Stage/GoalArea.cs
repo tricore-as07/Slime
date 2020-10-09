@@ -6,7 +6,7 @@ using UniRx;
 /// </summary>
 public class GoalArea : MonoBehaviour
 {
-    Subject<Unit> gameClearSubject = new Subject<Unit>();               //ゲームがクリアしたことを知らせるSubject
+    Subject<Unit> gameClearSubject = default;               //ゲームがクリアしたことを知らせるSubject
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -14,7 +14,7 @@ public class GoalArea : MonoBehaviour
     void Awake()
     {
         // イベントマネージャーに登録
-        EventManager.Inst.AddSubject(SubjectType.OnGameClear, gameClearSubject);
+        gameClearSubject = EventManager.Inst.CreateSubject(SubjectType.OnGameClear);
     }
 
     /// <summary>

@@ -15,7 +15,7 @@ public class TapToStartEvent : MonoBehaviour
         Restart             //ゲームがリスタートされた時
     }
     ImtStateMachine<TapToStartEvent> stateMachine;                      //ステートマシン
-    Subject<Unit> gameStartSubject = new Subject<Unit>();               //ゲームが開始したことを知らせるSubject
+    Subject<Unit> gameStartSubject = default;                           //ゲームが開始したことを知らせるSubject
 
     // インスペクターに表示する変数
     [SerializeField] TMP_Text topToStartText = default;                 //TMPのタップを促すために表示するテキスト
@@ -37,7 +37,7 @@ public class TapToStartEvent : MonoBehaviour
         // nullチェックとキャッシュ
         topToStartText = topToStartText ?? GetComponent<TMP_Text>();
         // イベントマネージャーに登録
-        EventManager.Inst.AddSubject(SubjectType.OnGameStart, gameStartSubject);
+        gameStartSubject = EventManager.Inst.CreateSubject(SubjectType.OnGameStart);
     }
 
     /// <summary>

@@ -17,16 +17,25 @@ public enum SubjectType
 /// </summary>
 public class EventManager : Singleton<EventManager>
 {
-    Dictionary<SubjectType, IObservable<Unit>> eventDictionary = new Dictionary<SubjectType, IObservable<Unit>>();      //イベントをSubjectTypeで呼び出せるようにするDictionary
+    Dictionary<SubjectType, Subject<Unit>> eventDictionary = new Dictionary<SubjectType, Subject<Unit>>();      //イベントをSubjectTypeで呼び出せるようにするDictionary
 
     /// <summary>
     /// サブジェクトの追加
     /// </summary>
     /// <param name="type">イベントの種類</param>
     /// <param name="observable">追加するサブジェクト</param>
-    public void AddSubject(SubjectType type, Subject<Unit> observable)
+    public Subject<Unit> CreateSubject(SubjectType type)
     {
-        eventDictionary.Add(type,observable);
+        if(eventDictionary.ContainsKey(type))
+        {
+            return eventDictionary[type];
+        }
+        else
+        {
+            var sub = new Subject<Unit>();
+            eventDictionary.Add(type, sub);
+            return sub;
+        }
     }
 
     /// <summary>
@@ -36,6 +45,15 @@ public class EventManager : Singleton<EventManager>
     /// <returns>通知用クラス</returns>
     public IObservable<Unit> GetObservable(SubjectType type)
     {
-        return eventDictionary[type];
+        if(eventDictionary.ContainsKey(type))
+        {
+            return eventDictionary[type];
+        }
+        else
+        {
+            var sub = new Subject<Unit>();
+            eventDictionary.Add(type, sub);
+            return sub;
+        }
     }
 }

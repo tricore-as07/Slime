@@ -10,7 +10,8 @@ public class PlayerStateMachine<TContext> : ImtStateMachine<TContext>
     PlayerState playerState = default;                          // プレイヤーのステートクラス
     PlayerState currentPlayerState                              // 現在のステートを取得する時に更新も兼ねるための変数
     {
-        get {
+        get
+        {
             playerState = base.currentState as PlayerState;     // 基底クラスの現在のステートをプレイヤー用のステートにキャスト
             return playerState;
         }
@@ -19,7 +20,8 @@ public class PlayerStateMachine<TContext> : ImtStateMachine<TContext>
     /// <summary>
     /// PlayerStateMachine のインスタンスを初期化します
     /// </summary>
-    /// <param name="context"></param>
+    /// <param name="context">このステートマシンが持つコンテキストの型</param>
+    /// NOTE : 継承元クラスに必要な引数を渡すための処理なしコンストラクタ
     public PlayerStateMachine(TContext context) : base(context)
     {
     }

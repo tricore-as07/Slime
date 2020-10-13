@@ -13,8 +13,8 @@ public partial class Player : MonoBehaviour
         Stay,           //静止状態（ゲームが開始されていない時の状態）
         Normal,         //何もしてない状態
         Jump,           //ジャンプしている状態
-        Hook,
-        FreeFall
+        Hook,           //フックを引っ掛けている状態
+        FreeFall        //自由落下している状態
     }
     PlayerStateMachine<Player> stateMachine = default;                          //ステートマシン
     RaycastHit hit;                                                             //プレイヤーステート間でRayに衝突したオブジェクトの情報を共有するための変数
@@ -22,7 +22,7 @@ public partial class Player : MonoBehaviour
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
     [SerializeField] float jumpPower = 0f;                                      //ジャンプする時の力
-    [SerializeField] float minHorizontalSpeed = 0f;
+    [SerializeField] float minHorizontalSpeed = 0f;                             //横方向に最低限動かすスピード
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -55,9 +55,10 @@ public partial class Player : MonoBehaviour
         // ステートマシンのインスタンスを生成して遷移テーブルを構築
         stateMachine = new PlayerStateMachine<Player>(this);   // 自身がコンテキストになるので自身のインスタンスを渡す
         // 静止状態からの状態遷移の記述
-        stateMachine.AddTransition<PlayerStayState, PlayerNormalState>((int)PlayerStateEventId.Normal);
+        stateMachine.AddTransition<PlayerStayState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         // 通常状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerNormalState, PlayerJumpState>((int)PlayerStateEventId.Jump);
+        stateMachine.AddTransition<PlayerNormalState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         // ジャンプしている状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerJumpState, PlayerNormalState>((int)PlayerStateEventId.Normal);
         stateMachine.AddTransition<PlayerJumpState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);

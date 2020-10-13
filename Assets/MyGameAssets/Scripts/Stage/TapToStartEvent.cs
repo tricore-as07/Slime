@@ -34,8 +34,6 @@ public class TapToStartEvent : MonoBehaviour
     {
         // nullチェックとキャッシュ
         topToStartText = topToStartText ?? GetComponent<TMP_Text>();
-        // イベントマネージャーでSubjectを作成する
-        EventManager.Inst.CreateSubject(SubjectType.OnGameStart);
     }
 
     /// <summary>

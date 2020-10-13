@@ -8,7 +8,7 @@ public partial class Player : MonoBehaviour
     /// <summary>
     /// プレイヤーが何もアクションを起こしていない時のステート
     /// </summary>
-    public class PlayerNormalState : PlayerStateMachine<Player>.PlayerState
+    private class PlayerNormalState : PlayerStateMachine<Player>.PlayerState
     {
         /// <summary>
         /// 状態の更新はこのUpdateで行う

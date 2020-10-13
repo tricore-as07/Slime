@@ -18,7 +18,7 @@ public class GoalArea : MonoBehaviour
     /// ２つのColliderが衝突した時に呼び出される（片方はisTriggerがtrueである時）
     /// </summary>
     /// <param name="other">この衝突に含まれるその他のCollider</param>
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == TagName.Player)
         {

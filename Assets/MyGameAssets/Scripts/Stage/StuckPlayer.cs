@@ -10,7 +10,7 @@ public class StuckPlayer : MonoBehaviour
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
     /// </summary>
-    private void Awake()
+    void Awake()
     {
         Initialize();
     }

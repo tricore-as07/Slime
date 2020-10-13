@@ -54,9 +54,9 @@ public partial class Player : MonoBehaviour
         }
 
         /// <summary>
-        /// 他のオブジェクトと衝突した時に呼ばれる
+        /// ２つのColliderが衝突したフレームに呼び出される
         /// </summary>
-        /// <param name="collision">衝突に関する情報</param>
+        /// <param name="collision">この衝突に含まれるその他のCollision</param>
         protected internal override void OnCollisionEnter(Collision collision)
         {
             // 接地したとき

@@ -17,6 +17,7 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Update()
         {
+            Context.MoveHorizontalPlayer();
             var isJumpInput = Input.GetKeyDown(KeyCode.Space);              //ジャンプする入力がされたか
             // ジャンプする入力がされていて、接地していたら
             if (isJumpInput && isOnGround)
@@ -27,9 +28,9 @@ public partial class Player : MonoBehaviour
         }
 
         /// <summary>
-        /// 他のオブジェクトと衝突した時に呼ばれる
+        /// ２つのColliderが衝突しなくなったフレームに呼び出される
         /// </summary>
-        /// <param name="collision">衝突に関する情報</param>
+        /// <param name="collision">この衝突に含まれるその他のCollision</param>
         protected internal　override void OnCollisionExit(Collision collision)
         {
             //　接地状態じゃなくなったとき
@@ -40,9 +41,9 @@ public partial class Player : MonoBehaviour
         }
 
         /// <summary>
-        /// 他のオブジェクトと衝突した時に呼ばれる
+        /// ２つのColliderが衝突したフレームに呼び出される
         /// </summary>
-        /// <param name="collision">衝突に関する情報</param>
+        /// <param name="collision">この衝突に含まれるその他のCollision</param>
         protected internal override void OnCollisionEnter(Collision collision)
         {
             // 接地したとき

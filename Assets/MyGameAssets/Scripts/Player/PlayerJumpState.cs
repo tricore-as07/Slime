@@ -24,17 +24,18 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Update()
         {
+            Context.MoveHorizontalPlayer();
             //ジャンプの入力がやめられたら自由落下に切り替える
-            if(!Input.GetKey(KeyCode.Space))
+            if (!Input.GetKey(KeyCode.Space))
             {
                 stateMachine.SendEvent((int)PlayerStateEventId.FreeFall);
             }
         }
 
         /// <summary>
-        /// 他のオブジェクトと衝突した時に呼ばれる
+        /// ２つのColliderが衝突したフレームに呼び出される
         /// </summary>
-        /// <param name="collision">衝突に関する情報</param>
+        /// <param name="collision">この衝突に含まれるその他のCollision</param>
         protected internal override void OnCollisionEnter(Collision collision)
         {
             // 接地したとき
@@ -46,4 +47,3 @@ public partial class Player : MonoBehaviour
         }
     }
 }
-

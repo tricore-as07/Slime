@@ -10,6 +10,7 @@ public partial class Player : MonoBehaviour
     // ステートマシーンの状態遷移に使用する列挙型
     enum PlayerStateEventId
     {
+        Stay,           //静止状態（ゲームが開始されていない時の状態）
         Normal,         //何もしてない状態
         Jump,           //ジャンプしている状態
         Hook,
@@ -21,6 +22,7 @@ public partial class Player : MonoBehaviour
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
     [SerializeField] float jumpPower = 0f;                                      //ジャンプする時の力
+    [SerializeField] float minHorizontalSpeed = 0f;
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -52,7 +54,9 @@ public partial class Player : MonoBehaviour
     {
         // ステートマシンのインスタンスを生成して遷移テーブルを構築
         stateMachine = new PlayerStateMachine<Player>(this);   // 自身がコンテキストになるので自身のインスタンスを渡す
-        // 通常状態からの状態遷移も記述
+        // 静止状態からの状態遷移の記述
+        stateMachine.AddTransition<PlayerStayState, PlayerNormalState>((int)PlayerStateEventId.Normal);
+        // 通常状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerNormalState, PlayerJumpState>((int)PlayerStateEventId.Jump);
         // ジャンプしている状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerJumpState, PlayerNormalState>((int)PlayerStateEventId.Normal);
@@ -64,7 +68,7 @@ public partial class Player : MonoBehaviour
         stateMachine.AddTransition<PlayerFreeFallState, PlayerHookState>((int)PlayerStateEventId.Hook);
         stateMachine.AddTransition<PlayerFreeFallState, PlayerNormalState>((int)PlayerStateEventId.Normal);
         // 起動ステートを設定（起動ステートは PlayerNormalState）
-        stateMachine.SetStartState<PlayerNormalState>();
+        stateMachine.SetStartState<PlayerStayState>();
     }
 
     /// <summary>
@@ -108,5 +112,16 @@ public partial class Player : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         stateMachine.OnCollisionExit(collision);
+    }
+
+    /// <summary>
+    /// プレイヤーを横方向に動かす処理（静止状態を作らないため）
+    /// </summary>
+    void MoveHorizontalPlayer()
+    {
+        if(Mathf.Abs(rigidbody.velocity.x) < minHorizontalSpeed)
+        {
+            rigidbody.velocity = new Vector3(minHorizontalSpeed * Time.deltaTime,rigidbody.velocity.y);
+        }
     }
 }

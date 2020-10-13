@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UniRx;
+using System;
 
 /// <summary>
 /// プレイヤーに関する処理を行う
@@ -37,11 +38,11 @@ public partial class Player : MonoBehaviour
     {
         // nullチェックとキャッシュ
         rigidbody = rigidbody ?? GetComponent<Rigidbody>();
-
         // ゲームが開始するまで重力が働かないようにする
         rigidbody.useGravity = false;
         // ゲームが開始されたら重力を有効にする
-        EventManager.Inst.GetObservable(SubjectType.OnGameStart)?.Subscribe(Unit => rigidbody.useGravity = true);
+        Action<Unit> action = Unit => rigidbody.useGravity = true;
+        EventManager.Inst.Subscribe(SubjectType.OnGameStart, action);
     }
 
     /// <summary>

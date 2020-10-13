@@ -1,20 +1,17 @@
 ﻿using UnityEngine;
-using UniRx;
 
 /// <summary>
 /// ゴールエリアに関する処理を行う
 /// </summary>
 public class GoalArea : MonoBehaviour
 {
-    Subject<Unit> gameClearSubject = default;               //ゲームがクリアしたことを知らせるSubject
-
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
     /// </summary>
     void Awake()
     {
-        // イベントマネージャーに登録
-        gameClearSubject = EventManager.Inst.CreateSubject(SubjectType.OnGameClear);
+        // イベントマネージャーでSubjectを作成する
+        EventManager.Inst.CreateSubject(SubjectType.OnGameClear);
     }
 
     /// <summary>
@@ -25,7 +22,7 @@ public class GoalArea : MonoBehaviour
     {
         if (other.transform.tag == TagName.Player)
         {
-            gameClearSubject.OnNext(Unit.Default);
+            EventManager.Inst.InvokeEvent(SubjectType.OnGameClear);
         }
     }
 }

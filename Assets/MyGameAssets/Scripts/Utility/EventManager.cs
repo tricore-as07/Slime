@@ -17,43 +17,63 @@ public enum SubjectType
 /// </summary>
 public class EventManager : Singleton<EventManager>
 {
-    Dictionary<SubjectType, Subject<Unit>> eventDictionary = new Dictionary<SubjectType, Subject<Unit>>();      //イベントをSubjectTypeで呼び出せるようにするDictionary
+    Dictionary<SubjectType, Subject<Unit>> eventDictionary = new Dictionary<SubjectType, Subject<Unit>>();          //イベントをSubjectTypeで呼び出せるようにするDictionary
+    Dictionary<SubjectType, Action<Unit>> tempActionDictionary = new Dictionary<SubjectType, Action<Unit>>();       //SubscribeするSubjectが無かったデリゲートを一時的に保存するDictionary
 
     /// <summary>
-    /// サブジェクトの追加
+    /// 指定したイベントにSubscribeする
     /// </summary>
-    /// <param name="type">イベントの種類</param>
-    /// <param name="observable">追加するサブジェクト</param>
-    public Subject<Unit> CreateSubject(SubjectType type)
+    /// <param name="type">Subscribeするイベントの種類</param>
+    /// <param name="action">イベントが呼ばれた時に実行されるデリゲート</param>
+    public void Subscribe(SubjectType type,Action<Unit> action)
     {
-        if(eventDictionary.ContainsKey(type))
+        // Subscribeする種類のイベントが存在していたら
+        if (eventDictionary.ContainsKey(type))
         {
-            return eventDictionary[type];
+            eventDictionary[type].Subscribe(action);
         }
+        // Subscribeする種類のイベントが存在していなかったら
         else
         {
-            var sub = new Subject<Unit>();
-            eventDictionary.Add(type, sub);
-            return sub;
+            tempActionDictionary.Add(type,action);
         }
     }
 
     /// <summary>
-    /// イベントの種類から該当するイベントを通知用のクラスを取得する
+    /// Subjectを作成する
     /// </summary>
-    /// <param name="type">必要な通知用クラスの種類</param>
-    /// <returns>通知用クラス</returns>
-    public IObservable<Unit> GetObservable(SubjectType type)
+    /// <param name="type">作成するSubjectの種類</param>
+    public void CreateSubject(SubjectType type)
     {
+        // 既に指定した種類のSubjectが存在していたら早期リターン
         if(eventDictionary.ContainsKey(type))
         {
-            return eventDictionary[type];
+            return;
         }
-        else
+        // Subjectの作成
+        var subject = new Subject<Unit>();
+        eventDictionary.Add(type, subject);
+        // Subscribe出来なくて一時的に保存するされているデリゲートが存在するなら
+        if (tempActionDictionary.ContainsKey(type))
         {
-            var sub = new Subject<Unit>();
-            eventDictionary.Add(type, sub);
-            return sub;
+            // Subscribe出来ていなかったデリゲートを全てSubscribeする
+            foreach (var action in tempActionDictionary)
+            {
+                eventDictionary[type].Subscribe(action.Value);
+            }
+            eventDictionary.Clear();
+        }
+    }
+
+    /// <summary>
+    /// 指定された種類のイベントを実行する
+    /// </summary>
+    /// <param name="type">実行するイベントの種類</param>
+    public void InvokeEvent(SubjectType type)
+    {
+        if (eventDictionary.ContainsKey(type))
+        {
+            eventDictionary[type].OnNext(Unit.Default);
         }
     }
 }

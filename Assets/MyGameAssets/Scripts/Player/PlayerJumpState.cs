@@ -38,7 +38,7 @@ public partial class Player : MonoBehaviour
         protected internal override void OnCollisionEnter(Collision collision)
         {
             // 接地したとき
-            if(collision.gameObject.tag == "Ground")
+            if(collision.gameObject.tag == TagName.Ground)
             {
                 // 何もしてない状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.Normal);

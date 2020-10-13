@@ -33,7 +33,7 @@ public partial class Player : MonoBehaviour
         protected internal　override void OnCollisionExit(Collision collision)
         {
             //　接地状態じゃなくなったとき
-            if(collision.gameObject.tag == "Ground")
+            if(collision.gameObject.tag == TagName.Ground)
             {
                 isOnGround = false;
             }
@@ -46,7 +46,7 @@ public partial class Player : MonoBehaviour
         protected internal override void OnCollisionEnter(Collision collision)
         {
             // 接地したとき
-            if (collision.gameObject.tag == "Ground")
+            if (collision.gameObject.tag == TagName.Ground)
             {
                 isOnGround = true;
             }

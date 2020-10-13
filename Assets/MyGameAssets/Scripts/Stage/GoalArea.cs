@@ -23,7 +23,7 @@ public class GoalArea : MonoBehaviour
     /// <param name="other">この衝突に含まれるその他のCollider</param>
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player")
+        if (other.transform.tag == TagName.Player)
         {
             gameClearSubject.OnNext(Unit.Default);
         }

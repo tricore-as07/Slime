@@ -44,7 +44,7 @@ public partial class Player : MonoBehaviour
             if (Physics.Raycast(Context.transform.position, hookDir, out hit, 100))
             {
                 //Rayに衝突したオブジェクトがHookを引っ掛けられるところなら
-                if (hit.transform.tag == "HookPoint")
+                if (hit.transform.tag == TagName.HookPoint)
                 {
                     Context.hit = hit;
                     // フックを引っ掛けてる状態に変化させる
@@ -60,7 +60,7 @@ public partial class Player : MonoBehaviour
         protected internal override void OnCollisionEnter(Collision collision)
         {
             // 接地したとき
-            if (collision.gameObject.tag == "Ground")
+            if (collision.gameObject.tag == TagName.Ground)
             {
                 // 何もしてない状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.Normal);

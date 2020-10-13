@@ -59,7 +59,7 @@ public partial class Player : MonoBehaviour
         protected internal override void OnCollisionEnter(Collision collision)
         {
             // 接地したとき
-            if (collision.gameObject.tag == "Ground")
+            if (collision.gameObject.tag == TagName.Ground)
             {
                 // フックを切断して、状態を自由落下に変化させる
                 joint.connectedBody = null;

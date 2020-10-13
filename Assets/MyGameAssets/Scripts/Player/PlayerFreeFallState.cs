@@ -8,7 +8,7 @@ public partial class Player : MonoBehaviour
     /// <summary>
     /// プレイヤーが落下している時のステート
     /// </summary>
-    public class PlayerFreeFallState : PlayerStateMachine<Player>.PlayerState
+    private class PlayerFreeFallState : PlayerStateMachine<Player>.PlayerState
     {
         Vector3 hookDir;                //フックを飛ばす方向
 

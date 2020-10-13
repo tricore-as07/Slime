@@ -8,7 +8,7 @@ public partial class Player : MonoBehaviour
     /// <summary>
     /// プレイヤーがジャンプしている時のステート
     /// </summary>
-    public class PlayerJumpState : PlayerStateMachine<Player>.PlayerState
+    private class PlayerJumpState : PlayerStateMachine<Player>.PlayerState
     {
         /// <summary>
         /// 状態へ突入時の処理はこのEnterで行う

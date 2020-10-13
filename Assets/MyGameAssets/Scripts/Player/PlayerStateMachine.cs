@@ -54,6 +54,33 @@ public class PlayerStateMachine<TContext> : ImtStateMachine<TContext>
     }
 
     /// <summary>
+    /// ２つのColliderが衝突したフレームに呼び出される（片方はisTriggerがtrueである時）
+    /// </summary>
+    /// <param name="collision">この衝突に含まれるその他のCollider</param>
+    public void OnTriggerEnter(Collider other)
+    {
+        currentPlayerState?.OnTriggerEnter(other);
+    }
+
+    /// <summary>
+    /// ２つのColliderが衝突している最中に呼び出される（片方はisTriggerがtrueである時）
+    /// </summary>
+    /// <param name="collision">この衝突に含まれるその他のCollider</param>
+    public void OnTriggerStay(Collider other)
+    {
+        currentPlayerState?.OnTriggerStay(other);
+    }
+
+    /// <summary>
+    /// ２つのColliderが衝突しなくなったフレームに呼び出される（片方はisTriggerがtrueである時）
+    /// </summary>
+    /// <param name="collision">この衝突に含まれるその他のCollider</param>
+    public void OnTriggerExit(Collider other)
+    {
+        currentPlayerState?.OnTriggerExit(other);
+    }
+
+    /// <summary>
     /// プレイヤー用のステートクラス
     /// </summary>
     public class PlayerState : PlayerStateMachine<TContext>.State
@@ -79,6 +106,30 @@ public class PlayerStateMachine<TContext> : ImtStateMachine<TContext>
         /// </summary>
         /// <param name="collision">この衝突に含まれるその他のCollision</param>
         protected internal virtual void OnCollisionExit(Collision collision)
+        {
+        }
+
+        /// <summary>
+        /// ２つのColliderが衝突したフレームに呼び出される（片方はisTriggerがtrueである時）
+        /// </summary>
+        /// <param name="collision">この衝突に含まれるその他のCollider</param>
+        protected internal virtual void OnTriggerEnter(Collider other)
+        {
+        }
+
+        /// <summary>
+        /// ２つのColliderが衝突している最中に呼び出される（片方はisTriggerがtrueである時）
+        /// </summary>
+        /// <param name="collision">この衝突に含まれるその他のCollider</param>
+        protected internal virtual void OnTriggerStay(Collider other)
+        {
+        }
+
+        /// <summary>
+        /// ２つのColliderが衝突しなくなったフレームに呼び出される（片方はisTriggerがtrueである時）
+        /// </summary>
+        /// <param name="collision">この衝突に含まれるその他のCollider</param>
+        protected internal virtual void OnTriggerExit(Collider other)
         {
         }
     }

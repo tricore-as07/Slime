@@ -70,7 +70,7 @@ public partial class Player : MonoBehaviour
     /// <summary>
     /// 毎フレーム呼び出される
     /// </summary>
-    private void Update()
+    void Update()
     {
         stateMachine.Update();
     }
@@ -78,7 +78,7 @@ public partial class Player : MonoBehaviour
     /// <summary>
     /// Updateが最初に呼び出される前のフレームで呼び出される
     /// </summary>
-    private void Start()
+    void Start()
     {
         stateMachine.Update();
     }
@@ -87,7 +87,7 @@ public partial class Player : MonoBehaviour
     /// ２つのColliderが衝突している最中に呼び出される
     /// </summary>
     /// <param name="collision">この衝突に含まれるその他のCollision</param>
-    private void OnCollisionStay(Collision collision)
+    void OnCollisionStay(Collision collision)
     {
         stateMachine.OnCollisionStay(collision);
     }
@@ -96,7 +96,7 @@ public partial class Player : MonoBehaviour
     /// ２つのColliderが衝突したフレームに呼び出される
     /// </summary>
     /// <param name="collision">この衝突に含まれるその他のCollision</param>
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         stateMachine.OnCollisionEnter(collision);
     }
@@ -105,8 +105,35 @@ public partial class Player : MonoBehaviour
     /// ２つのColliderが衝突しなくなったフレームに呼び出される
     /// </summary>
     /// <param name="collision">この衝突に含まれるその他のCollision</param>
-    private void OnCollisionExit(Collision collision)
+    void OnCollisionExit(Collision collision)
     {
         stateMachine.OnCollisionExit(collision);
+    }
+
+    /// <summary>
+    /// ２つのColliderが衝突しなくなったフレームに呼び出される
+    /// </summary>
+    /// <param name="collision">この衝突に含まれるその他のCollision</param>
+    void OnTriggerEnter(Collider other)
+    {
+        stateMachine.OnTriggerEnter(other);
+    }
+
+    /// <summary>
+    /// ２つのColliderが衝突している最中に呼び出される（片方はisTriggerがtrueである時）
+    /// </summary>
+    /// <param name="collision">この衝突に含まれるその他のCollider</param>
+    void OnTriggerStay(Collider other)
+    {
+        stateMachine.OnTriggerStay(other);
+    }
+
+    /// <summary>
+    /// ２つのColliderが衝突しなくなったフレームに呼び出される（片方はisTriggerがtrueである時）
+    /// </summary>
+    /// <param name="collision">この衝突に含まれるその他のCollider</param>
+    void OnTriggerExit(Collider other)
+    {
+        stateMachine.OnTriggerExit(other);
     }
 }

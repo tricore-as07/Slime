@@ -21,7 +21,7 @@ public class TapToStartEvent : MonoBehaviour
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
     /// </summary>
-    private void Awake()
+    void Awake()
     {
         Initialize();
         CreateStateTable();
@@ -70,7 +70,7 @@ public class TapToStartEvent : MonoBehaviour
     /// <summary>
     /// ゲームが開始される前の処理
     /// </summary>
-    private class BeforeGameStartState : ImtStateMachine<TapToStartEvent>.State
+    class BeforeGameStartState : ImtStateMachine<TapToStartEvent>.State
     {
         /// <summary>
         /// 状態へ突入時の処理はこのEnterで行う
@@ -97,7 +97,7 @@ public class TapToStartEvent : MonoBehaviour
     /// <summary>
     /// ゲームが開始された後の処理
     /// </summary>
-    private class AfterGameStartState : ImtStateMachine<TapToStartEvent>.State
+    class AfterGameStartState : ImtStateMachine<TapToStartEvent>.State
     {
         /// <summary>
         /// 状態へ突入時の処理はこのEnterで行う

@@ -8,7 +8,7 @@ public partial class Player : MonoBehaviour
     /// <summary>
     /// プレイヤーがフックを引っ掛けている時のステート
     /// </summary>
-    public class PlayerHookState : PlayerStateMachine<Player>.PlayerState
+    private class PlayerHookState : PlayerStateMachine<Player>.PlayerState
     {
         GameObject hookObj;             //フックを引っ掛けるオブジェクト
         HingeJoint joint;               //フックを繋げるためのクラス

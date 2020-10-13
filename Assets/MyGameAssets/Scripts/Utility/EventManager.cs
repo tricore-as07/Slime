@@ -17,8 +17,8 @@ public enum SubjectType
 /// </summary>
 public class EventManager : Singleton<EventManager>
 {
-    Dictionary<SubjectType, Subject<Unit>> eventDictionary = new Dictionary<SubjectType, Subject<Unit>>();          //イベントをSubjectTypeで呼び出せるようにするDictionary
-    Dictionary<SubjectType, Action<Unit>> tempActionDictionary = new Dictionary<SubjectType, Action<Unit>>();       //SubscribeするSubjectが無かったデリゲートを一時的に保存するDictionary
+    Dictionary<SubjectType, Subject<Unit>> eventDictionary = new Dictionary<SubjectType, Subject<Unit>>();                      //イベントをSubjectTypeで呼び出せるようにするDictionary
+    Dictionary<SubjectType, List<Action<Unit>>> tempActionDictionary = new Dictionary<SubjectType, List<Action<Unit>>>();       //SubscribeするSubjectが無かったデリゲートを一時的に保存するDictionary
 
     /// <summary>
     /// 指定したイベントにSubscribeする
@@ -35,7 +35,18 @@ public class EventManager : Singleton<EventManager>
         // Subscribeする種類のイベントが存在していなかったら
         else
         {
-            tempActionDictionary.Add(type,action);
+            // 一時的に保存するDictionaryにSubscribeするイベントの種類のリストが存在していたら
+            if (tempActionDictionary.ContainsKey(type))
+            {
+                tempActionDictionary[type].Add(action);
+            }
+            // 一時的に保存するDictionaryにSubscribeするイベントの種類のリストが存在していなかったら
+            else
+            {
+                // 新しくリストを作成し、デリゲートを追加する
+                tempActionDictionary.Add(type, new List<Action<Unit>>());
+                tempActionDictionary[type].Add(action);
+            }
         }
     }
 
@@ -57,11 +68,11 @@ public class EventManager : Singleton<EventManager>
         if (tempActionDictionary.ContainsKey(type))
         {
             // Subscribe出来ていなかったデリゲートを全てSubscribeする
-            foreach (var action in tempActionDictionary)
+            foreach (var action in tempActionDictionary[type])
             {
-                eventDictionary[type].Subscribe(action.Value);
+                eventDictionary[type].Subscribe(action);
             }
-            eventDictionary.Clear();
+            tempActionDictionary[type].Clear();
         }
     }
 

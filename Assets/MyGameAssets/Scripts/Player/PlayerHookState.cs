@@ -53,16 +53,15 @@ public partial class Player : MonoBehaviour
         }
 
         /// <summary>
-        /// 他のオブジェクトと衝突した時に呼ばれる
+        /// ２つのColliderが衝突したフレームに呼び出される（片方はisTriggerがtrueである時）
         /// </summary>
-        /// <param name="collision">衝突に関する情報</param>
-        protected internal override void OnCollisionEnter(Collision collision)
+        /// <param name="collision">この衝突に含まれるその他のCollider</param>
+        protected internal override void OnTriggerEnter(Collider other)
         {
             // 接地したとき
-            if (collision.gameObject.tag == TagName.Ground)
+            if (other.tag == TagName.GroundTrigger)
             {
-                // フックを切断して、状態を自由落下に変化させる
-                joint.connectedBody = null;
+                // 何もしてない状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.Normal);
             }
         }

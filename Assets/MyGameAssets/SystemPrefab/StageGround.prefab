@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4988738970943024345}
   m_Layer: 0
   m_Name: StageGround
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,7 +88,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4988738970943024322}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c919d63f037d54aeda7ddb5900d52d1f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

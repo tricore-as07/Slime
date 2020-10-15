@@ -15,12 +15,12 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Update()
         {
-            Context.MoveHorizontalPlayer();
             var isJumpInput = Input.GetKeyDown(KeyCode.Space);              //ジャンプする入力がされたか
             if (isJumpInput)
             {
-                // ジャンプしている状態に変化させる
-                stateMachine.SendEvent((int)PlayerStateEventId.Jump);
+                Context.rigidbody.AddForce(Vector3.up * Context.jumpPower);
+                // 自由落下している状態に変化させる
+                stateMachine.SendEvent((int)PlayerStateEventId.FreeFall);
             }
         }
 

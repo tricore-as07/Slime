@@ -66,5 +66,17 @@ public partial class Player : MonoBehaviour
                 stateMachine.SendEvent((int)PlayerStateEventId.Normal);
             }
         }
+
+        /// <summary>
+        /// ２つのColliderが衝突したフレームに呼び出される（片方はisTriggerがtrueである時）
+        /// </summary>
+        /// <param name="collision">この衝突に含まれるその他のCollider</param>
+        protected internal override void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == TagName.GroundTrigger)
+            {
+                //acceleratePlayer.StartAccelerate(Context.rigidbody, Context.minHorizontalSpeed);
+            }
+        }
     }
 }

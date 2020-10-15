@@ -53,6 +53,13 @@ public partial class Player : MonoBehaviour
         }
 
         /// <summary>
+        /// 別の状態に変更される時の処理はこのExitで行う
+        /// </summary>
+        protected internal override void Exit()
+        {
+        }
+
+        /// <summary>
         /// ２つのColliderが衝突したフレームに呼び出される
         /// </summary>
         /// <param name="collision">この衝突に含まれるその他のCollision</param>

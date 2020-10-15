@@ -40,19 +40,6 @@ public partial class Player : MonoBehaviour
         }
 
         /// <summary>
-        /// ２つのColliderが衝突しなくなったフレームに呼び出される（片方はisTriggerがtrueである時）
-        /// </summary>
-        /// <param name="collision">この衝突に含まれるその他のCollider</param>
-        protected internal override void OnTriggerExit(Collider other)
-        {
-            //　接地状態じゃなくなったとき
-            if (other.tag == TagName.Ground)
-            {
-                isOnGround = false;
-            }
-        }
-
-        /// <summary>
         /// 他のオブジェクトと衝突した時に呼ばれる
         /// </summary>
         /// <param name="collision">衝突に関する情報</param>

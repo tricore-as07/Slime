@@ -22,7 +22,6 @@ public partial class Player : MonoBehaviour
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
     [SerializeField] float jumpPower = 0f;                                      //ジャンプする時の力
-    [SerializeField] float minHorizontalSpeed = 0f;                             //横方向に最低限動かすスピード
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -109,17 +108,6 @@ public partial class Player : MonoBehaviour
     void OnCollisionExit(Collision collision)
     {
         stateMachine.OnCollisionExit(collision);
-    }
-
-    /// <summary>
-    /// プレイヤーを横方向に動かす処理（静止状態を作らないため）
-    /// </summary>
-    void MoveHorizontalPlayer()
-    {
-        if (Mathf.Abs(rigidbody.velocity.x) < minHorizontalSpeed)
-        {
-            rigidbody.velocity = new Vector3(minHorizontalSpeed * Time.deltaTime, rigidbody.velocity.y);
-        }
     }
 
     /// ２つのColliderが衝突しなくなったフレームに呼び出される

@@ -26,18 +26,13 @@ public class EventManager : Singleton<EventManager>
     /// <param name="action">イベントが呼ばれた時に実行されるデリゲート</param>
     public void Subscribe(SubjectType type,Action<Unit> action)
     {
-        // Subscribeする種類のイベントが存在していたら
-        if (eventDictionary.ContainsKey(type))
-        {
-            eventDictionary[type].Subscribe(action);
-        }
         // Subscribeする種類のイベントが存在していなかったら
-        else
+        if (!eventDictionary.ContainsKey(type))
         {
-            // Subjectの作成
             CreateSubject(type);
-            eventDictionary[type].Subscribe(action);
         }
+        // Subscribeする
+        eventDictionary[type].Subscribe(action);
     }
 
     /// <summary>

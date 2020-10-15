@@ -20,21 +20,14 @@ public class AddMotorForce : MonoBehaviour
         {
             // モータークラスを取得
             var motor = joint.motor;
-            // xがプラス方向の速度が加速しない時の速度より大きい時
-            if (joint.connectedBody.velocity.x > deadZoneVelocity)
+            // 加速させる必要があるかどうか（X軸の速度の絶対値が加速しない時の速度以下になっていないかの判定）
+            var needAccelerate = Mathf.Abs(joint.connectedBody.velocity.x) > deadZoneVelocity;
+            // 加速させる必要があれば
+            if(needAccelerate)
             {
-                // xのプラス方向に加速させる
-                motor.force = force;
-                motor.targetVelocity = -targetVelocity;
+                AccelerateMotor(ref motor, joint.connectedBody.velocity.x);
             }
-            // xがマイナス方向の速度が加速しない時の速度より大きい時
-            else if (-joint.connectedBody.velocity.x > deadZoneVelocity)
-            {
-                // xのマイナス方向に加速させる
-                motor.force = force;
-                motor.targetVelocity = targetVelocity;
-            }
-            // 速度が小さすぎる場合は加速しない
+            // 加速させる必要がなければ
             else
             {
                 motor.force = 0f;
@@ -43,5 +36,20 @@ public class AddMotorForce : MonoBehaviour
             // 計算したモータークラスの情報に書き換え
             joint.motor = motor;
         }
+    }
+
+    /// <summary>
+    /// モーターを加速させる
+    /// </summary>
+    /// <param name="motor">加速させるモータークラス</param>
+    /// <param name="jointVelocityX">繋がれているオブジェクトのX軸の速度</param>
+    void AccelerateMotor(ref JointMotor motor,float jointVelocityX)
+    {
+        // 加速させる力を設定されている値に変更
+        motor.force = force;
+        // オブジェクトのX軸の速度からプラス方向に動かすかマイナス方向に加速力を働かせるかを決める
+        var accelerateDirection = jointVelocityX < 0 ? 1f : -1f;
+        // 決めた方向に加速させる
+        motor.targetVelocity = targetVelocity * accelerateDirection;
     }
 }

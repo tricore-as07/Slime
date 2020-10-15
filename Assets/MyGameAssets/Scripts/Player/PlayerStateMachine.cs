@@ -21,9 +21,9 @@ public class PlayerStateMachine<TContext> : ImtStateMachine<TContext>
     /// PlayerStateMachine のインスタンスを初期化します
     /// </summary>
     /// <param name="context">このステートマシンが持つコンテキストの型</param>
-    /// NOTE : 継承元クラスに必要な引数を渡すための処理なしコンストラクタ
     public PlayerStateMachine(TContext context) : base(context)
     {
+        // 継承元クラスに必要な引数を渡すための処理なしコンストラクタ
     }
 
     /// <summary>
@@ -89,49 +89,37 @@ public class PlayerStateMachine<TContext> : ImtStateMachine<TContext>
         /// ２つのColliderが衝突したフレームに呼び出される
         /// </summary>
         /// <param name="collision">この衝突に含まれるその他のCollision</param>
-        protected internal virtual void OnCollisionEnter(Collision collision)
-        {
-        }
+        protected internal virtual void OnCollisionEnter(Collision collision) { }
 
         /// <summary>
         /// ２つのColliderが衝突している最中に呼び出される
         /// </summary>
         /// <param name="collision">この衝突に含まれるその他のCollision</param>
-        protected internal virtual void OnCollisionStay(Collision collision)
-        {
-        }
+        protected internal virtual void OnCollisionStay(Collision collision) { }
 
         /// <summary>
         /// ２つのColliderが衝突しなくなったフレームに呼び出される
         /// </summary>
         /// <param name="collision">この衝突に含まれるその他のCollision</param>
-        protected internal virtual void OnCollisionExit(Collision collision)
-        {
-        }
+        protected internal virtual void OnCollisionExit(Collision collision) { }
 
         /// <summary>
         /// ２つのColliderが衝突したフレームに呼び出される（片方はisTriggerがtrueである時）
         /// </summary>
         /// <param name="collision">この衝突に含まれるその他のCollider</param>
-        protected internal virtual void OnTriggerEnter(Collider other)
-        {
-        }
+        protected internal virtual void OnTriggerEnter(Collider other) { }
 
         /// <summary>
         /// ２つのColliderが衝突している最中に呼び出される（片方はisTriggerがtrueである時）
         /// </summary>
         /// <param name="collision">この衝突に含まれるその他のCollider</param>
-        protected internal virtual void OnTriggerStay(Collider other)
-        {
-        }
+        protected internal virtual void OnTriggerStay(Collider other) { }
 
         /// <summary>
         /// ２つのColliderが衝突しなくなったフレームに呼び出される（片方はisTriggerがtrueである時）
         /// </summary>
         /// <param name="collision">この衝突に含まれるその他のCollider</param>
-        protected internal virtual void OnTriggerExit(Collider other)
-        {
-        }
+        protected internal virtual void OnTriggerExit(Collider other) { }
     }
 }
 

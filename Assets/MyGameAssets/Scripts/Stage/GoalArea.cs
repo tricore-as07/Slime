@@ -11,7 +11,6 @@ public class GoalArea : MonoBehaviour
     void Awake()
     {
         // イベントマネージャーでSubjectを作成する
-        EventManager.Inst.CreateSubject(SubjectType.OnGameClear);
     }
 
     /// <summary>

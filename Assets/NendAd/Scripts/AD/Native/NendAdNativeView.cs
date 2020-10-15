@@ -19,15 +19,15 @@
 		[SerializeField] private int viewTag;
 		[SerializeField] private bool renderWhenLoaded = true;
 		[SerializeField] private bool renderWhenActivated = true;
-		[SerializeField] private AdvertisingExplicitly advertisingExplicitly;
-		[SerializeField] private Text prText;
-		[SerializeField] private Text shortText;
-		[SerializeField] private Text longText;
-		[SerializeField] private Text promotionNameText;
-		[SerializeField] private Text promotionUrlText;
-		[SerializeField] private Text actionButtonText;
-		[SerializeField] private RawImage adImage;
-		[SerializeField] private RawImage logoImage;
+		[SerializeField] private AdvertisingExplicitly advertisingExplicitly = default;
+		[SerializeField] private Text prText = default;
+		[SerializeField] private Text shortText = default;
+		[SerializeField] private Text longText = default;
+		[SerializeField] private Text promotionNameText = default;
+		[SerializeField] private Text promotionUrlText = default;
+		[SerializeField] private Text actionButtonText = default;
+		[SerializeField] private RawImage adImage = default;
+		[SerializeField] private RawImage logoImage = default;
 
 		#region AdEvents
 

@@ -14,18 +14,18 @@ namespace NendUnityPlugin.Common
 		internal class NendID
 		{
 			[SerializeField]
-			internal string apiKey;
+			internal string apiKey = default;
 			[SerializeField]
-			internal int spotID;
+			internal int spotID = default;
 		}
 
 		[SerializableAttribute]
 		internal class Account
 		{
 			[SerializeField]
-			internal NendID android;
+			internal NendID android = default;
 			[SerializeField]
-			internal NendID iOS;
+			internal NendID iOS = default;
 		}
 
 		/// <summary>

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// 風のギミックの処理を行う
+/// 風のギミックの中にプレイヤーがいる時に行う処理
 /// </summary>
 public class OnWindGimmickStay : MonoBehaviour
 {

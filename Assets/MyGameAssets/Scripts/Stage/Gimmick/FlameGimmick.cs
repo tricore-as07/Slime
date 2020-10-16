@@ -1,18 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// 炎のギミックの処理をする
+/// </summary>
+/// FIXME: orimoto 氷のギミック実装時にゲームオーバーの条件追加予定
 public class FlameGimmick : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    static Player player;           //プレイヤーのクラス
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// ２つのColliderが衝突したフレームに呼び出される（片方はisTriggerがtrueである時）
+    /// </summary>
+    /// <param name="other">この衝突に含まれるその他のCollider</param>
+    private void OnTriggerEnter(Collider other)
     {
-        
+        // 衝突したオブジェクトがプレイヤーなら
+        if(other.tag == TagName.Player)
+        {
+            // プレイヤーのクラスを持っていなければキャッシュする 
+            player = player ?? other.GetComponent<Player>();
+            // ゲームオーバー処理を実行する
+            EventManager.Inst.InvokeEvent(SubjectType.OnGameOver);
+        }
     }
 }

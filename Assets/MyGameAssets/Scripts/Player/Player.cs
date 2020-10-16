@@ -21,7 +21,7 @@ public partial class Player : MonoBehaviour
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
     [SerializeField] float jumpPower = 0f;                                      //ジャンプする時の力
-    Vector3 startPosition;
+    Vector3 startPosition;                                                      //リトライ時に最初のポジションに戻すキャッシュとして使用
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -127,9 +127,10 @@ public partial class Player : MonoBehaviour
         stateMachine.OnCollisionExit(collision);
     }
 
-    /// ２つのColliderが衝突しなくなったフレームに呼び出される
+    /// <summary>
+    /// ２つのColliderが衝突したフレームに呼び出される（片方はisTriggerがtrueである時）
     /// </summary>
-    /// <param name="collision">この衝突に含まれるその他のCollision</param>
+    /// <param name="other">この衝突に含まれるその他のCollider</param>
     void OnTriggerEnter(Collider other)
     {
         stateMachine.OnTriggerEnter(other);
@@ -138,7 +139,7 @@ public partial class Player : MonoBehaviour
     /// <summary>
     /// ２つのColliderが衝突している最中に呼び出される（片方はisTriggerがtrueである時）
     /// </summary>
-    /// <param name="collision">この衝突に含まれるその他のCollider</param>
+    /// <param name="other">この衝突に含まれるその他のCollider</param>
     void OnTriggerStay(Collider other)
     {
         stateMachine.OnTriggerStay(other);
@@ -147,7 +148,7 @@ public partial class Player : MonoBehaviour
     /// <summary>
     /// ２つのColliderが衝突しなくなったフレームに呼び出される（片方はisTriggerがtrueである時）
     /// </summary>
-    /// <param name="collision">この衝突に含まれるその他のCollider</param>
+    /// <param name="other">この衝突に含まれるその他のCollider</param>
     void OnTriggerExit(Collider other)
     {
         stateMachine.OnTriggerExit(other);

@@ -5,9 +5,12 @@
 /// </summary>
 public class GroundTriggerCreater : MonoBehaviour
 {
-    [SerializeField] GameObject triggerObject = default;
-    [SerializeField] float sideMarginSpace = default;
-    
+    [SerializeField] GameObject triggerObject = default;        //生成するトリガーオブジェクト
+    [SerializeField] float sideMarginSpace = default;           //横の空白をどのくらい開けるか
+
+    /// <summary>
+    /// Updateが最初に呼び出される前のフレームで呼び出される
+    /// </summary>
     private void Start()
     {
         // トリガーになるオブジェクトを生成する

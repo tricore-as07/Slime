@@ -392,10 +392,9 @@ GameObject:
   - component: {fileID: 457703309}
   - component: {fileID: 457703308}
   - component: {fileID: 457703307}
-  - component: {fileID: 457703306}
   m_Layer: 0
   m_Name: Wind
-  m_TagString: Untagged
+  m_TagString: WindGimmick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -414,20 +413,6 @@ Transform:
   m_Father: {fileID: 1513834403}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &457703306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 457703304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa8ec6ee047ba4ea6bb3e75ed1d799b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WindPower: 100
-  limitSpeed: 10
 --- !u!65 &457703307
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -621,13 +606,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535927945}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb5d646a14aa4909b44eaa749fb901a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e04b5faa83e747dfa4b6743e823d358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 535927950}
-  maxSpeed: 20
+  WindPower: 100
+  limitSpeed: 10
+  playerRigidbody: {fileID: 535927950}
 --- !u!1 &716796118
 GameObject:
   m_ObjectHideFlags: 0

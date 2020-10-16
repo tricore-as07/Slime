@@ -3,7 +3,7 @@
 /// <summary>
 /// 風のギミックの処理を行う
 /// </summary>
-public class WindGimmik : MonoBehaviour
+public class WindGimmick : MonoBehaviour
 {
     [SerializeField] float WindPower = 0f;      //風の強さ（加速度）
     [SerializeField] float limitSpeed = 0f;     //風で加速させる最大の速度

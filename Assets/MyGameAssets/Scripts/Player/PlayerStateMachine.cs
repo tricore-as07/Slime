@@ -16,7 +16,6 @@ public class PlayerStateMachine<TContext> : ImtStateMachine<TContext>
             return playerState;
         }
     }
-    string stateName;
 
     /// <summary>
     /// PlayerStateMachine のインスタンスを初期化します

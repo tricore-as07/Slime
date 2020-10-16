@@ -5,7 +5,7 @@
 /// </summary>
 public class OnWindGimmickStay : MonoBehaviour
 {
-    [SerializeField] float WindPower = 0f;      //風の強さ（加速度）
+    [SerializeField] float windPower = 0f;      //風の強さ（加速度）
     [SerializeField] float limitSpeed = 0f;     //風で加速させる最大の速度
     [SerializeField] Rigidbody playerRigidbody; //プレイヤーのRigidbody
 
@@ -21,7 +21,7 @@ public class OnWindGimmickStay : MonoBehaviour
             // Rigidbodyをキャッシュ
             playerRigidbody = playerRigidbody ?? GetComponent<Rigidbody>();
             // 上方向に風の強さの力を加える
-            playerRigidbody.AddForce(Vector3.up * WindPower);
+            playerRigidbody.AddForce(Vector3.up * windPower);
             // プレイヤーの速度が最大速度より大きいなら
             if (playerRigidbody.velocity.y > limitSpeed)
             {

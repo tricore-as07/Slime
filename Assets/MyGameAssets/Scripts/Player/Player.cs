@@ -12,7 +12,6 @@ public partial class Player : MonoBehaviour
     {
         Stay,           //静止状態（ゲームが開始されていない時の状態）
         Normal,         //何もしてない状態
-        Jump,           //ジャンプしている状態
         Hook,           //フックを引っ掛けている状態
         FreeFall        //自由落下している状態
     }

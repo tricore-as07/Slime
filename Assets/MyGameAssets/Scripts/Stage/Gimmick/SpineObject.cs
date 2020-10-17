@@ -19,8 +19,12 @@ public class SpineObject : MonoBehaviour
         {
             // プレイヤーのクラスを持っていなければキャッシュする 
             player = player ?? collision.gameObject.GetComponent<Player>();
-            // ゲームオーバー処理を実行する
-            EventManager.Inst.InvokeEvent(SubjectType.OnGameOver);
+            // プレイヤーが氷の状態じゃなければゲームオーバーにする
+            if(!player.IsFrozen)
+            {
+                // ゲームオーバー処理を実行する
+                EventManager.Inst.InvokeEvent(SubjectType.OnGameOver);
+            }
         }
     }
 }

@@ -19,8 +19,17 @@ public class FlameGimmick : MonoBehaviour
         {
             // プレイヤーのクラスを持っていなければキャッシュする 
             player = player ?? other.GetComponent<Player>();
-            // ゲームオーバー処理を実行する
-            EventManager.Inst.InvokeEvent(SubjectType.OnGameOver);
+            // プレイヤーが氷の状態じゃなければゲームオーバーにする
+            if (!player.IsFrozen)
+            {
+                // ゲームオーバー処理を実行する
+                EventManager.Inst.InvokeEvent(SubjectType.OnGameOver);
+            }
+            else
+            {
+                // 氷の状態で炎のギミックに入ったときの処理をする
+                player.OnFlameGimmickEnterByIceCondition();
+            }
         }
     }
 }

@@ -3,7 +3,6 @@
 /// <summary>
 /// 棘のオブジェクトの処理をする
 /// </summary>
-/// FIXME: orimoto 氷のギミック実装時にゲームオーバーの条件追加予定
 public class SpineObject : MonoBehaviour
 {
     static Player player;           //プレイヤーのクラス

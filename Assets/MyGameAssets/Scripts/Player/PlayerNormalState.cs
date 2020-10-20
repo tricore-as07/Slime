@@ -18,7 +18,21 @@ public partial class Player : MonoBehaviour
             var isJumpInput = Input.GetKeyDown(KeyCode.Space);              //ジャンプする入力がされたか
             if (isJumpInput)
             {
-                Context.rigidbody.AddForce(Vector3.up * Context.jumpPower);
+                // ジャンプ力
+                float jumpPower;
+                // プレイヤーが氷の状態かどうか
+                if(Context.IsFrozen)
+                {
+                    // 氷の状態だったら氷の状態のジャンプ力の係数をかける
+                    jumpPower = Context.jumpPower * Context.jumpPowerByIceConditionFactor;
+                }
+                else
+                {
+                    // 通常状態だったら普通のジャンプ力
+                    jumpPower = Context.jumpPower;
+                }
+                // ジャンプ力を元に上方向に力を加える
+                Context.rigidbody.AddForce(Vector3.up * jumpPower);
                 // 自由落下している状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.FreeFall);
             }

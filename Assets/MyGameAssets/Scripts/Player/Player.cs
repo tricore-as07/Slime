@@ -26,8 +26,9 @@ public partial class Player : MonoBehaviour
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
     [SerializeField] float jumpPower = 0f;                                      //ジャンプする時の力
+    [SerializeField, Range(0f, 1f)] float jumpPowerByIceConditionFactor = 0f;   //氷の状態の時のジャンプ力の係数
     [SerializeField] float meltIceTime = default;                               //溶ける時間
-    [SerializeField] GameObject playerIce = default;
+    [SerializeField] GameObject playerIce = default;                            //プレイヤーが氷の状態になったら表示するゲームオブジェクト
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される

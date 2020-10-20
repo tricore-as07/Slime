@@ -9,7 +9,7 @@ using VMUnityLib;
 [Serializable]
 public class SaveData : SingletonMonoBehaviour<SaveData>
 {
-    [SerializeField] List<StageSaveData> stageSaveDataList = default;       //ステージ毎のセーブデータのリスト
+    [SerializeField] StageSaveDataList stageData;       //ステージ毎のセーブデータのリスト
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -19,13 +19,15 @@ public class SaveData : SingletonMonoBehaviour<SaveData>
         // セーブデータのファイルが存在しているなら
         if (JsonDataSaver.FileExists<SaveData>(this))
         {
+            InitializationSaveData();
             // セーブデータのファイルが存在しているならそのファイルをロードする
             JsonDataSaver.Load<SaveData>(this);
             // ロードしたファイルのステージのリストがnullなら
-            if (stageSaveDataList == null)
+            if (stageData == null)
             {
                 // リストを初期化する
-                stageSaveDataList = new List<StageSaveData>();
+                stageData = new StageSaveDataList();
+                stageData.stageSaveDataList = new List<StageSaveData>();
             }
         }
         // セーブデータのファイルが存在しないなら
@@ -42,7 +44,11 @@ public class SaveData : SingletonMonoBehaviour<SaveData>
     /// </summary>
     void InitializationSaveData()
     {
-        stageSaveDataList = new List<StageSaveData>();
+        stageData = new StageSaveDataList();
+        stageData.stageSaveDataList = new List<StageSaveData>();
+        stageData.stageSaveDataList.Add(new StageSaveData());
+        stageData.stageSaveDataList[0].isAcquireItemList = new List<bool>();
+        stageData.stageSaveDataList[0].isAcquireItemList.Add(false);
     }
 
     /// <summary>
@@ -50,13 +56,13 @@ public class SaveData : SingletonMonoBehaviour<SaveData>
     /// </summary>
     /// <param name="stageNum">ステージ数</param>
     /// <param name="isAcquireList">ステージにあるダイヤを取ったかどうかをリストでまとめたもの</param>
-    void SaveStageData(int stageNum, IReadOnlyCollection<bool> isAcquireList)
+    public void SaveStageData(int stageNum, IReadOnlyCollection<bool> isAcquireList)
     {
         // 既にセーブされてるステージのリストがこれからセーブするステージ数分ないなら
         // 今のステージ数に達するまで追加する
-        while(stageSaveDataList.Count < stageNum)
+        while(stageData.stageSaveDataList.Count < stageNum)
         {
-            stageSaveDataList = new List<StageSaveData>();
+            stageData.stageSaveDataList = new List<StageSaveData>();
         }
         // 新しいリストの作成
         StageSaveData newStageSaveData = new StageSaveData();
@@ -64,15 +70,44 @@ public class SaveData : SingletonMonoBehaviour<SaveData>
         // 新しいリストにダイヤを取ったかどうかのリストをまとめて追加
         newStageSaveData.isAcquireItemList.AddRange(isAcquireList);
         // 新しく作ったリストで上書きする
-        stageSaveDataList[stageNum - 1] = newStageSaveData;
+        stageData.stageSaveDataList[stageNum - 1] = newStageSaveData;
     }
+
+    /// <summary>
+    /// ステージのセーブデータを返す
+    /// </summary>
+    /// <param name="stageNum"></param>
+    /// <returns></returns>
+    public StageSaveData LoadStageData(int stageNum)
+    {
+        if(stageData.stageSaveDataList.Count >= stageNum)
+        {
+            StageSaveData stageSaveData = stageData.stageSaveDataList[stageNum - 1].Clone() as StageSaveData;
+            return stageSaveData;
+        }
+        return new StageSaveData();
+    }
+}
+
+/// <summary>
+/// ステージ毎のセーブデータをリストで管理する
+/// </summary>
+[Serializable]
+public class StageSaveDataList
+{
+    public List<StageSaveData> stageSaveDataList = default;
 }
 
 /// <summary>
 /// ステージのセーブデータ
 /// </summary>
 [Serializable]
-public class StageSaveData
+public class StageSaveData : ICloneable
 {
     public List<bool> isAcquireItemList = default;          //アイテム獲得したかどうかのリスト
+
+    public object Clone()
+    {
+        return MemberwiseClone();
+    }
 }

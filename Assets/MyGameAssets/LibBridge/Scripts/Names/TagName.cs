@@ -15,6 +15,8 @@ public static class TagName
 	public const string GoalArea = "GoalArea";
 	public const string Ground = "Ground";
 	public const string HookPoint = "HookPoint";
+	public const string GroundTrigger = "GroundTrigger";
+	public const string WindGimmick = "WindGimmick";
 	
 	/// <summary>
 	/// タグ名の配列を取得
@@ -33,6 +35,8 @@ public static class TagName
 		tagNames.Add(TagName.GoalArea);
 		tagNames.Add(TagName.Ground);
 		tagNames.Add(TagName.HookPoint);
+		tagNames.Add(TagName.GroundTrigger);
+		tagNames.Add(TagName.WindGimmick);
 		return tagNames.ToArray();
 	}
 }

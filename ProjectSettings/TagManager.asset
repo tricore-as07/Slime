@@ -8,6 +8,8 @@ TagManager:
   - GoalArea
   - Ground
   - HookPoint
+  - GroundTrigger
+  - WindGimmick
   layers:
   - Default
   - TransparentFX

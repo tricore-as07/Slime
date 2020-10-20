@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UniRx;
 using System;
 
@@ -10,10 +10,10 @@ public partial class Player : MonoBehaviour
     // ステートマシーンの状態遷移に使用する列挙型
     enum PlayerStateEventId
     {
+        Stay,           //静止状態（ゲームが開始されていない時の状態）
         Normal,         //何もしてない状態
-        Jump,           //ジャンプしている状態
-        Hook,
-        FreeFall
+        Hook,           //フックを引っ掛けている状態
+        FreeFall        //自由落下している状態
     }
     PlayerStateMachine<Player> stateMachine = default;                          //ステートマシン
     RaycastHit hit;                                                             //プレイヤーステート間でRayに衝突したオブジェクトの情報を共有するための変数
@@ -52,11 +52,10 @@ public partial class Player : MonoBehaviour
     {
         // ステートマシンのインスタンスを生成して遷移テーブルを構築
         stateMachine = new PlayerStateMachine<Player>(this);   // 自身がコンテキストになるので自身のインスタンスを渡す
-        // 通常状態からの状態遷移も記述
-        stateMachine.AddTransition<PlayerNormalState, PlayerJumpState>((int)PlayerStateEventId.Jump);
-        // ジャンプしている状態からの状態遷移の記述
-        stateMachine.AddTransition<PlayerJumpState, PlayerNormalState>((int)PlayerStateEventId.Normal);
-        stateMachine.AddTransition<PlayerJumpState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
+        // 静止状態からの状態遷移の記述
+        stateMachine.AddTransition<PlayerStayState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
+        // 通常状態からの状態遷移の記述
+        stateMachine.AddTransition<PlayerNormalState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         // フックを使用している状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerHookState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         stateMachine.AddTransition<PlayerHookState, PlayerNormalState>((int)PlayerStateEventId.Normal);
@@ -64,7 +63,7 @@ public partial class Player : MonoBehaviour
         stateMachine.AddTransition<PlayerFreeFallState, PlayerHookState>((int)PlayerStateEventId.Hook);
         stateMachine.AddTransition<PlayerFreeFallState, PlayerNormalState>((int)PlayerStateEventId.Normal);
         // 起動ステートを設定（起動ステートは PlayerNormalState）
-        stateMachine.SetStartState<PlayerNormalState>();
+        stateMachine.SetStartState<PlayerStayState>();
     }
 
     /// <summary>
@@ -110,7 +109,6 @@ public partial class Player : MonoBehaviour
         stateMachine.OnCollisionExit(collision);
     }
 
-    /// <summary>
     /// ２つのColliderが衝突しなくなったフレームに呼び出される
     /// </summary>
     /// <param name="collision">この衝突に含まれるその他のCollision</param>

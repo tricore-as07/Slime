@@ -27,7 +27,8 @@ public partial class Player : MonoBehaviour
         protected internal override void Update()
         {
             var isExtendHookInput = Input.GetKeyDown(KeyCode.Space);              //フックを伸ばす入力がされたか
-            if (isExtendHookInput)
+            // フックを伸ばす入力がされて、プレイヤーが氷の状態じゃなければ
+            if (isExtendHookInput && !Context.IsFrozen)
             {
                 ExtendHook();
             }

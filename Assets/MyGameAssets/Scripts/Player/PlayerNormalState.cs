@@ -20,17 +20,7 @@ public partial class Player : MonoBehaviour
             {
                 // ジャンプ力
                 float jumpPower;
-                // プレイヤーが氷の状態かどうか
-                if(Context.IsFrozen)
-                {
-                    // 氷の状態だったら氷の状態のジャンプ力の係数をかける
-                    jumpPower = Context.jumpPower * Context.jumpPowerByIceConditionFactor;
-                }
-                else
-                {
-                    // 通常状態だったら普通のジャンプ力
-                    jumpPower = Context.jumpPower;
-                }
+                jumpPower = Context.jumpPower * Context.GetJumpPowerFactor();
                 // ジャンプ力を元に上方向に力を加える
                 Context.rigidbody.AddForce(Vector3.up * jumpPower);
                 // 自由落下している状態に変化させる

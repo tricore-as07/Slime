@@ -150,6 +150,22 @@ public partial class Player : MonoBehaviour
     }
 
     /// <summary>
+    /// ジャンプ力にかける係数を取得する
+    /// </summary>
+    /// <returns>ジャンプ力にかける係数</returns>
+    float GetJumpPowerFactor()
+    {
+        // 氷の状態なら
+        if(IsFrozen)
+        {
+            // 氷の状態のジャンプ力にかける係数を返す
+            return jumpPowerByIceConditionFactor;
+        }
+        // 通常状態なら1を返す
+        return 1f;
+    }
+
+    /// <summary>
     /// ２つのColliderが衝突している最中に呼び出される
     /// </summary>
     /// <param name="collision">この衝突に含まれるその他のCollision</param>

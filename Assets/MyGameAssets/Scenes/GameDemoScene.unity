@@ -615,6 +615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 535927950}
   jumpPower: 750
+  jumpPowerByIceConditionFactor: 0.5
   meltIceTime: 1
   playerIce: {fileID: 750005273}
 --- !u!1 &716796118
@@ -875,7 +876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4899f56df8ef8488e92d7604df28b1ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 535927945}
 --- !u!23 &750005276
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -19,12 +19,6 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
         {
             // セーブデータのファイルが存在しているならそのファイルをロードする
             saveData = JsonDataSaver.Load<SaveData>(saveData);
-            // ロードしたファイルのステージのリストがnullなら
-            if (saveData == null)
-            {
-                saveData = new SaveData();
-
-            }
         }
         // セーブデータのファイルが存在しないなら
         else
@@ -54,6 +48,7 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
         newDiamondAcquisitionData.isDiamondAcquisitionList = new List<bool>(diamondAcquisitionData.isDiamondAcquisitionList);
         // 新しく作ったリストで上書きする
         saveData.stageSaveData.diamondAcquisitionDataList[stageNum - 1] = newDiamondAcquisitionData;
+        JsonDataSaver.Save<SaveData>(saveData);
     }
 
     /// <summary>

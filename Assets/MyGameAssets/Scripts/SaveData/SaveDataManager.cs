@@ -23,7 +23,6 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
         // セーブデータのファイルが存在しないなら
         else
         {
-            saveData = new SaveData();
             // 初期化したセーブデータを保存してファイルを作成しておく
             JsonDataSaver.Save<SaveData>(saveData);
         }

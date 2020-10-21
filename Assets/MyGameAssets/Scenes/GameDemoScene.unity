@@ -1993,7 +1993,7 @@ GameObject:
   - component: {fileID: 1500945144}
   - component: {fileID: 1500945145}
   m_Layer: 0
-  m_Name: SaveData
+  m_Name: SaveDataManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2022,12 +2022,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1500945143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 768474d8c90024a7faf6e8b3d177592d, type: 3}
+  m_Script: {fileID: 11500000, guid: afd3e7bb0bf3d4f76adb9045b657261b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  root:
-    stageData:
-      stageSaveDataList: []
 --- !u!1 &1585592697
 GameObject:
   m_ObjectHideFlags: 0

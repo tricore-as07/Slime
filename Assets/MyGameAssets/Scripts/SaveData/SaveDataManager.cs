@@ -13,6 +13,7 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
     /// </summary>
     void Awake()
     {
+        saveData = new SaveData();
         // セーブデータのファイルが存在しているなら
         if (JsonDataSaver.FileExists<SaveData>(saveData))
         {

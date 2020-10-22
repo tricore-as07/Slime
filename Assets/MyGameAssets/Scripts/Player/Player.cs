@@ -22,13 +22,14 @@ public partial class Player : MonoBehaviour
     bool isFrozen = false;                                                      //プレイヤーが凍っているかどうか
     public bool IsFrozen => isFrozen;                                           //プレイヤーが凍っているかどうかを外部に公開するためのプロパティ
     Coroutine meltIceCoroutine;                                                 //氷を溶かすコルーチンのための変数
+    float jumpPower;                                                            //ジャンプする時の力
+    float jumpPowerByIceConditionFactor;                                        //氷の状態の時のジャンプ力の係数
+    float meltIceTime;                                                          //溶ける時間
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
-    [SerializeField] float jumpPower = 0f;                                      //ジャンプする時の力
-    [SerializeField, Range(0f, 1f)] float jumpPowerByIceConditionFactor = 0f;   //氷の状態の時のジャンプ力の係数
-    [SerializeField] float meltIceTime = default;                               //溶ける時間
     [SerializeField] GameObject playerIce = default;                            //プレイヤーが氷の状態になったら表示するゲームオブジェクト
+    [SerializeField] PlayerSettingsData playerSettingsData = default;           //プレイヤーの設定データ
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -55,6 +56,10 @@ public partial class Player : MonoBehaviour
         startPosition = transform.position;
         // ゲームオーバーになったらリスタートの関数が呼ばれるようにする
         EventManager.Inst.Subscribe(SubjectType.OnRetry, Unit => Restart());
+        // プレイヤーの設定データを反映させる
+        jumpPower = playerSettingsData.JumpPower;
+        jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;
+        meltIceTime = playerSettingsData.MeltIceTime;
     }
 
     /// <summary>

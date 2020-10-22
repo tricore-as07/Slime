@@ -16,3 +16,5 @@ MonoBehaviour:
   motorForceOfHook: 1000
   motorTargetAngle: 150
   deadZoneVelocity: 1
+  windPower: 100
+  limitSpeedInWindGimmick: 10

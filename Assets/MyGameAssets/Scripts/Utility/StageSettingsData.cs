@@ -20,4 +20,10 @@ public class StageSettingsData : ScriptableObject
     [InfoBox("加速を止める時の速度です\r\n※上記の目標角度に達した後に\r\n逆方向に加速するタイミングが変わります", InfoMessageType.None, 0)]
     [SerializeField] float deadZoneVelocity = 0f;                               //加速をやめる速度（ある程度の高さまで上がったら逆に加速するために設定する）
     public float DeadZoneVelocity => deadZoneVelocity;                          //外部に公開するためのプロパティ
+    [InfoBox("風のギミックの中にプレイヤーが入った時に\r\n加速させる力です", InfoMessageType.None, 0)]
+    [SerializeField] float windPower = 0f;                                      //風の強さ
+    public float WindPower => windPower;                                        //外部に公開するためのプロパティ
+    [InfoBox("風のギミックの中にプレイヤーがいる状態の\r\n最高速度です", InfoMessageType.None, 0)]
+    [SerializeField] float limitSpeedInWindGimmick = 0f;                        //風に入っている時に最高速度
+    public float LimitSpeedOnWindGimmick => limitSpeedInWindGimmick;            //外部に公開するためのプロパティ
 }

@@ -73,6 +73,10 @@ public partial class Player : MonoBehaviour
         rigidbody.velocity = Vector3.zero;
         // ゲームが再開されるまで重力を無効にしておく
         rigidbody.useGravity = false;
+        // 氷状態の情報を初期化
+        isFrozen = false;
+        playerIce.SetActive(false);
+        meltIceCoroutine = null;
     }
 
     /// <summary>

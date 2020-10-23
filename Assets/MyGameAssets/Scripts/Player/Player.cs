@@ -21,6 +21,7 @@ public partial class Player : MonoBehaviour
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
     [SerializeField] float jumpPower = 0f;                                      //ジャンプする時の力
+    Vector3 startPosition;                                                      //リトライ時に最初のポジションに戻すキャッシュとして使用
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -43,6 +44,23 @@ public partial class Player : MonoBehaviour
         // ゲームが開始されたら重力を有効にする
         Action<Unit> action = Unit => rigidbody.useGravity = true;
         EventManager.Inst.Subscribe(SubjectType.OnGameStart, action);
+        // 開始時のポジションを記憶しておく
+        startPosition = transform.position;
+        // ゲームオーバーになったらリスタートの関数が呼ばれるようにする
+        EventManager.Inst.Subscribe(SubjectType.OnRetry, Unit => Restart());
+    }
+
+    /// <summary>
+    /// 同じステージ内でリスタートする時の処理
+    /// </summary>
+    void Restart()
+    { 
+        // プレイヤーのポジションをスタート地点に戻す
+        transform.position = startPosition;
+        // プレイヤーのRigidbodyのVelocityを0にする
+        rigidbody.velocity = Vector3.zero;
+        // ゲームが再開されるまで重力を無効にしておく
+        rigidbody.useGravity = false;
     }
 
     /// <summary>
@@ -109,9 +127,10 @@ public partial class Player : MonoBehaviour
         stateMachine.OnCollisionExit(collision);
     }
 
-    /// ２つのColliderが衝突しなくなったフレームに呼び出される
+    /// <summary>
+    /// ２つのColliderが衝突したフレームに呼び出される（片方はisTriggerがtrueである時）
     /// </summary>
-    /// <param name="collision">この衝突に含まれるその他のCollision</param>
+    /// <param name="other">この衝突に含まれるその他のCollider</param>
     void OnTriggerEnter(Collider other)
     {
         stateMachine.OnTriggerEnter(other);
@@ -120,7 +139,7 @@ public partial class Player : MonoBehaviour
     /// <summary>
     /// ２つのColliderが衝突している最中に呼び出される（片方はisTriggerがtrueである時）
     /// </summary>
-    /// <param name="collision">この衝突に含まれるその他のCollider</param>
+    /// <param name="other">この衝突に含まれるその他のCollider</param>
     void OnTriggerStay(Collider other)
     {
         stateMachine.OnTriggerStay(other);
@@ -129,7 +148,7 @@ public partial class Player : MonoBehaviour
     /// <summary>
     /// ２つのColliderが衝突しなくなったフレームに呼び出される（片方はisTriggerがtrueである時）
     /// </summary>
-    /// <param name="collision">この衝突に含まれるその他のCollider</param>
+    /// <param name="other">この衝突に含まれるその他のCollider</param>
     void OnTriggerExit(Collider other)
     {
         stateMachine.OnTriggerExit(other);

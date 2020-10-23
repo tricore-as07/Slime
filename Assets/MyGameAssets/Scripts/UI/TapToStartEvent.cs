@@ -34,6 +34,8 @@ public class TapToStartEvent : MonoBehaviour
     {
         // nullチェックとキャッシュ
         topToStartText = topToStartText ?? GetComponent<TMP_Text>();
+        // ゲームオーバーになったらリスタート関数が呼ばれるように
+        EventManager.Inst.Subscribe(SubjectType.OnRetry, Unit => OnRestart());
     }
 
     /// <summary>
@@ -63,6 +65,14 @@ public class TapToStartEvent : MonoBehaviour
     void Update()
     {
         stateMachine.Update();
+    }
+
+    /// <summary>
+    /// リスタートされた時に呼ばれるイベント
+    /// </summary>
+    void OnRestart()
+    {
+        stateMachine.SendEvent((int)StateEventId.Restart);
     }
 
     /// <summary>

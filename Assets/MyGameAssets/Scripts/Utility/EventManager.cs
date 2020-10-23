@@ -8,8 +8,10 @@ using System;
 /// </summary>
 public enum SubjectType
 {
-    OnGameStart,
-    OnGameClear
+    OnGameStart,            // ゲームが開始された時のイベント
+    OnGameClear,            // ゲームがクリアされた時のイベント
+    OnGameOver,             // ゲームオーバーになった時のイベント
+    OnRetry                 // リトライされた時のイベント
 }
 
 /// <summary>

@@ -40,21 +40,29 @@ public class MyEditor : EditorWindow
             var component = gameObject.GetComponent<Type>();
             var setting = component.GetType().GetField(variableName, BindingFlags.Instance | BindingFlags.NonPublic).GetValue(component);
             var settingsData = setting as ScriptableObject;
-            string myname = settingsData.name;
+            if(setting == null)
+            {
+                drawObject = null;
+                editor = null;
+            }
+            string myname = settingsData?.name;
 
             var guids = UnityEditor.AssetDatabase.FindAssets(myname);
-            if (guids.Length == 0)
+            if (guids.Length == 0 | myname == null)
             {
-                throw new System.IO.FileNotFoundException("ScriptableObject does not found");
+                //throw new System.IO.FileNotFoundException("シーンに設定データが割り当てられているオブジェクトがありません");
+                throw new System.IO.FileNotFoundException(string.Format("シーンに設定データが割り当てられている{0}オブジェクトがありません", tagName));
             }
-
-            for (int i = 0; i < guids.Length; i++)
+            else
             {
-                var path = AssetDatabase.GUIDToAssetPath(guids[i]);
-                drawObject = AssetDatabase.LoadAssetAtPath<ScriptableObject>(path);
-                if (drawObject.name == myname)
+                for (int i = 0; i < guids.Length; i++)
                 {
-                    break;
+                    var path = AssetDatabase.GUIDToAssetPath(guids[i]);
+                    drawObject = AssetDatabase.LoadAssetAtPath<ScriptableObject>(path);
+                    if (drawObject.name == myname)
+                    {
+                        break;
+                    }
                 }
             }
         }

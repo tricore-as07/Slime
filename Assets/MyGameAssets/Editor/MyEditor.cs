@@ -4,9 +4,11 @@ using System.Reflection;
 
 public class MyEditor : EditorWindow
 {
-    private Editor editor;
-    private ScriptableObject playerSettings;
-    private ScriptableObject stageSettings;
+    Editor playerEditor;
+    Editor stageEditor;
+    ScriptableObject playerSettings;
+    ScriptableObject stageSettings;
+    Vector2 scrollPosition = new Vector2(0, 0);
 
     [MenuItem("Custom/MyWindow")]
     static void ShowWindow()
@@ -16,41 +18,53 @@ public class MyEditor : EditorWindow
 
     void OnGUI()
     {
-        DrawPlayerSettings();
+        scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
+        GUILayout.Space(20);
+        DrawSettings<Player>(ref playerSettings, ref playerEditor, TagName.Player, "playerSettingsData","プレイヤーの設定を更新する");
+        GUILayout.Space(60);
+
+        DrawSettings<StageSettingsOwner>(ref stageSettings, ref stageEditor, TagName.StageSettingsOwner, "stageSettingsData","ステージの設定を更新する");
+        GUILayout.Space(200);
+
+        EditorGUILayout.EndScrollView();
     }
 
-    void DrawPlayerSettings()
+    void DrawSettings<Type>(ref ScriptableObject drawObject, ref Editor editor, string tagName, string variableName, string buttonName)
+        where Type : MonoBehaviour
     {
         EditorGUI.BeginChangeCheck();
 
-        if (GUILayout.Button("リロード"))
+        if (GUILayout.Button(buttonName))
         {
-            var playerObj = GameObject.FindGameObjectWithTag(TagName.Player);
-            var player = playerObj.GetComponent<Player>();
-            var setting = player.GetType().GetField("playerSettingsData", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(player);
-            var playerSettingsData = setting as ScriptableObject;
-            string myname = playerSettingsData.name;
+            var gameObject = GameObject.FindGameObjectWithTag(tagName);
+            var component = gameObject.GetComponent<Type>();
+            var setting = component.GetType().GetField(variableName, BindingFlags.Instance | BindingFlags.NonPublic).GetValue(component);
+            var settingsData = setting as ScriptableObject;
+            string myname = settingsData.name;
 
             var guids = UnityEditor.AssetDatabase.FindAssets(myname);
             if (guids.Length == 0)
             {
-                throw new System.IO.FileNotFoundException("MyScriptableObject does not found");
+                throw new System.IO.FileNotFoundException("ScriptableObject does not found");
             }
 
             for (int i = 0; i < guids.Length; i++)
             {
                 var path = AssetDatabase.GUIDToAssetPath(guids[i]);
-                playerSettings = AssetDatabase.LoadAssetAtPath<ScriptableObject>(path);
-                if (playerSettings.name == myname)
+                drawObject = AssetDatabase.LoadAssetAtPath<ScriptableObject>(path);
+                if (drawObject.name == myname)
                 {
                     break;
                 }
             }
         }
-        playerSettings = (ScriptableObject)EditorGUILayout.ObjectField("PlayerSettingsData", playerSettings, typeof(ScriptableObject), false);
+
+        GUILayout.Space(20);
+
+        drawObject = (ScriptableObject)EditorGUILayout.ObjectField(variableName, drawObject, typeof(ScriptableObject), false);
         if (EditorGUI.EndChangeCheck())
         {
-            editor = Editor.CreateEditor(playerSettings);
+            editor = Editor.CreateEditor(drawObject);
         }
 
         if (editor == null)

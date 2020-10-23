@@ -14,6 +14,10 @@ public class PlayerSettingsData : ScriptableObject
     [SerializeField, Range(0f, 1f)] float jumpPowerByIceConditionFactor = 0f;   //氷の状態の時のジャンプ力の係数
     public float JumpPowerByIceConditionFactor => jumpPowerByIceConditionFactor;//外部に公開するためのプロパティ
     [InfoBox("氷の状態で炎に当たった時に\r\n氷が溶けるまでの時間（無敵時間）", InfoMessageType.None, 0)]
-    [SerializeField] float meltIceTime = default;                               //溶ける時間
+    [SerializeField] float meltIceTime = 0f;                                    //溶ける時間
     public float MeltIceTime => meltIceTime;                                    //外部に公開するためのプロパティ
+    [InfoBox("触手が伸びる最大の長さです", InfoMessageType.None, 0)]
+    [SerializeField] float tentacleMaxLength = 0f;                              //触手の最大の長さ
+    public float TentacleMaxLength => tentacleMaxLength;                        //外部に公開するためのプロパティ
 }
+

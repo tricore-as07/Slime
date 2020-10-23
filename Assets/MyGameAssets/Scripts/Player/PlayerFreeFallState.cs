@@ -42,7 +42,7 @@ public partial class Player : MonoBehaviour
             //Rayを飛ばして衝突したオブジェクトの情報を保存する
             RaycastHit hit;
             //Rayを飛ばして衝突したものがあれば
-            if (Physics.Raycast(Context.transform.position, hookDir, out hit, 100))
+            if (Physics.Raycast(Context.transform.position, hookDir, out hit, Context.playerSettingsData.TentacleMaxLength, LayerName.HookPointMask)) 
             {
                 //Rayに衝突したオブジェクトがHookを引っ掛けられるところなら
                 if (hit.transform.tag == TagName.HookPoint)

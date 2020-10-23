@@ -448,6 +448,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameGimick
       objectReference: {fileID: 0}
+    - target: {fileID: 8256710585268725750, guid: e03496f21d9c54455bb70cb3fc541504,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8256710585268725751, guid: e03496f21d9c54455bb70cb3fc541504,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -725,7 +730,7 @@ PrefabInstance:
     - target: {fileID: 8527023304601326915, guid: 5060b68826d474ccaae0bb197beea8e2,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5060b68826d474ccaae0bb197beea8e2, type: 3}
@@ -831,6 +836,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WindGimmik (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517495451892689562, guid: c00468d7aff524b328458e2cd1a98c0b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8517495451892689563, guid: c00468d7aff524b328458e2cd1a98c0b,
         type: 3}
@@ -1021,6 +1031,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spine
       objectReference: {fileID: 0}
+    - target: {fileID: 257854868140057213, guid: b61a6e0ec32e247b3847a55fc7846ad6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5188737761357000274, guid: b61a6e0ec32e247b3847a55fc7846ad6,
         type: 3}
       propertyPath: m_Material
@@ -1057,27 +1072,32 @@ PrefabInstance:
     - target: {fileID: 6564490743183100469, guid: 8c2aa3630ea524e728e44d3556716a9c,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 29.88
+      value: 33.2
       objectReference: {fileID: 0}
     - target: {fileID: 6564490743183100469, guid: 8c2aa3630ea524e728e44d3556716a9c,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -3.6999998
+      value: -3.6
       objectReference: {fileID: 0}
     - target: {fileID: 6564490743183100472, guid: 8c2aa3630ea524e728e44d3556716a9c,
         type: 3}
       propertyPath: m_Name
       value: HookPoint (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6564490743183100472, guid: 8c2aa3630ea524e728e44d3556716a9c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6564490743183100473, guid: 8c2aa3630ea524e728e44d3556716a9c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 40.7
+      value: 33.2
       objectReference: {fileID: 0}
     - target: {fileID: 6564490743183100473, guid: 8c2aa3630ea524e728e44d3556716a9c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.1
+      value: -2.1
       objectReference: {fileID: 0}
     - target: {fileID: 6564490743183100473, guid: 8c2aa3630ea524e728e44d3556716a9c,
         type: 3}
@@ -1593,17 +1613,22 @@ PrefabInstance:
     - target: {fileID: 6564490743183100469, guid: 8c2aa3630ea524e728e44d3556716a9c,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 0
+      value: 29.88
       objectReference: {fileID: 0}
     - target: {fileID: 6564490743183100469, guid: 8c2aa3630ea524e728e44d3556716a9c,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.5
+      value: -6.7
       objectReference: {fileID: 0}
     - target: {fileID: 6564490743183100472, guid: 8c2aa3630ea524e728e44d3556716a9c,
         type: 3}
       propertyPath: m_Name
       value: HookPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564490743183100472, guid: 8c2aa3630ea524e728e44d3556716a9c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6564490743183100473, guid: 8c2aa3630ea524e728e44d3556716a9c,
         type: 3}
@@ -1763,6 +1788,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WindGimmik
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517495451892689562, guid: c00468d7aff524b328458e2cd1a98c0b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8517495451892689563, guid: c00468d7aff524b328458e2cd1a98c0b,
         type: 3}

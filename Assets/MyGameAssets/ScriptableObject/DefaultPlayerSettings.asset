@@ -15,4 +15,4 @@ MonoBehaviour:
   jumpPower: 750
   jumpPowerByIceConditionFactor: 0.5
   meltIceTime: 1
-  tentacleMaxLength: 100
+  tentacleMaxLength: 10

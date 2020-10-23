@@ -12,6 +12,7 @@ TagManager:
   - WindGimmick
   - Diamond
   - DiamondManager
+  - StageSettingsOwner
   layers:
   - Default
   - TransparentFX

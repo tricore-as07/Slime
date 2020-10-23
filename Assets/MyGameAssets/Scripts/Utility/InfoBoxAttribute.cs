@@ -34,7 +34,7 @@ public sealed class InfoBoxAttribute : PropertyAttribute
     /// <param name="showMessage">インスペクターに表示する文字列</param>
     /// <param name="infoMessageType">インスペクターに表示する際の情報の種類</param>
     /// <param name="order">表示する順番</param>
-    public InfoBoxAttribute(string showMessage, InfoMessageType infoMessageType = InfoMessageType.None, int order = 0,bool isEnable = true)
+    public InfoBoxAttribute(string showMessage, InfoMessageType infoMessageType = InfoMessageType.None, int order = 0)
     {
         // コンストラクタで渡ってきた引数をメンバ変数に格納する
         message = showMessage;

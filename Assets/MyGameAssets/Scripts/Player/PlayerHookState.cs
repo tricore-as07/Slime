@@ -35,6 +35,7 @@ public partial class Player : MonoBehaviour
                 // 自由落下の状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.FreeFall);
             }
+            Context.playerTentacle.ExtendTentacle(Context.gameObject, joint.transform.position - new Vector3(0f,joint.transform.localScale.y / 2,0f));
         }
 
         /// <summary>
@@ -50,6 +51,14 @@ public partial class Player : MonoBehaviour
                 joint.connectedBody = null;
                 stateMachine.SendEvent((int)PlayerStateEventId.FreeFall);
             }
+        }
+
+        /// <summary>
+        /// 別の状態に変更される時の処理はこのExitで行う
+        /// </summary>
+        protected internal override void Exit()
+        {
+            Context.playerTentacle.ShrinkTentacle();
         }
 
         /// <summary>

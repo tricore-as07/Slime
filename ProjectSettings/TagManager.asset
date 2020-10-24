@@ -8,6 +8,11 @@ TagManager:
   - GoalArea
   - Ground
   - HookPoint
+  - GroundTrigger
+  - WindGimmick
+  - Diamond
+  - DiamondManager
+  - StageSettingsOwner
   layers:
   - Default
   - TransparentFX
@@ -17,9 +22,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - FitPlayerObject
+  - Player
+  - HookPoint
   - 
   - 
   - 

@@ -8,8 +8,10 @@ using System;
 /// </summary>
 public enum SubjectType
 {
-    OnGameStart,
-    OnGameClear
+    OnGameStart,            // ゲームが開始された時のイベント
+    OnGameClear,            // ゲームがクリアされた時のイベント
+    OnGameOver,             // ゲームオーバーになった時のイベント
+    OnRetry                 // リトライされた時のイベント
 }
 
 /// <summary>
@@ -17,43 +19,44 @@ public enum SubjectType
 /// </summary>
 public class EventManager : Singleton<EventManager>
 {
-    Dictionary<SubjectType, Subject<Unit>> eventDictionary = new Dictionary<SubjectType, Subject<Unit>>();      //イベントをSubjectTypeで呼び出せるようにするDictionary
+    Dictionary<SubjectType, Subject<Unit>> eventDictionary = new Dictionary<SubjectType, Subject<Unit>>();                      //イベントをSubjectTypeで呼び出せるようにするDictionary
 
     /// <summary>
-    /// サブジェクトの追加
+    /// 指定したイベントにSubscribeする
     /// </summary>
-    /// <param name="type">イベントの種類</param>
-    /// <param name="observable">追加するサブジェクト</param>
-    public Subject<Unit> CreateSubject(SubjectType type)
+    /// <param name="type">Subscribeするイベントの種類</param>
+    /// <param name="action">イベントが呼ばれた時に実行されるデリゲート</param>
+    public void Subscribe(SubjectType type,Action<Unit> action)
     {
-        if(eventDictionary.ContainsKey(type))
+        // Subscribeする種類のイベントが存在していなかったら
+        if (!eventDictionary.ContainsKey(type))
         {
-            return eventDictionary[type];
+            CreateSubject(type);
         }
-        else
-        {
-            var sub = new Subject<Unit>();
-            eventDictionary.Add(type, sub);
-            return sub;
-        }
+        // Subscribeする
+        eventDictionary[type].Subscribe(action);
     }
 
     /// <summary>
-    /// イベントの種類から該当するイベントを通知用のクラスを取得する
+    /// Subjectを作成する
     /// </summary>
-    /// <param name="type">必要な通知用クラスの種類</param>
-    /// <returns>通知用クラス</returns>
-    public IObservable<Unit> GetObservable(SubjectType type)
+    /// <param name="type">作成するSubjectの種類</param>
+    void CreateSubject(SubjectType type)
     {
-        if(eventDictionary.ContainsKey(type))
+        // Subjectの作成
+        var subject = new Subject<Unit>();
+        eventDictionary.Add(type, subject);
+    }
+
+    /// <summary>
+    /// 指定された種類のイベントを実行する
+    /// </summary>
+    /// <param name="type">実行するイベントの種類</param>
+    public void InvokeEvent(SubjectType type)
+    {
+        if (eventDictionary.ContainsKey(type))
         {
-            return eventDictionary[type];
-        }
-        else
-        {
-            var sub = new Subject<Unit>();
-            eventDictionary.Add(type, sub);
-            return sub;
+            eventDictionary[type].OnNext(Unit.Default);
         }
     }
 }

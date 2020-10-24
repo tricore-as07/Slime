@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UniRx;
+using System;
 
 /// <summary>
 /// プレイヤーをゲーム開始まで足止めする
@@ -9,7 +10,7 @@ public class StuckPlayer : MonoBehaviour
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
     /// </summary>
-    private void Awake()
+    void Awake()
     {
         Initialize();
     }
@@ -20,6 +21,7 @@ public class StuckPlayer : MonoBehaviour
     void Initialize()
     {
         // ゲームが開始されたら自分を非アクティブにする
-        EventManager.Inst.GetObservable(SubjectType.OnGameStart)?.Subscribe(Unit => gameObject.SetActive(false));
+        Action<Unit> action = Unit => gameObject.SetActive(false);
+        EventManager.Inst.Subscribe(SubjectType.OnGameStart, action);
     }
 }

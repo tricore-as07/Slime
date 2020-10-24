@@ -8,11 +8,11 @@ PlayerSettings:
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 0
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: Tricore
   productName: Slime
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -242,7 +242,7 @@ PlayerSettings:
   metalEditorSupport: 1
   metalAPIValidation: 1
   iOSRenderExtraFrameOnPause: 0
-  appleDeveloperTeamID: 
+  appleDeveloperTeamID: EYG2C75PKE
   iOSManualSigningProvisioningProfileID: 
   tvOSManualSigningProvisioningProfileID: 
   iOSManualSigningProvisioningProfileType: 0
@@ -679,7 +679,7 @@ PlayerSettings:
   webGLWasmStreaming: 0
   scriptingDefineSymbols:
     1: ODIN_INSPECTOR;TextMeshPro
-    4: USE_TWEEN;ODIN_INSPECTOR;TextMeshPro;ENABLE_ADMOB
+    4: USE_TWEEN;ODIN_INSPECTOR;TextMeshPro;ENABLE_ADMOB;DISABLE_SHARE_HELP
     7: TextMeshPro
     13: TextMeshPro
     19: TextMeshPro

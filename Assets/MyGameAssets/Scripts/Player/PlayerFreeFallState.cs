@@ -8,7 +8,7 @@ public partial class Player : MonoBehaviour
     /// <summary>
     /// プレイヤーが落下している時のステート
     /// </summary>
-    public class PlayerFreeFallState : PlayerStateMachine<Player>.PlayerState
+    private class PlayerFreeFallState : PlayerStateMachine<Player>.PlayerState
     {
         Vector3 hookDir;                //フックを飛ばす方向
 
@@ -27,7 +27,8 @@ public partial class Player : MonoBehaviour
         protected internal override void Update()
         {
             var isExtendHookInput = Input.GetKeyDown(KeyCode.Space);              //フックを伸ばす入力がされたか
-            if (isExtendHookInput)
+            // フックを伸ばす入力がされて、プレイヤーが氷の状態じゃなければ
+            if (isExtendHookInput && !Context.IsFrozen)
             {
                 ExtendHook();
             }
@@ -41,10 +42,10 @@ public partial class Player : MonoBehaviour
             //Rayを飛ばして衝突したオブジェクトの情報を保存する
             RaycastHit hit;
             //Rayを飛ばして衝突したものがあれば
-            if (Physics.Raycast(Context.transform.position, hookDir, out hit, 100))
+            if (Physics.Raycast(Context.transform.position, hookDir, out hit, Context.playerSettingsData.TentacleMaxLength, LayerName.HookPointMask)) 
             {
                 //Rayに衝突したオブジェクトがHookを引っ掛けられるところなら
-                if (hit.transform.tag == "HookPoint")
+                if (hit.transform.tag == TagName.HookPoint)
                 {
                     Context.hit = hit;
                     // フックを引っ掛けてる状態に変化させる
@@ -54,13 +55,13 @@ public partial class Player : MonoBehaviour
         }
 
         /// <summary>
-        /// 他のオブジェクトと衝突した時に呼ばれる
+        /// ２つのColliderが衝突したフレームに呼び出される
         /// </summary>
-        /// <param name="collision">衝突に関する情報</param>
+        /// <param name="collision">この衝突に含まれるその他のCollision</param>
         protected internal override void OnCollisionEnter(Collision collision)
         {
             // 接地したとき
-            if (collision.gameObject.tag == "Ground")
+            if (collision.gameObject.tag == TagName.Ground)
             {
                 // 何もしてない状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.Normal);

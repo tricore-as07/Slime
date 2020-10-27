@@ -25,6 +25,7 @@ public partial class Player : MonoBehaviour
     float jumpPower;                                                            //ジャンプする時の力
     float jumpPowerByIceConditionFactor;                                        //氷の状態の時のジャンプ力の係数
     float meltIceTime;                                                          //溶ける時間
+    float tapMomentTime;                                                        //タップされた瞬間を判定する時の誤差の許容範囲をカウントする変数
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
@@ -69,7 +70,7 @@ public partial class Player : MonoBehaviour
     /// 同じステージ内でリスタートする時の処理
     /// </summary>
     void Restart()
-    { 
+    {
         // プレイヤーのポジションをスタート地点に戻す
         transform.position = startPosition;
         // プレイヤーのRigidbodyのVelocityを0にする
@@ -143,7 +144,7 @@ public partial class Player : MonoBehaviour
     public void OnFlameGimmickEnterByIceCondition()
     {
         // 氷を溶かしている途中じゃなければ
-        if(meltIceCoroutine == null)
+        if (meltIceCoroutine == null)
         {
             // 氷を溶かす処理を開始する
             meltIceCoroutine = StartCoroutine(MeltIce());
@@ -159,7 +160,7 @@ public partial class Player : MonoBehaviour
         yield return new WaitForSeconds(meltIceTime);
         // 氷状態を解除して、溶かしている最中をやめる
         isFrozen = false;
-        playerIce.SetActive(false); 
+        playerIce.SetActive(false);
         meltIceCoroutine = null;
         physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
     }
@@ -239,13 +240,45 @@ public partial class Player : MonoBehaviour
     /// タップ入力されているかどうか
     /// </summary>
     /// <returns>タップ入力されている : true,タップ入力されていない : false</returns>
-    /// NOTE: orimoto UnityEditor用なのでスペースか左クリックでタップ判定とする
     bool IsTapInput()
     {
-        if(Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+        // タップ判定の入力がされているとき
+        if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
         {
             return true;
         }
+        return false;
+    }
+
+    /// <summary>
+    /// タップ入力された瞬間かどうか（誤差許容あり）
+    /// </summary>
+    /// <returns>タップ入力された瞬間の判定 : true,タップ入力された瞬間の判定じゃない : false</returns>
+    bool IsTapInputMoment()
+    {
+        // タップ判定の入力がされているとき
+        if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+        {
+            // 前にタップされた時間が記録されてないなら
+            if (tapMomentTime == 0f)
+            {
+                // 前にタップされた時間を記録してtrueを返す
+                tapMomentTime = Time.realtimeSinceStartup;
+                return true;
+            }
+            // 前にタップされた時間から経った時間が誤差許容時間なら
+            if (Time.realtimeSinceStartup - tapMomentTime < playerSettingsData.TapErrorToleranceTime)
+            {
+                return true;
+            }
+            // 誤差許容時間以上の時間が経っていたなら
+            else
+            {
+                return false;
+            }
+        }
+        // 前にタップされた時間の記録をリセット
+        tapMomentTime = 0f;
         return false;
     }
 #elif UNITY_IOS || UNITY_ANDROID
@@ -259,6 +292,37 @@ public partial class Player : MonoBehaviour
         {
             return true;
         }
+        return false;
+    }
+
+    /// <summary>
+    /// タップ入力された瞬間かどうか（誤差許容あり）
+    /// </summary>
+    /// <returns>タップ入力された瞬間の判定 : true,タップ入力された瞬間の判定じゃない : false</returns>
+    bool IsTapInputMoment()
+    {
+        // タップ判定の入力がされているとき
+        if (Input.touchCount > 0)
+        {
+            // 前にタップされた時間が記録されてないなら
+            if (tapMomentTime == 0f)
+            {
+                // 前にタップされた時間を記録してtrueを返す
+                tapMomentTime = Time.realtimeSinceStartup;
+                return true;
+            }
+            // 前にタップされた時間から経った時間が誤差許容時間なら
+            if (Time.realtimeSinceStartup - tapMomentTime < playerSettingsData.TapErrorToleranceTime)
+            {
+                return true;
+            }
+            // 誤差許容時間以上の時間が経っていたなら
+            else
+            {
+                return false;
+            }
+        }
+        tapMomentTime = 0f;
         return false;
     }
 #endif

@@ -18,3 +18,4 @@ MonoBehaviour:
   tentacleMaxLength: 10
   normalPlayerFriction: 0.4
   frozenPlayerFriction: 0
+  tapErrorToleranceTime: 1

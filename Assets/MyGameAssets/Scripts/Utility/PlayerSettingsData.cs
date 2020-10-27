@@ -25,4 +25,7 @@ public class PlayerSettingsData : ScriptableObject
     [InfoBox("氷状態のプレイヤーの摩擦の大きさです", InfoMessageType.None, 0)]
     [SerializeField, Range(0f, 1f)] float frozenPlayerFriction = 0f;            //氷状態のプレイヤーの摩擦の大きさ
     public float FrozenPlayerFriction => frozenPlayerFriction;                  //外部に公開するためのプロパティ
+    [InfoBox("タップの押された瞬間を\r\n判定する時の誤差許容範囲", InfoMessageType.None, 0)]
+    [SerializeField] float tapErrorToleranceTime = 0f;                          //タップされた瞬間を判定する時の誤差の許容範囲
+    public float TapErrorToleranceTime => tapErrorToleranceTime;                //外部に公開するためのプロパティ
 }

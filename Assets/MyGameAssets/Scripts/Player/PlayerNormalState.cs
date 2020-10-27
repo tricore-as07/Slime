@@ -15,7 +15,7 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Update()
         {
-            var isJumpInput = Context.IsTapInput();              //ジャンプする入力がされたか
+            var isJumpInput = Context.IsTapInputMoment();              //ジャンプする入力がされたか
             if (isJumpInput)
             {
                 // ジャンプ力

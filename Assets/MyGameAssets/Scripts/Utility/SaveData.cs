@@ -38,7 +38,7 @@ public class StageSaveData
     }
 
     /// <summary>
-    /// コピーコンストラクタ
+    /// 同じデータを持ったクラスを作るための引数付きコンストラクタ
     /// </summary>
     /// <param name="stageSaveData">コピー元のStageSaveDataクラス</param>
     public StageSaveData(StageSaveData stageSaveData)
@@ -68,7 +68,7 @@ public class DiamondAcquisitionData
     }
 
     /// <summary>
-    /// コピーコンストラクタ
+    /// 同じデータを持ったクラスを作るための引数付きコンストラクタ
     /// </summary>
     /// <param name="diamondAcquisitionData">コピー元のDiamondAcquisitionDataクラス</param>
     public DiamondAcquisitionData(DiamondAcquisitionData diamondAcquisitionData)

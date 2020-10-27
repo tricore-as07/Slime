@@ -31,6 +31,7 @@ public partial class Player : MonoBehaviour
     [SerializeField] GameObject playerIce = default;                            //プレイヤーが氷の状態になったら表示するゲームオブジェクト
     [SerializeField] PlayerTentacle playerTentacle = default;                   //プレイヤーがフックを引っ掛けている状態の時に使う触手のゲームオブジェクト
     [SerializeField] PlayerSettingsData playerSettingsData = default;           //プレイヤーの設定データ
+    [SerializeField] PhysicMaterial physicMaterial = default;                   //物理特性を設定するマテリアル
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -61,6 +62,7 @@ public partial class Player : MonoBehaviour
         jumpPower = playerSettingsData.JumpPower;
         jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;
         meltIceTime = playerSettingsData.MeltIceTime;
+        physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
     }
 
     /// <summary>
@@ -78,6 +80,7 @@ public partial class Player : MonoBehaviour
         isFrozen = false;
         playerIce.SetActive(false);
         meltIceCoroutine = null;
+        physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
     }
 
     /// <summary>
@@ -125,6 +128,7 @@ public partial class Player : MonoBehaviour
         // プレイヤーを凍っている状態にする
         isFrozen = true;
         playerIce.SetActive(true);
+        physicMaterial.dynamicFriction = playerSettingsData.FrozenPlayerFriction;
         // 氷を溶かしている途中だったら
         if (meltIceCoroutine != null)
         {
@@ -157,6 +161,7 @@ public partial class Player : MonoBehaviour
         isFrozen = false;
         playerIce.SetActive(false); 
         meltIceCoroutine = null;
+        physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
     }
 
     /// <summary>
@@ -228,4 +233,33 @@ public partial class Player : MonoBehaviour
     {
         stateMachine.OnTriggerExit(other);
     }
+
+#if UNITY_EDITOR
+    /// <summary>
+    /// タップ入力されているかどうか
+    /// </summary>
+    /// <returns>タップ入力されている : true,タップ入力されていない : false</returns>
+    /// NOTE: orimoto UnityEditor用なのでスペースか左クリックでタップ判定とする
+    bool IsTapInput()
+    {
+        if(Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+        {
+            return true;
+        }
+        return false;
+    }
+#elif UNITY_IOS || UNITY_ANDROID
+    /// <summary>
+    /// タップ入力されているかどうか
+    /// </summary>
+    /// <returns>タップ入力されている : true,タップ入力されていない : false</returns>
+    bool IsTapInput()
+    {
+        if (Input.touchCount > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+#endif
 }

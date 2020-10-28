@@ -5,7 +5,7 @@
 /// </summary>
 public class IceGimmick : MonoBehaviour
 {
-    static Player player;           //プレイヤーのクラス
+    Player player;           //プレイヤーのクラス
 
     /// <summary>
     /// ２つのColliderが衝突したフレームに呼び出される（片方はisTriggerがtrueである時）

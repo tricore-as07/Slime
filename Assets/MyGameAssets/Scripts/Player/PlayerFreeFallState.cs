@@ -19,7 +19,8 @@ public partial class Player : MonoBehaviour
         protected internal override void Enter()
         {
             // フックを伸ばす方向
-            hookDir = (Vector3.right + Vector3.up).normalized;
+            hookDir = Vector3.right;
+            hookDir = Quaternion.Euler(0f,0f,Context.playerSettingsData.TentacleDir) * hookDir;
             isReleaseInput = false;
         }
 

@@ -16,6 +16,6 @@ MonoBehaviour:
   jumpPowerByIceConditionFactor: 0.5
   meltIceTime: 1
   tentacleMaxLength: 10
-  normalPlayerFriction: 0.4
+  normalPlayerFriction: 0.3
   frozenPlayerFriction: 0
   tapErrorToleranceTime: 1

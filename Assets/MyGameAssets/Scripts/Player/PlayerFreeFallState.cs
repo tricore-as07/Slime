@@ -80,13 +80,33 @@ public partial class Player : MonoBehaviour
         }
 
         /// <summary>
-        /// ２つのColliderが衝突したフレームに呼び出される
+        /// ２つのColliderが衝突したフレームに呼び出される（片方はisTriggerがtrueである時）
         /// </summary>
-        /// <param name="collision">この衝突に含まれるその他のCollision</param>
-        protected internal override void OnCollisionEnter(Collision collision)
+        /// <param name="collision">この衝突に含まれるその他のCollider</param>
+        protected internal override void OnTriggerEnter(Collider other)
         {
             // 接地したとき
-            if (collision.gameObject.tag == TagName.Ground)
+            if (other.tag == TagName.GroundTrigger)
+            {
+                // 何もしてない状態に変化させる
+                stateMachine.SendEvent((int)PlayerStateEventId.Normal);
+            }
+        }
+
+        /// <summary>
+        /// ２つのColliderが衝突している最中に呼び出される（片方はisTriggerがtrueである時）
+        /// </summary>
+        /// <param name="collision">この衝突に含まれるその他のCollider</param>
+        protected internal override void OnTriggerStay(Collider other)
+        {
+            // 入力を一度離しているかどうか
+            if (!isReleaseInput)
+            {
+                // 入力しっぱなしの場合、早期リターン
+                return;
+            }
+            // 接地したとき
+            if (other.tag == TagName.GroundTrigger)
             {
                 // 何もしてない状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.Normal);

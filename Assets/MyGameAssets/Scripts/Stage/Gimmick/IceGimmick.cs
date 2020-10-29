@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// 炎のギミックの処理をする
+/// 氷のギミックの処理をする
 /// </summary>
-public class FlameGimmick : MonoBehaviour
+public class IceGimmick : MonoBehaviour
 {
     Player player;           //プレイヤーのクラス
 
@@ -14,21 +14,11 @@ public class FlameGimmick : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // 衝突したオブジェクトがプレイヤーなら
-        if(other.tag == TagName.Player)
+        if (other.tag == TagName.Player)
         {
             // プレイヤーのクラスを持っていなければキャッシュする 
             player = player ?? other.GetComponent<Player>();
-            // プレイヤーが氷の状態じゃなければゲームオーバーにする
-            if (!player.IsFrozen)
-            {
-                // ゲームオーバー処理を実行する
-                EventManager.Inst.InvokeEvent(SubjectType.OnGameOver);
-            }
-            else
-            {
-                // 氷の状態で炎のギミックに入ったときの処理をする
-                player.OnFlameGimmickEnterByIceCondition();
-            }
+            player.OnIceGimmickEnter();
         }
     }
 }

@@ -3,10 +3,9 @@
 /// <summary>
 /// 棘のオブジェクトの処理をする
 /// </summary>
-/// FIXME: orimoto 氷のギミック実装時にゲームオーバーの条件追加予定
 public class SpineObject : MonoBehaviour
 {
-    static Player player;           //プレイヤーのクラス
+    Player player;           //プレイヤーのクラス
 
     /// <summary>
     /// ２つのColliderが衝突したフレームに呼び出される
@@ -19,8 +18,12 @@ public class SpineObject : MonoBehaviour
         {
             // プレイヤーのクラスを持っていなければキャッシュする 
             player = player ?? collision.gameObject.GetComponent<Player>();
-            // ゲームオーバー処理を実行する
-            EventManager.Inst.InvokeEvent(SubjectType.OnGameOver);
+            // プレイヤーが氷の状態じゃなければゲームオーバーにする
+            if(!player.IsFrozen)
+            {
+                // ゲームオーバー処理を実行する
+                EventManager.Inst.InvokeEvent(SubjectType.OnGameOver);
+            }
         }
     }
 }

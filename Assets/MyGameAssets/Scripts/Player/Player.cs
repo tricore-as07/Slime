@@ -1,6 +1,7 @@
 using UnityEngine;
 using UniRx;
 using System;
+using System.Collections;
 
 /// <summary>
 /// プレイヤーに関する処理を行う
@@ -17,11 +18,17 @@ public partial class Player : MonoBehaviour
     }
     PlayerStateMachine<Player> stateMachine = default;                          //ステートマシン
     RaycastHit hit;                                                             //プレイヤーステート間でRayに衝突したオブジェクトの情報を共有するための変数
+    Vector3 startPosition;                                                      //リトライ時に最初のポジションに戻すキャッシュとして使用
+    bool isFrozen = false;                                                      //プレイヤーが凍っているかどうか
+    public bool IsFrozen => isFrozen;                                           //プレイヤーが凍っているかどうかを外部に公開するためのプロパティ
+    Coroutine meltIceCoroutine;                                                 //氷を溶かすコルーチンのための変数
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
     [SerializeField] float jumpPower = 0f;                                      //ジャンプする時の力
-    Vector3 startPosition;                                                      //リトライ時に最初のポジションに戻すキャッシュとして使用
+    [SerializeField, Range(0f, 1f)] float jumpPowerByIceConditionFactor = 0f;   //氷の状態の時のジャンプ力の係数
+    [SerializeField] float meltIceTime = default;                               //溶ける時間
+    [SerializeField] GameObject playerIce = default;                            //プレイヤーが氷の状態になったら表示するゲームオブジェクト
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -98,6 +105,64 @@ public partial class Player : MonoBehaviour
     void Start()
     {
         stateMachine.Update();
+    }
+
+    /// <summary>
+    /// 氷のギミックに入った時
+    /// </summary>
+    public void OnIceGimmickEnter()
+    {
+        // プレイヤーを凍っている状態にする
+        isFrozen = true;
+        playerIce.SetActive(true);
+        // 氷を溶かしている途中だったら
+        if (meltIceCoroutine != null)
+        {
+            StopCoroutine(meltIceCoroutine);
+            meltIceCoroutine = null;
+        }
+    }
+
+    /// <summary>
+    /// 氷の状態で炎のギミックに入った時
+    /// </summary>
+    public void OnFlameGimmickEnterByIceCondition()
+    {
+        // 氷を溶かしている途中じゃなければ
+        if(meltIceCoroutine == null)
+        {
+            // 氷を溶かす処理を開始する
+            meltIceCoroutine = StartCoroutine(MeltIce());
+        }
+    }
+
+    /// <summary>
+    /// 氷を溶かす処理
+    /// </summary>
+    IEnumerator MeltIce()
+    {
+        // 設定されてる氷が溶ける時間待つ
+        yield return new WaitForSeconds(meltIceTime);
+        // 氷状態を解除して、溶かしている最中をやめる
+        isFrozen = false;
+        playerIce.SetActive(false); 
+        meltIceCoroutine = null;
+    }
+
+    /// <summary>
+    /// ジャンプ力にかける係数を取得する
+    /// </summary>
+    /// <returns>ジャンプ力にかける係数</returns>
+    float GetJumpPowerFactor()
+    {
+        // 氷の状態なら
+        if(IsFrozen)
+        {
+            // 氷の状態のジャンプ力にかける係数を返す
+            return jumpPowerByIceConditionFactor;
+        }
+        // 通常状態なら1を返す
+        return 1f;
     }
 
     /// <summary>

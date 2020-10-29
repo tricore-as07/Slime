@@ -18,7 +18,11 @@ public partial class Player : MonoBehaviour
             var isJumpInput = Input.GetKeyDown(KeyCode.Space);              //ジャンプする入力がされたか
             if (isJumpInput)
             {
-                Context.rigidbody.AddForce(Vector3.up * Context.jumpPower);
+                // ジャンプ力
+                float jumpPower;
+                jumpPower = Context.jumpPower * Context.GetJumpPowerFactor();
+                // ジャンプ力を元に上方向に力を加える
+                Context.rigidbody.AddForce(Vector3.up * jumpPower);
                 // 自由落下している状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.FreeFall);
             }

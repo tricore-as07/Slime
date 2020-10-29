@@ -17,6 +17,8 @@ public static class TagName
 	public const string HookPoint = "HookPoint";
 	public const string GroundTrigger = "GroundTrigger";
 	public const string WindGimmick = "WindGimmick";
+	public const string Diamond = "Diamond";
+	public const string DiamondManager = "DiamondManager";
 	
 	/// <summary>
 	/// タグ名の配列を取得
@@ -37,6 +39,8 @@ public static class TagName
 		tagNames.Add(TagName.HookPoint);
 		tagNames.Add(TagName.GroundTrigger);
 		tagNames.Add(TagName.WindGimmick);
+		tagNames.Add(TagName.Diamond);
+		tagNames.Add(TagName.DiamondManager);
 		return tagNames.ToArray();
 	}
 }

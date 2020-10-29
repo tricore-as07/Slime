@@ -17,6 +17,6 @@ MonoBehaviour:
   meltIceTime: 1
   tentacleMaxLength: 10
   tentacleDir: 45
-  normalPlayerFriction: 0.3
+  normalPlayerFriction: 0.4
   frozenPlayerFriction: 0
   tapErrorToleranceTime: 1

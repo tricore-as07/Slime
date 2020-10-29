@@ -63,6 +63,7 @@ public partial class Player : MonoBehaviour
         jumpPower = playerSettingsData.JumpPower;
         jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;
         meltIceTime = playerSettingsData.MeltIceTime;
+        physicMaterial = physicMaterial ?? GetComponent<SphereCollider>().material;
         physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
     }
 

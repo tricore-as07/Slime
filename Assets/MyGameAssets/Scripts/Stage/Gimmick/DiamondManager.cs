@@ -6,7 +6,8 @@ using UnityEngine;
 /// </summary>
 public class DiamondManager : MonoBehaviour
 {
-    int stageSerialNum = 1;                                     //ステージの識別番号（ステージのエディタが完成したらステージ作成時に取得してくるように修正）
+    // FIXME: orimoto ステージのエディタが完成したらステージ作成時に取得してくるように修正
+    int stageSerialNum = 1;                                     //ステージの識別番号
     List<GameObject> diamonds = new List<GameObject>();         //ステージにあるダイヤモンドのリスト
     DiamondAcquisitionData diamondAcquisitionData;              //ダイヤモンドの獲得状況がセーブされているデータ
 

@@ -25,11 +25,14 @@ public partial class Player : MonoBehaviour
     float jumpPower;                                                            //ジャンプする時の力
     float jumpPowerByIceConditionFactor;                                        //氷の状態の時のジャンプ力の係数
     float meltIceTime;                                                          //溶ける時間
+    float tapMomentTime;                                                        //タップされた瞬間を判定する時の誤差の許容範囲をカウントする変数
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
     [SerializeField] GameObject playerIce = default;                            //プレイヤーが氷の状態になったら表示するゲームオブジェクト
+    [SerializeField] PlayerTentacle playerTentacle = default;                   //プレイヤーがフックを引っ掛けている状態の時に使う触手のゲームオブジェクト
     [SerializeField] PlayerSettingsData playerSettingsData = default;           //プレイヤーの設定データ
+    [SerializeField] PhysicMaterial physicMaterial = default;                   //物理特性を設定するマテリアル
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -60,13 +63,14 @@ public partial class Player : MonoBehaviour
         jumpPower = playerSettingsData.JumpPower;
         jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;
         meltIceTime = playerSettingsData.MeltIceTime;
+        physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
     }
 
     /// <summary>
     /// 同じステージ内でリスタートする時の処理
     /// </summary>
     void Restart()
-    { 
+    {
         // プレイヤーのポジションをスタート地点に戻す
         transform.position = startPosition;
         // プレイヤーのRigidbodyのVelocityを0にする
@@ -77,6 +81,7 @@ public partial class Player : MonoBehaviour
         isFrozen = false;
         playerIce.SetActive(false);
         meltIceCoroutine = null;
+        physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
     }
 
     /// <summary>
@@ -87,7 +92,7 @@ public partial class Player : MonoBehaviour
         // ステートマシンのインスタンスを生成して遷移テーブルを構築
         stateMachine = new PlayerStateMachine<Player>(this);   // 自身がコンテキストになるので自身のインスタンスを渡す
         // 静止状態からの状態遷移の記述
-        stateMachine.AddTransition<PlayerStayState, PlayerNormalState>((int)PlayerStateEventId.Normal);
+        stateMachine.AddTransition<PlayerStayState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         // 通常状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerNormalState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         // フックを使用している状態からの状態遷移の記述
@@ -124,6 +129,7 @@ public partial class Player : MonoBehaviour
         // プレイヤーを凍っている状態にする
         isFrozen = true;
         playerIce.SetActive(true);
+        physicMaterial.dynamicFriction = playerSettingsData.FrozenPlayerFriction;
         // 氷を溶かしている途中だったら
         if (meltIceCoroutine != null)
         {
@@ -138,7 +144,7 @@ public partial class Player : MonoBehaviour
     public void OnFlameGimmickEnterByIceCondition()
     {
         // 氷を溶かしている途中じゃなければ
-        if(meltIceCoroutine == null)
+        if (meltIceCoroutine == null)
         {
             // 氷を溶かす処理を開始する
             meltIceCoroutine = StartCoroutine(MeltIce());
@@ -154,8 +160,9 @@ public partial class Player : MonoBehaviour
         yield return new WaitForSeconds(meltIceTime);
         // 氷状態を解除して、溶かしている最中をやめる
         isFrozen = false;
-        playerIce.SetActive(false); 
+        playerIce.SetActive(false);
         meltIceCoroutine = null;
+        physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
     }
 
     /// <summary>
@@ -227,4 +234,96 @@ public partial class Player : MonoBehaviour
     {
         stateMachine.OnTriggerExit(other);
     }
+
+#if UNITY_EDITOR
+    /// <summary>
+    /// タップ入力されているかどうか
+    /// </summary>
+    /// <returns>タップ入力されている : true,タップ入力されていない : false</returns>
+    bool IsTapInput()
+    {
+        // タップ判定の入力がされているとき
+        if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// タップ入力された瞬間かどうか（誤差許容あり）
+    /// </summary>
+    /// <returns>タップ入力された瞬間の判定 : true,タップ入力された瞬間の判定じゃない : false</returns>
+    bool IsTapInputMoment()
+    {
+        // タップ判定の入力がされているとき
+        if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+        {
+            // 前にタップされた時間が記録されてないなら
+            if (tapMomentTime == 0f)
+            {
+                // 前にタップされた時間を記録してtrueを返す
+                tapMomentTime = Time.realtimeSinceStartup;
+                return true;
+            }
+            // 前にタップされた時間から経った時間が誤差許容時間なら
+            if (Time.realtimeSinceStartup - tapMomentTime < playerSettingsData.TapErrorToleranceTime)
+            {
+                return true;
+            }
+            // 誤差許容時間以上の時間が経っていたなら
+            else
+            {
+                return false;
+            }
+        }
+        // 前にタップされた時間の記録をリセット
+        tapMomentTime = 0f;
+        return false;
+    }
+#elif UNITY_IOS || UNITY_ANDROID
+    /// <summary>
+    /// タップ入力されているかどうか
+    /// </summary>
+    /// <returns>タップ入力されている : true,タップ入力されていない : false</returns>
+    bool IsTapInput()
+    {
+        if (Input.touchCount > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// タップ入力された瞬間かどうか（誤差許容あり）
+    /// </summary>
+    /// <returns>タップ入力された瞬間の判定 : true,タップ入力された瞬間の判定じゃない : false</returns>
+    bool IsTapInputMoment()
+    {
+        // タップ判定の入力がされているとき
+        if (Input.touchCount > 0)
+        {
+            // 前にタップされた時間が記録されてないなら
+            if (tapMomentTime == 0f)
+            {
+                // 前にタップされた時間を記録してtrueを返す
+                tapMomentTime = Time.realtimeSinceStartup;
+                return true;
+            }
+            // 前にタップされた時間から経った時間が誤差許容時間なら
+            if (Time.realtimeSinceStartup - tapMomentTime < playerSettingsData.TapErrorToleranceTime)
+            {
+                return true;
+            }
+            // 誤差許容時間以上の時間が経っていたなら
+            else
+            {
+                return false;
+            }
+        }
+        tapMomentTime = 0f;
+        return false;
+    }
+#endif
 }

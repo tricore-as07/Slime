@@ -63,6 +63,7 @@ public partial class Player : MonoBehaviour
         jumpPower = playerSettingsData.JumpPower;
         jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;
         meltIceTime = playerSettingsData.MeltIceTime;
+        physicMaterial = physicMaterial ?? GetComponent<SphereCollider>().material;
         physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
     }
 
@@ -92,7 +93,7 @@ public partial class Player : MonoBehaviour
         // ステートマシンのインスタンスを生成して遷移テーブルを構築
         stateMachine = new PlayerStateMachine<Player>(this);   // 自身がコンテキストになるので自身のインスタンスを渡す
         // 静止状態からの状態遷移の記述
-        stateMachine.AddTransition<PlayerStayState, PlayerNormalState>((int)PlayerStateEventId.Normal);
+        stateMachine.AddTransition<PlayerStayState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         // 通常状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerNormalState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         // フックを使用している状態からの状態遷移の記述

@@ -11,6 +11,7 @@ public partial class Player : MonoBehaviour
     private class PlayerFreeFallState : PlayerStateMachine<Player>.PlayerState
     {
         Vector3 hookDir;                //フックを飛ばす方向
+        bool isReleaseInput;            //入力を離したかどうか
 
         /// <summary>
         /// 状態へ突入時の処理はこのEnterで行う
@@ -19,6 +20,7 @@ public partial class Player : MonoBehaviour
         {
             // フックを伸ばす方向
             hookDir = (Vector3.right + Vector3.up).normalized;
+            isReleaseInput = false;
         }
 
         /// <summary>
@@ -26,7 +28,30 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Update()
         {
-            var isExtendHookInput = Input.GetKeyDown(KeyCode.Space);              //フックを伸ばす入力がされたか
+#if UNITY_EDITOR
+            // 入力が離されていない状態で、何かしらの入力がまだされていたら
+            if (!isReleaseInput && Input.anyKey)
+            {
+                return;
+            }
+            // 入力が離されていない状態で、何も入力されていなければ
+            else if(!isReleaseInput && !Input.anyKey)
+            {
+                isReleaseInput = true;
+            }
+#elif UNITY_IOS || UNITY_ANDROID
+            // 入力が離されていない状態で、何かしらの入力がまだされていたら
+            if (!isReleaseInput && Input.touchCount != 0)
+            {
+                return;
+            }
+            // 入力が離されていない状態で、何も入力されていなければ
+            else if(!isReleaseInput && Input.touchCount == 0)
+            {
+                isReleaseInput = true;
+            }
+#endif
+            var isExtendHookInput = Context.IsTapInputMoment();              //フックを伸ばす入力がされたか
             // フックを伸ばす入力がされて、プレイヤーが氷の状態じゃなければ
             if (isExtendHookInput && !Context.IsFrozen)
             {

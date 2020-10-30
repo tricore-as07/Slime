@@ -43,7 +43,7 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Update()
         {
-            bool isDisconnectHook = !Input.GetKey(KeyCode.Space);        //フックを切断するか
+            bool isDisconnectHook = !Context.IsTapInput();        //フックを切断するか
             // フックを切断するなら
             if (isDisconnectHook)
             {

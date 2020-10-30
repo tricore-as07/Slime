@@ -21,7 +21,7 @@ public partial class Player : MonoBehaviour
         FreeFall        //自由落下している状態
     }
     PlayerStateMachine<Player> stateMachine = default;                          //ステートマシン
-    RaycastHit hit;                                                             //プレイヤーステート間でRayに衝突したオブジェクトの情報を共有するための変数
+    GameObject hookObject;                                                      //フックのオブジェクト
     Vector3 startPosition;                                                      //リトライ時に最初のポジションに戻すキャッシュとして使用
     bool isFrozen = false;                                                      //プレイヤーが凍っているかどうか
     public bool IsFrozen => isFrozen;                                           //プレイヤーが凍っているかどうかを外部に公開するためのプロパティ

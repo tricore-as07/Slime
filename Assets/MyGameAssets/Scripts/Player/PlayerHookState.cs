@@ -19,7 +19,7 @@ public partial class Player : MonoBehaviour
         protected internal override void Enter()
         {
             // フックを引っ掛けるオブジェクトをキャッシュ
-            hookObj = Context.hit.transform.gameObject;
+            hookObj = Context.hookObject;
             // フックを引っ掛けるオブジェクトに繋げるためのコンポーネントがあるならキャッシュ
             joint = hookObj?.GetComponent<HingeJoint>();
             // フックの繋げるためのクラスがキャッシュがあるなら

@@ -5,10 +5,21 @@
 /// </summary>
 public class AddMotorForce : MonoBehaviour
 {
-    [SerializeField] HingeJoint joint = default;                //フックを繋げるためのクラス
-    [SerializeField] float force = 0f;                          //加速する力
-    [SerializeField] float targetVelocity = 0f;                 //加速する目標
-    [SerializeField] float deadZoneVelocity = 0f;               //加速しない時の速度（速度が一定以下になると逆方向に加速させるため）
+    [SerializeField] HingeJoint joint = default;                       //フックを繋げるためのクラス
+    static float force = 0f;                                           //加速する力
+    static float targetVelocity = 0f;                                  //加速する目標
+    static float deadZoneVelocity = 0f;                                //加速しない時の速度（速度が一定以下になると逆方向に加速させるため）
+
+    /// <summary>
+    /// スクリプトのインスタンスがロードされたときに呼び出される
+    /// </summary>
+    void Awake()
+    {
+        // ステージの設定を反映させる
+        force = StageSettingsOwner.Inst.StageSettingsData.MotorForceOfHook;
+        targetVelocity = StageSettingsOwner.Inst.StageSettingsData.MotorTatgetAngle;
+        deadZoneVelocity = StageSettingsOwner.Inst.StageSettingsData.DeadZoneVelocity;
+    }
 
     /// <summary>
     /// 毎フレーム呼び出される

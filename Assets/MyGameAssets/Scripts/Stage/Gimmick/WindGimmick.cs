@@ -5,9 +5,19 @@
 /// </summary>
 public class WindGimmick : MonoBehaviour
 {
-    [SerializeField] float WindPower = 0f;      //風の強さ（加速度）
-    [SerializeField] float limitSpeed = 0f;     //風で加速させる最大の速度
-    Rigidbody playerRigidbody;                  //プレイヤーのRigidbody
+    static float windPower = 0f;                                    //風の強さ（加速度）
+    static float limitSpeed = 0f;                                   //風で加速させる最大の速度
+    static Rigidbody playerRigidbody;                               //プレイヤーのRigidbody
+
+    /// <summary>
+    /// スクリプトのインスタンスがロードされたときに呼び出される
+    /// </summary>
+    void Awake()
+    {
+        // ステージの設定を反映させる
+        windPower = StageSettingsOwner.Inst.StageSettingsData.WindPower;
+        limitSpeed = StageSettingsOwner.Inst.StageSettingsData.LimitSpeedOnWindGimmick;
+    }
 
     /// <summary>
     /// ２つのColliderが衝突している最中に呼び出される（片方はisTriggerがtrueである時）
@@ -21,7 +31,7 @@ public class WindGimmick : MonoBehaviour
             // Rigidbodyをキャッシュ
             playerRigidbody = playerRigidbody ?? other.gameObject.GetComponent<Rigidbody>();
             // 上方向に風の強さの力を加える
-            playerRigidbody.AddForce(Vector3.up * WindPower);
+            playerRigidbody.AddForce(Vector3.up * windPower);
             // プレイヤーの速度が最大速度より大きいなら
             if(playerRigidbody.velocity.y > limitSpeed)
             {

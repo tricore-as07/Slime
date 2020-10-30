@@ -22,13 +22,15 @@ public partial class Player : MonoBehaviour
     bool isFrozen = false;                                                      //プレイヤーが凍っているかどうか
     public bool IsFrozen => isFrozen;                                           //プレイヤーが凍っているかどうかを外部に公開するためのプロパティ
     Coroutine meltIceCoroutine;                                                 //氷を溶かすコルーチンのための変数
+    float jumpPower;                                                            //ジャンプする時の力
+    float jumpPowerByIceConditionFactor;                                        //氷の状態の時のジャンプ力の係数
+    float meltIceTime;                                                          //溶ける時間
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
-    [SerializeField] float jumpPower = 0f;                                      //ジャンプする時の力
-    [SerializeField, Range(0f, 1f)] float jumpPowerByIceConditionFactor = 0f;   //氷の状態の時のジャンプ力の係数
-    [SerializeField] float meltIceTime = default;                               //溶ける時間
     [SerializeField] GameObject playerIce = default;                            //プレイヤーが氷の状態になったら表示するゲームオブジェクト
+    [SerializeField] PlayerTentacle playerTentacle = default;                   //プレイヤーがフックを引っ掛けている状態の時に使う触手のゲームオブジェクト
+    [SerializeField] PlayerSettingsData playerSettingsData = default;           //プレイヤーの設定データ
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -55,6 +57,10 @@ public partial class Player : MonoBehaviour
         startPosition = transform.position;
         // ゲームオーバーになったらリスタートの関数が呼ばれるようにする
         EventManager.Inst.Subscribe(SubjectType.OnRetry, Unit => Restart());
+        // プレイヤーの設定データを反映させる
+        jumpPower = playerSettingsData.JumpPower;
+        jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;
+        meltIceTime = playerSettingsData.MeltIceTime;
     }
 
     /// <summary>
@@ -68,6 +74,10 @@ public partial class Player : MonoBehaviour
         rigidbody.velocity = Vector3.zero;
         // ゲームが再開されるまで重力を無効にしておく
         rigidbody.useGravity = false;
+        // 氷状態の情報を初期化
+        isFrozen = false;
+        playerIce.SetActive(false);
+        meltIceCoroutine = null;
     }
 
     /// <summary>
@@ -78,7 +88,7 @@ public partial class Player : MonoBehaviour
         // ステートマシンのインスタンスを生成して遷移テーブルを構築
         stateMachine = new PlayerStateMachine<Player>(this);   // 自身がコンテキストになるので自身のインスタンスを渡す
         // 静止状態からの状態遷移の記述
-        stateMachine.AddTransition<PlayerStayState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
+        stateMachine.AddTransition<PlayerStayState, PlayerNormalState>((int)PlayerStateEventId.Normal);
         // 通常状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerNormalState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         // フックを使用している状態からの状態遷移の記述

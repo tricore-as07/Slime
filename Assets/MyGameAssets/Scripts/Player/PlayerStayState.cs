@@ -22,7 +22,7 @@ public partial class Player : MonoBehaviour
             stayPosition = Context.transform.position;
             Context.rigidbody.useGravity = false;
             // ゲームが開始されたらプレイヤーの状態をNormalに変更する
-            Action<Unit> action = Unit => stateMachine.SendEvent((int)PlayerStateEventId.FreeFall);
+            Action<Unit> action = Unit => stateMachine.SendEvent((int)PlayerStateEventId.Normal);
             EventManager.Inst.Subscribe(SubjectType.OnGameStart, action);
         }
 

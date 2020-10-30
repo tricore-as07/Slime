@@ -12,6 +12,7 @@ TagManager:
   - WindGimmick
   - Diamond
   - DiamondManager
+  - StageSettingsOwner
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - 
   - FitPlayerObject
   - Player
-  - 
+  - HookPoint
   - 
   - 
   - 

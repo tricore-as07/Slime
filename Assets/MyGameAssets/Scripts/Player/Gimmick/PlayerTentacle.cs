@@ -9,6 +9,8 @@ public class PlayerTentacle : MonoBehaviour
     Vector3 hook;               //フックのポジション
     Vector3 mediumPos;          //プレイヤーのポジションとフックのポジションの中間
     float dist;                 //プレイヤーとフックの距離
+    float extendTime;           //触手を伸ばすのにかかる時間
+    float extendElapsedTime;    //触手を伸ばすのにかかった経過時間
 
     /// <summary>
     /// 毎フレーム呼び出される
@@ -26,8 +28,11 @@ public class PlayerTentacle : MonoBehaviour
     /// </summary>
     /// <param name="playerObject">プレイヤーのゲームオブジェクト</param>
     /// <param name="hookPosition">フックのポジション</param>
-    public void ExtendTentacle(GameObject playerObject,Vector3 hookPosition)
+    /// <param name="argExtendTime">フックを伸ばすのにかかる時間</param>
+    public void ExtendTentacle(GameObject playerObject,Vector3 hookPosition,float argExtendTime)
     {
+        extendElapsedTime = 0f;
+        extendTime = argExtendTime;
         player = playerObject;
         hook = hookPosition;
         gameObject.SetActive(true);
@@ -49,10 +54,23 @@ public class PlayerTentacle : MonoBehaviour
     /// </summary>
     void FixTentacle()
     {
-        // フックとプレイヤーの中間のポジションを求める
-        mediumPos = (player.transform.position + hook) / 2f;
-        // フックとプレイヤーの距離を求める
+        extendElapsedTime += Time.deltaTime;
+        //経過時間でプレイヤーからフックまでのどのくらいの割合まで触手を伸ばすかを決定する
+        float extendPercentage = extendElapsedTime / extendTime;
         dist = Vector3.Distance(player.transform.position, hook);
+        //伸ばす割合が１以上なら
+        if (extendPercentage >= 1)
+        {
+            // フックとプレイヤーの中間のポジションを求める
+            mediumPos = (player.transform.position + hook) / 2f;
+        }
+        else
+        {
+            // 触手を伸ばす距離を求める
+            dist *= extendPercentage;
+            // 触手の長さから触手のオブジェクトの中心位置を求める
+            mediumPos = player.transform.position + (hook - player.transform.position) * extendPercentage / 2;
+        }
         // 各パラメータを決定
         transform.position = mediumPos;
         transform.localScale = new Vector3(0.1f, 0.1f, dist);

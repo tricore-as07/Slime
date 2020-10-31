@@ -11,7 +11,6 @@ public partial class Player : MonoBehaviour
     /// </summary>
     private class PlayerFreeFallState : PlayerStateMachine<Player>.PlayerState
     {
-        Vector3 hookDir;            //フックを飛ばす方向
         bool isReleaseInput;        //入力を離したかどうか
         bool canHookAction;         //フックのアクションができる時
             
@@ -20,9 +19,6 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Enter()
         {
-            // フックを伸ばす方向
-            hookDir = Vector3.right;
-            hookDir = Quaternion.Euler(0f,0f,Context.playerSettingsData.TentacleDir) * hookDir;
             isReleaseInput = false;
             canHookAction = false;
         }

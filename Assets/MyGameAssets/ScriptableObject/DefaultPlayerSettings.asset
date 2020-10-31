@@ -15,7 +15,7 @@ MonoBehaviour:
   jumpPower: 750
   jumpPowerByIceConditionFactor: 0.5
   meltIceTime: 1
-  extendTentacleTime: 0.5
+  extendTentacleTime: 0.2
   normalPlayerFriction: 0.4
   frozenPlayerFriction: 0
   tapErrorToleranceTime: 1

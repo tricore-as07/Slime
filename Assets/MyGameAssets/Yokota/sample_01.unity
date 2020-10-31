@@ -862,6 +862,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: DiamondManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4508075037484815071, guid: f6a1912e590bd496caecde09d6167c9e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9100347420253882559, guid: f6a1912e590bd496caecde09d6167c9e,
+        type: 3}
+      propertyPath: sceneSetting
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6a1912e590bd496caecde09d6167c9e, type: 3}
 --- !u!4 &700714079 stripped

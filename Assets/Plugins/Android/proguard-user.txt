@@ -1,0 +1,2 @@
+-keep class net.nend.unity.** { *; }
+-dontwarn net.nend.unity.**

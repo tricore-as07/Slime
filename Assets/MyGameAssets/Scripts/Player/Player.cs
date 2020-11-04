@@ -3,6 +3,10 @@ using UniRx;
 using System;
 using System.Collections;
 
+// 必要なコンポーネントを定義
+[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(Rigidbody))]
+
 /// <summary>
 /// プレイヤーに関する処理を行う
 /// </summary>
@@ -50,6 +54,7 @@ public partial class Player : MonoBehaviour
     {
         // nullチェックとキャッシュ
         rigidbody = rigidbody ?? GetComponent<Rigidbody>();
+        physicMaterial = physicMaterial ?? GetComponent<SphereCollider>().material;
         // ゲームが開始するまで重力が働かないようにする
         rigidbody.useGravity = false;
         // ゲームが開始されたら重力を有効にする
@@ -92,7 +97,7 @@ public partial class Player : MonoBehaviour
         // ステートマシンのインスタンスを生成して遷移テーブルを構築
         stateMachine = new PlayerStateMachine<Player>(this);   // 自身がコンテキストになるので自身のインスタンスを渡す
         // 静止状態からの状態遷移の記述
-        stateMachine.AddTransition<PlayerStayState, PlayerNormalState>((int)PlayerStateEventId.Normal);
+        stateMachine.AddTransition<PlayerStayState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         // 通常状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerNormalState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         // フックを使用している状態からの状態遷移の記述

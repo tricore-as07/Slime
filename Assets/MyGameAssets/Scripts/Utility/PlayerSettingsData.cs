@@ -19,6 +19,9 @@ public class PlayerSettingsData : ScriptableObject
     [InfoBox("触手が伸びる最大の長さです", InfoMessageType.None, 0)]
     [SerializeField] float tentacleMaxLength = 0f;                              //触手の最大の長さ
     public float TentacleMaxLength => tentacleMaxLength;                        //外部に公開するためのプロパティ
+    [InfoBox("触手を伸ばす際の角度です", InfoMessageType.None, 0)]
+    [SerializeField, Range(0, 90)] int tentacleDir = 45;                        //触手を伸ばす方向
+    public int TentacleDir => tentacleDir;                                      //外部に公開するためのプロパティ
     [InfoBox("通常状態のプレイヤーの摩擦の大きさです", InfoMessageType.None, 0)]
     [SerializeField, Range(0f, 1f)] float normalPlayerFriction = 0f;            //通常状態のプレイヤーの摩擦の大きさ
     public float NormalPlayerFriction => normalPlayerFriction;                  //外部に公開するためのプロパティ

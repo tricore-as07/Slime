@@ -11,6 +11,7 @@ public class PlayerTentacle : MonoBehaviour
     float dist;                 //プレイヤーとフックの距離
     float extendTime;           //触手を伸ばすのにかかる時間
     float extendElapsedTime;    //触手を伸ばすのにかかった経過時間
+    bool endExtendTentacle;     //触手を伸ばし終えたかどうか 
 
     /// <summary>
     /// 毎フレーム呼び出される
@@ -31,6 +32,7 @@ public class PlayerTentacle : MonoBehaviour
     /// <param name="argExtendTime">フックを伸ばすのにかかる時間</param>
     public void ExtendTentacle(GameObject playerObject,Vector3 hookPosition,float argExtendTime)
     {
+        endExtendTentacle = false;
         extendElapsedTime = 0f;
         extendTime = argExtendTime;
         player = playerObject;
@@ -61,6 +63,13 @@ public class PlayerTentacle : MonoBehaviour
         //伸ばす割合が１以上なら
         if (extendPercentage >= 1)
         {
+            // 触手を伸ばし終えてるフラグが立っていなかったら
+            if(!endExtendTentacle)
+            {
+                //フラグを立てて触手を伸ばし終えたイベントを呼ぶ
+                endExtendTentacle = true;
+                EventManager.Inst.InvokeEvent(SubjectType.OnNotFoundHook);
+            }
             // フックとプレイヤーの中間のポジションを求める
             mediumPos = (player.transform.position + hook) / 2f;
         }

@@ -22,6 +22,8 @@ public partial class Player : MonoBehaviour
     }
     PlayerStateMachine<Player> stateMachine = default;                          //ステートマシン
     GameObject hookObject;                                                      //フックのオブジェクト
+    Vector3 targetHookPosition;                                                 //ターゲットのフックのポジション
+    public Vector3 TargetHookPosition => targetHookPosition;                    //ターゲットのフックのポジションを外部に公開するためのプロパティ   
     Vector3 startPosition;                                                      //リトライ時に最初のポジションに戻すキャッシュとして使用
     bool isFrozen = false;                                                      //プレイヤーが凍っているかどうか
     public bool IsFrozen => isFrozen;                                           //プレイヤーが凍っているかどうかを外部に公開するためのプロパティ

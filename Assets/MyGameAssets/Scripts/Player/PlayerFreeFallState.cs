@@ -11,8 +11,9 @@ public partial class Player : MonoBehaviour
     /// </summary>
     private class PlayerFreeFallState : PlayerStateMachine<Player>.PlayerState
     {
-        bool isReleaseInput;        //入力を離したかどうか
-        bool canHookAction;         //フックのアクションができる時
+        bool isReleaseInput;                //入力を離したかどうか
+        bool canHookAction;                 //フックのアクションができる時
+        bool calledFoundHookTargetEvent;    //フックのターゲットが見つかったイベントを呼んだかどうか
             
         /// <summary>
         /// 状態へ突入時の処理はこのEnterで行う
@@ -21,6 +22,7 @@ public partial class Player : MonoBehaviour
         {
             isReleaseInput = false;
             canHookAction = false;
+            calledFoundHookTargetEvent = false;
         }
 
         /// <summary>
@@ -68,10 +70,22 @@ public partial class Player : MonoBehaviour
         /// </summary>
         void CheckToHookAction(GameObject gameObject)
         {
-            // フックのエリアに入っていて、フックのアクションが可能なら
-            if(gameObject.tag == TagName.HookPoint && canHookAction)
+            // フックのオブジェクトのタグじゃなけれな早期リターン
+            if(gameObject.tag != TagName.HookPoint)
+            {
+                return;
+            }
+            // フックのオブジェクトのタグでフックが見つかったイベントを呼んでいなければ
+            else if(!calledFoundHookTargetEvent)
             {
                 Context.hookObject = gameObject;
+                Context.targetHookPosition = gameObject.transform.position - new Vector3(0f, gameObject.transform.localScale.y * 0.5f);
+                EventManager.Inst.InvokeEvent(SubjectType.OnFoundHook);
+                calledFoundHookTargetEvent = true;
+            }
+            // フックのエリアに入っていて、フックのアクションが可能なら
+            if(canHookAction)
+            {
                 // フックを引っ掛けてる状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.Hook);
             }
@@ -86,6 +100,12 @@ public partial class Player : MonoBehaviour
             // 接地したとき
             if (gameObject.tag == TagName.GroundTrigger)
             {
+                // フックのターゲットが見つかったイベントを呼んでいたら
+                if(calledFoundHookTargetEvent)
+                {
+                    // フックが使えなくなるので見つからなくなった時のイベントを呼ぶ
+                    EventManager.Inst.InvokeEvent(SubjectType.OnNotFoundHook);
+                }
                 // 何もしてない状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.Normal);
             }
@@ -115,6 +135,21 @@ public partial class Player : MonoBehaviour
             }
             CheckToHookAction(other.gameObject);
             CheckOnGround(other.gameObject);
+        }
+
+        /// <summary>
+        /// ２つのColliderが衝突しなくなったフレームに呼び出される（片方はisTriggerがtrueである時）
+        /// </summary>
+        /// <param name="collision">この衝突に含まれるその他のCollider</param>
+        protected internal override void OnTriggerExit(Collider other)
+        {
+            // フックのターゲットが見つかったイベントを呼んでいて、衝突しなくなったオブジェクトがフックポイントなら
+            if (calledFoundHookTargetEvent && other.tag == TagName.HookPoint)
+            {
+                calledFoundHookTargetEvent = false;
+                // フックが使えなくなるので見つからなくなった時のイベントを呼ぶ
+                EventManager.Inst.InvokeEvent(SubjectType.OnNotFoundHook);
+            }
         }
     }
 }

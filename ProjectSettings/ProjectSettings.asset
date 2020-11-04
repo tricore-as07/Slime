@@ -673,7 +673,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: ODIN_INSPECTOR;TextMeshPro
     4: USE_TWEEN;ODIN_INSPECTOR;TextMeshPro;ENABLE_ADMOB;DISABLE_SHARE_HELP
-    7: TextMeshPro
+    7: TextMeshPro;ODIN_INSPECTOR
     13: TextMeshPro
     14: TextMeshPro
     19: TextMeshPro

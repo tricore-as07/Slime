@@ -38,7 +38,7 @@
 		#endregion
 
 		#if !(!UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID))
-		[SerializeField] private NativeAdClientFactory.NativeAdType type = default;
+		[SerializeField] private NativeAdClientFactory.NativeAdType type;
 		#endif
 
 		private INativeAdClient m_Client;

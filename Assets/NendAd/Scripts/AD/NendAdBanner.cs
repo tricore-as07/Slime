@@ -33,13 +33,13 @@ namespace NendUnityPlugin.AD
 		[SerializeField]
 		bool adjustSize = false;
 		[SerializeField]
-		BannerSize size = default;
+		BannerSize size;
 		[SerializeField]
 		Color backgroundColor = Color.clear;
 		[SerializeField]
-		Gravity[] gravity = default;
+		Gravity[] gravity;
 		[SerializeField]
-		Margin margin = default;
+		Margin margin;
 
 		private NendAdBannerInterface _interface = null;
 

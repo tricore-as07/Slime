@@ -3,6 +3,10 @@ using UniRx;
 using System;
 using System.Collections;
 
+// 必要なコンポーネントを定義
+[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(Rigidbody))]
+
 /// <summary>
 /// プレイヤーに関する処理を行う
 /// </summary>
@@ -50,6 +54,7 @@ public partial class Player : MonoBehaviour
     {
         // nullチェックとキャッシュ
         rigidbody = rigidbody ?? GetComponent<Rigidbody>();
+        physicMaterial = physicMaterial ?? GetComponent<SphereCollider>().material;
         // ゲームが開始するまで重力が働かないようにする
         rigidbody.useGravity = false;
         // ゲームが開始されたら重力を有効にする
@@ -63,7 +68,6 @@ public partial class Player : MonoBehaviour
         jumpPower = playerSettingsData.JumpPower;
         jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;
         meltIceTime = playerSettingsData.MeltIceTime;
-        physicMaterial = physicMaterial ?? GetComponent<SphereCollider>().material;
         physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
     }
 

@@ -37,7 +37,7 @@ public partial class Player : MonoBehaviour
             }
             Context.playerTentacle.ExtendTentacle(
             Context.gameObject,
-            joint.transform.position - new Vector3(0f,joint.transform.localScale.y / 2,0f),
+            joint.transform.position - new Vector3(0f,joint.transform.localScale.y * 0.5f),
             Context.playerSettingsData.ExtendTentacleTime);
         }
 

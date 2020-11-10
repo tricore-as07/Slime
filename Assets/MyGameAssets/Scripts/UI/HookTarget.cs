@@ -8,9 +8,9 @@
 /// </summary>
 public class HookTarget : MonoBehaviour
 {
-    [SerializeField] Player player = default;
-    [SerializeField] RectTransform rectTransform = default;
-    Vector3 targetPos;
+    [SerializeField] Player player = default;                   //プレイヤー
+    [SerializeField] RectTransform rectTransform = default;     //矩形の位置情報
+    Vector3 targetPos;                                          //フックのターゲットのポジション
 
     /// <summary>
     /// Updateが最初に呼び出される前のフレームで呼び出される

@@ -34,11 +34,10 @@ public class DebugWarningUI : MonoBehaviour
             return;
         }
         // オブジェクトが複数あるなら必要な間隔が空けられているか判定するために必要な値を求める
-        var HookPointColliderRadius = hookObjectList[0].GetComponent<SphereCollider>()?.radius;             // コライダーの半径を取得
-        var HookPointTriggerRadius = hookObjectList[0].transform.localScale.y * HookPointColliderRadius;    // トリガーの半径を求める
-        var mustOpenSqrDist =                                                                               // 開けないといけない間隔の２乗
-            (HookPointTriggerRadius + HookPointTriggerRadius + player.transform.localScale.x)
-            * (HookPointTriggerRadius + HookPointTriggerRadius + player.transform.localScale.x);
+        var HookPointColliderRadius = hookObjectList[0].GetComponent<SphereCollider>()?.radius;                         // コライダーの半径を取得
+        var HookPointTriggerRadius = hookObjectList[0].transform.localScale.y * HookPointColliderRadius;                // トリガーの半径を求める
+        var mustOpenDist = (float)(HookPointTriggerRadius + HookPointTriggerRadius + player.transform.localScale.x);    // 開けないといけない間隔
+        var mustOpenSqrDist = mustOpenDist * mustOpenDist;                                                              // 開けないといけない間隔の２乗
         // オブジェクトを総当たりで判定
         for (int i = 0; i < hookObjectList.Count - 1; i++)
         {

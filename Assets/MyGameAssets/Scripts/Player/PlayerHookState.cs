@@ -19,7 +19,7 @@ public partial class Player : MonoBehaviour
         protected internal override void Enter()
         {
             // フックを引っ掛けるオブジェクトをキャッシュ
-            hookObj = Context.hit.transform.gameObject;
+            hookObj = Context.hookObject;
             // フックを引っ掛けるオブジェクトに繋げるためのコンポーネントがあるならキャッシュ
             joint = hookObj?.GetComponent<HingeJoint>();
             // フックの繋げるためのクラスがキャッシュがあるなら
@@ -35,7 +35,10 @@ public partial class Player : MonoBehaviour
                 // 自由落下の状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.FreeFall);
             }
-            Context.playerTentacle.ExtendTentacle(Context.gameObject, joint.transform.position - new Vector3(0f,joint.transform.localScale.y / 2,0f));
+            Context.playerTentacle.ExtendTentacle(
+                Context.gameObject,
+                joint.transform.position - new Vector3(0f,joint.transform.localScale.y * 0.5f),
+                Context.playerSettingsData.ExtendTentacleTime);
         }
 
         /// <summary>

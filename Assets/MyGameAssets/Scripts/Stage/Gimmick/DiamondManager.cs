@@ -6,10 +6,10 @@ using UnityEngine;
 /// </summary>
 public class DiamondManager : MonoBehaviour
 {
-    // FIXME: orimoto ステージのエディタが完成したらステージ作成時に取得してくるように修正
     int stageSerialNum = 1;                                     //ステージの識別番号
     List<GameObject> diamonds = new List<GameObject>();         //ステージにあるダイヤモンドのリスト
     DiamondAcquisitionData diamondAcquisitionData;              //ダイヤモンドの獲得状況がセーブされているデータ
+    [SerializeField] SceneSetting sceneSetting = default;       //シーンの設定
 
     /// <summary>
     /// Updateが最初に呼び出される前のフレームで呼び出される
@@ -25,6 +25,8 @@ public class DiamondManager : MonoBehaviour
     /// </summary>
     void Initialize()
     {
+        // ステージ数を取得する
+        stageSerialNum = sceneSetting.StageNumber;
         // Diamondのタグのゲームオブジェクトをリストに格納
         diamonds.AddRange(GameObject.FindGameObjectsWithTag(TagName.Diamond));
         // DiamondのオブジェクトをX座標を元にソート

@@ -8,10 +8,14 @@ using System;
 /// </summary>
 public enum SubjectType
 {
+    OnHome,                 // ホームの戻る時のイベント
     OnGameStart,            // ゲームが開始された時のイベント
     OnGameClear,            // ゲームがクリアされた時のイベント
     OnGameOver,             // ゲームオーバーになった時のイベント
     OnRetry,                // リトライされた時のイベント
+    OnNextStage,            // 次のステージに進む時のイベント
+    OnOpenConfig,           // 設定が開かれた時のイベント
+    OnCloseConfig,          // 設定が閉じられた時のイベント
     OnFoundHook,            // フックが見つかった時のイベント
     OnNotFoundHook          // フックが見つからなくなった時もイベント
 }

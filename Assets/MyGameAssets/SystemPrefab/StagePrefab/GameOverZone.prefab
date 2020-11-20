@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagName: Player
-  subjectType: 2
+  subjectType: 3
 --- !u!54 &7009005730332820078
 Rigidbody:
   m_ObjectHideFlags: 0

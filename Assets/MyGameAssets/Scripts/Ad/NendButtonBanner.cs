@@ -7,6 +7,9 @@ using UnityEngine.Purchasing;
 /// </summary>
 public class NendButtonBanner : MonoBehaviour
 {
+    /// <summary>
+    /// スクリプトのインスタンスがロードされたときに呼び出される
+    /// </summary>
     private void Awake()
     {
         if(CodelessIAPStoreListener.initializationComplete)
@@ -18,7 +21,6 @@ public class NendButtonBanner : MonoBehaviour
                 this.gameObject.SetActive(false);
             }
         }
-        
     }
 
     /// <summary>
@@ -29,6 +31,10 @@ public class NendButtonBanner : MonoBehaviour
         NendAdController.Inst.ShowBottomBanner(true);
     }
 
+    /// <summary>
+    /// 課金が完了した時に呼ばれる
+    /// </summary>
+    /// <param name="product">完了したProduct</param>
     public void OnComplete(Product product)
     {
         NendAdController.Inst.ShowBottomBanner(false);

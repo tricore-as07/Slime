@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 /// <summary>
 /// プレイヤーに関する処理を行う
@@ -10,18 +11,18 @@ public partial class Player : MonoBehaviour
     /// </summary>
     private class PlayerFreeFallState : PlayerStateMachine<Player>.PlayerState
     {
-        Vector3 hookDir;                //フックを飛ばす方向
-        bool isReleaseInput;            //入力を離したかどうか
-
+        bool isReleaseInput;                //入力を離したかどうか
+        bool canHookAction;                 //フックのアクションができる時
+        bool calledFoundHookTargetEvent;    //フックのターゲットが見つかったイベントを呼んだかどうか
+            
         /// <summary>
         /// 状態へ突入時の処理はこのEnterで行う
         /// </summary>
         protected internal override void Enter()
         {
-            // フックを伸ばす方向
-            hookDir = Vector3.right;
-            hookDir = Quaternion.Euler(0f,0f,Context.playerSettingsData.TentacleDir) * hookDir;
             isReleaseInput = false;
+            canHookAction = false;
+            calledFoundHookTargetEvent = false;
         }
 
         /// <summary>
@@ -56,27 +57,57 @@ public partial class Player : MonoBehaviour
             // フックを伸ばす入力がされて、プレイヤーが氷の状態じゃなければ
             if (isExtendHookInput && !Context.IsFrozen)
             {
-                ExtendHook();
+                canHookAction = true;
+            }
+            else
+            {
+                canHookAction = false;
             }
         }
 
         /// <summary>
-        /// フックを飛ばす処理
+        /// フックのアクションができるか確認する
         /// </summary>
-        void ExtendHook()
+        void CheckToHookAction(GameObject gameObject)
         {
-            //Rayを飛ばして衝突したオブジェクトの情報を保存する
-            RaycastHit hit;
-            //Rayを飛ばして衝突したものがあれば
-            if (Physics.Raycast(Context.transform.position, hookDir, out hit, Context.playerSettingsData.TentacleMaxLength, LayerName.HookPointMask)) 
+            // フックのオブジェクトのタグじゃなけれな早期リターン
+            if(gameObject.tag != TagName.HookPoint)
             {
-                //Rayに衝突したオブジェクトがHookを引っ掛けられるところなら
-                if (hit.transform.tag == TagName.HookPoint)
+                return;
+            }
+            // フックのオブジェクトのタグでフックが見つかったイベントを呼んでいなければ
+            else if(!calledFoundHookTargetEvent)
+            {
+                Context.hookObject = gameObject;
+                Context.targetHookPosition = gameObject.transform.position - new Vector3(0f, gameObject.transform.localScale.y * 0.5f);
+                EventManager.Inst.InvokeEvent(SubjectType.OnFoundHook);
+                calledFoundHookTargetEvent = true;
+            }
+            // フックのエリアに入っていて、フックのアクションが可能なら
+            if(canHookAction)
+            {
+                // フックを引っ掛けてる状態に変化させる
+                stateMachine.SendEvent((int)PlayerStateEventId.Hook);
+            }
+        }
+
+        /// <summary>
+        /// 接地したかどうかを確認する
+        /// </summary>
+        /// <param name="gameObject"></param>
+        void CheckOnGround(GameObject gameObject)
+        {
+            // 接地したとき
+            if (gameObject.tag == TagName.GroundTrigger)
+            {
+                // フックのターゲットが見つかったイベントを呼んでいたら
+                if(calledFoundHookTargetEvent)
                 {
-                    Context.hit = hit;
-                    // フックを引っ掛けてる状態に変化させる
-                    stateMachine.SendEvent((int)PlayerStateEventId.Hook);
+                    // フックが使えなくなるので見つからなくなった時のイベントを呼ぶ
+                    EventManager.Inst.InvokeEvent(SubjectType.OnNotFoundHook);
                 }
+                // 何もしてない状態に変化させる
+                stateMachine.SendEvent((int)PlayerStateEventId.Normal);
             }
         }
 
@@ -86,12 +117,8 @@ public partial class Player : MonoBehaviour
         /// <param name="collision">この衝突に含まれるその他のCollider</param>
         protected internal override void OnTriggerEnter(Collider other)
         {
-            // 接地したとき
-            if (other.tag == TagName.GroundTrigger)
-            {
-                // 何もしてない状態に変化させる
-                stateMachine.SendEvent((int)PlayerStateEventId.Normal);
-            }
+            CheckToHookAction(other.gameObject);
+            CheckOnGround(other.gameObject);
         }
 
         /// <summary>
@@ -106,11 +133,22 @@ public partial class Player : MonoBehaviour
                 // 入力しっぱなしの場合、早期リターン
                 return;
             }
-            // 接地したとき
-            if (other.tag == TagName.GroundTrigger)
+            CheckToHookAction(other.gameObject);
+            CheckOnGround(other.gameObject);
+        }
+
+        /// <summary>
+        /// ２つのColliderが衝突しなくなったフレームに呼び出される（片方はisTriggerがtrueである時）
+        /// </summary>
+        /// <param name="collision">この衝突に含まれるその他のCollider</param>
+        protected internal override void OnTriggerExit(Collider other)
+        {
+            // フックのターゲットが見つかったイベントを呼んでいて、衝突しなくなったオブジェクトがフックポイントなら
+            if (calledFoundHookTargetEvent && other.tag == TagName.HookPoint)
             {
-                // 何もしてない状態に変化させる
-                stateMachine.SendEvent((int)PlayerStateEventId.Normal);
+                calledFoundHookTargetEvent = false;
+                // フックが使えなくなるので見つからなくなった時のイベントを呼ぶ
+                EventManager.Inst.InvokeEvent(SubjectType.OnNotFoundHook);
             }
         }
     }

@@ -31,7 +31,7 @@ public class WindGimmick : MonoBehaviour
             // Rigidbodyをキャッシュ
             playerRigidbody = playerRigidbody ?? other.gameObject.GetComponent<Rigidbody>();
             // 上方向に風の強さの力を加える
-            playerRigidbody.AddForce(Vector3.up * windPower);
+            playerRigidbody.AddForce(transform.up * windPower);
             // プレイヤーの速度が最大速度より大きいなら
             if(playerRigidbody.velocity.y > limitSpeed)
             {

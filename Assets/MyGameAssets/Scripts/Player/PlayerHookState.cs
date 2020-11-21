@@ -36,9 +36,9 @@ public partial class Player : MonoBehaviour
                 stateMachine.SendEvent((int)PlayerStateEventId.FreeFall);
             }
             Context.playerTentacle.ExtendTentacle(
-            Context.gameObject,
-            joint.transform.position - new Vector3(0f,joint.transform.localScale.y / 2,0f),
-            Context.playerSettingsData.ExtendTentacleTime);
+                Context.gameObject,
+                joint.transform.position - new Vector3(0f,joint.transform.localScale.y * 0.5f),
+                Context.playerSettingsData.ExtendTentacleTime);
         }
 
         /// <summary>

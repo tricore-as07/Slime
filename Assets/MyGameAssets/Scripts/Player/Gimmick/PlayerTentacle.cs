@@ -71,14 +71,14 @@ public class PlayerTentacle : MonoBehaviour
                 EventManager.Inst.InvokeEvent(SubjectType.OnNotFoundHook);
             }
             // フックとプレイヤーの中間のポジションを求める
-            mediumPos = (player.transform.position + hook) / 2f;
+            mediumPos = (player.transform.position + hook) * 0.5f;
         }
         else
         {
             // 触手を伸ばす距離を求める
             dist *= extendPercentage;
             // 触手の長さから触手のオブジェクトの中心位置を求める
-            mediumPos = player.transform.position + (hook - player.transform.position) * extendPercentage / 2;
+            mediumPos = player.transform.position + (hook - player.transform.position) * extendPercentage * 0.5f;
         }
         // 各パラメータを決定
         transform.position = mediumPos;

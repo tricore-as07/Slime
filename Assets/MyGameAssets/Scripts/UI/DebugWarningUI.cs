@@ -41,7 +41,7 @@ public class DebugWarningUI : MonoBehaviour
         // オブジェクトを総当たりで判定
         for (int i = 0; i < hookObjectList.Count - 1; i++)
         {
-            for (int j = 1; j < hookObjectList.Count; j++)
+            for (int j = i + 1; j < hookObjectList.Count; j++)
             {
                 var pos1 = hookObjectList[i].transform.position;
                 var pos2 = hookObjectList[j].transform.position;

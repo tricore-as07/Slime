@@ -859,10 +859,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 2b62180b-cbe8-4e43-a405-619371338f69
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: Slime
+  organizationId: tricore-inc
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

@@ -11,18 +11,7 @@ public class AdButton : MonoBehaviour
     /// </summary>
     void Start()
     {
-        //IAPの初期化が完了していたら
-        if (CodelessIAPStoreListener.initializationComplete)
-        {
-            // slimedeladが購入されているかを調べる
-            var product = CodelessIAPStoreListener.Instance.GetProduct("slimedelad");
-            // slimedeladが購入されたレシートが存在しているなら
-            if (product.hasReceipt)
-            {
-                // 広告削除ボタンを非表示にする
-                this.gameObject.SetActive(false);
-            }
-        }
+        this.gameObject.SetActive(AdMobManager.Inst.IsShowAd);
     }
     /// <summary>
     /// 購入処理が完了したときに呼ばれる

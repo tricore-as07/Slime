@@ -1124,7 +1124,7 @@ MonoBehaviour:
   navigationBar: {fileID: 114858858624774444}
   sceneTitle: {fileID: 114617887705491612}
   sceneBackButton: {fileID: 114713517037089006}
-  myUI: {fileID: 2856497331751673576}
+  commonUI: {fileID: 2856497331751673576}
 --- !u!1 &1610163025218330
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public sealed class CommonSceneUI : SingletonMonoBehaviour<CommonSceneUI>
         public bool                 showNavigationBar;
         public bool                 showSceneTitle;
         public bool                 showSceneBackButton;
-        public bool                 showMyUI;
+        public bool                 showCommonUI;
     }
 
     [SerializeField]
@@ -35,7 +35,7 @@ public sealed class CommonSceneUI : SingletonMonoBehaviour<CommonSceneUI>
     UISceneBackButton sceneBackButton = default;
 
     [SerializeField]
-    GameObject myUI;
+    GameObject commonUI;
 
     /// <summary>
     /// 共通シーンUIの切り替え.
@@ -49,6 +49,7 @@ public sealed class CommonSceneUI : SingletonMonoBehaviour<CommonSceneUI>
         navigationBar.gameObject.SetActive(param.showNavigationBar);
         sceneTitle.gameObject.SetActive(param.showSceneTitle);
         sceneBackButton.gameObject.SetActive(param.showSceneBackButton);
+        commonUI.gameObject.SetActive(param.showCommonUI);
     }
 
     /// <summary>

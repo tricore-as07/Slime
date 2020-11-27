@@ -6,8 +6,8 @@ using System.Collections.Generic;
 /// </summary>
 public class GameUI : MonoBehaviour
 {
-    [SerializeField] List<SubjectType> enableEvents = default;
-    [SerializeField] List<SubjectType> disableEvents = default;
+    [SerializeField] List<SubjectType> enableEvents = default;          //UIをアクティブにするイベントのリスト
+    [SerializeField] List<SubjectType> disableEvents = default;         //UIを非アクティブにするイベントのリスト
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -23,10 +23,12 @@ public class GameUI : MonoBehaviour
     /// </summary>
     void Initialize()
     {
+        // アクティブにするイベントを登録する
         foreach(var enableEvent in enableEvents)
         {
             EventManager.Inst.Subscribe(enableEvent, Unit => gameObject.SetActive(true));
         }
+        // 非アクティブにするイベントを登録する
         foreach (var disableEvent in disableEvents)
         {
             EventManager.Inst.Subscribe(disableEvent, Unit => gameObject.SetActive(false));

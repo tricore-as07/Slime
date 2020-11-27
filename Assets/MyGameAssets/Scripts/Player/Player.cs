@@ -32,7 +32,7 @@ public partial class Player : MonoBehaviour
     float jumpPowerByIceConditionFactor;                                        //氷の状態の時のジャンプ力の係数
     float meltIceTime;                                                          //溶ける時間
     float tapMomentTime;                                                        //タップされた瞬間を判定する時の誤差の許容範囲をカウントする変数
-    bool isGamePlay;
+    bool isGamePlay;                                                            //ゲームプレイ中かどうか
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
@@ -68,6 +68,7 @@ public partial class Player : MonoBehaviour
         // ゲームオーバーになったらリスタートの関数が呼ばれるようにする
         EventManager.Inst.Subscribe(SubjectType.OnRetry, Unit => Restart());
         EventManager.Inst.Subscribe(SubjectType.OnNextStage, Unit => Restart());
+        // 呼ばれたイベントに応じてゲーム中かどうかのフラグを切り替える
         EventManager.Inst.Subscribe(SubjectType.OnGameStart, Unit => isGamePlay = true);
         EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => isGamePlay = false);
         EventManager.Inst.Subscribe(SubjectType.OnGameClear, Unit => isGamePlay = false);

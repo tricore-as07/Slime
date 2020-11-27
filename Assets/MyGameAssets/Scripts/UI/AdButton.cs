@@ -18,8 +18,10 @@ public class AdButton : MonoBehaviour
     /// </summary>
     public void OnPurchaseComplete(Product product)
     {
+        // 購入されたものと広告削除用の名前が一致しているなら
         if(product.transactionID == AdMobManager.Inst.AdRemovingName)
         {
+            // 広告削除ボタンを非表示にする
             this.gameObject.SetActive(false);
         }
     }

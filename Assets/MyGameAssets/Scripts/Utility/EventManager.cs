@@ -18,8 +18,8 @@ public enum SubjectType
     OnCloseConfig,          // 設定が閉じられた時のイベント
     OnFoundHook,            // フックが見つかった時のイベント
     OnNotFoundHook,         // フックが見つからなくなった時もイベント
-    OnOpenLevels,
-    OnCloseLevels
+    OnOpenLevels,           // ステージ選択UIが開かれた時のイベント
+    OnCloseLevels           // ステージ選択UIが閉じられた時のイベント
 }
 
 /// <summary>
@@ -34,6 +34,7 @@ public class EventManager : Singleton<EventManager>
     /// </summary>
     /// <param name="type">Subscribeするイベントの種類</param>
     /// <param name="action">イベントが呼ばれた時に実行されるデリゲート</param>
+    /// <returns>イベントの解除に必要なIDisposable</returns>
     public IDisposable Subscribe(SubjectType type,Action<Unit> action)
     {
         // Subscribeする種類のイベントが存在していなかったら

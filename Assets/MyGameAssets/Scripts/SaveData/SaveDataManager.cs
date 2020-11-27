@@ -68,12 +68,22 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
         return new DiamondAcquisitionData();
     }
 
+    /// <summary>
+    /// クリアしたステージ数をセーブする
+    /// </summary>
+    /// <param name="clearStageNum">クリアしたステージ数</param>
     public void SaveClearStageNum(int clearStageNum)
     {
+        // クリアしたステージ数を上書き
         saveData.clearStageNum = clearStageNum;
+        // 保存
         JsonDataSaver.Save<SaveData>(saveData);
     }
 
+    /// <summary>
+    /// クリアしたステージ数を取得する
+    /// </summary>
+    /// <returns>クリアしたステージ数</returns>
     public int GetClearStageNum()
     {
         return saveData.clearStageNum;

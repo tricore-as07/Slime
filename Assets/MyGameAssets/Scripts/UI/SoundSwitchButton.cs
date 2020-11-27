@@ -12,7 +12,9 @@ public class SoundSwitchButton : MonoBehaviour
     /// </summary>
     public void OnClickSwitchButton()
     {
+        // 切り替え先をアクティブにする
         switchingDestination.SetActive(true);
+        // 自分を非アクティブにする
         this.gameObject.SetActive(false);
     }
 }

@@ -84,5 +84,6 @@ public class DiamondManager : MonoBehaviour
         }
         // ダイヤモンドの獲得状況をセーブする
         SaveDataManager.Inst.SaveDiamondAcquisitionData(stageSerialNum,diamondAcquisitionData);
+        LevelContntManager.Inst.UpdateContent(stageSerialNum);
     }
 }

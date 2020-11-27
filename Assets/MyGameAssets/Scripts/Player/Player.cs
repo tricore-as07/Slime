@@ -32,6 +32,7 @@ public partial class Player : MonoBehaviour
     float jumpPowerByIceConditionFactor;                                        //氷の状態の時のジャンプ力の係数
     float meltIceTime;                                                          //溶ける時間
     float tapMomentTime;                                                        //タップされた瞬間を判定する時の誤差の許容範囲をカウントする変数
+    bool isGamePlay;
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
@@ -66,6 +67,10 @@ public partial class Player : MonoBehaviour
         startPosition = transform.position;
         // ゲームオーバーになったらリスタートの関数が呼ばれるようにする
         EventManager.Inst.Subscribe(SubjectType.OnRetry, Unit => Restart());
+        EventManager.Inst.Subscribe(SubjectType.OnNextStage, Unit => Restart());
+        EventManager.Inst.Subscribe(SubjectType.OnGameStart, Unit => isGamePlay = true);
+        EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => isGamePlay = false);
+        EventManager.Inst.Subscribe(SubjectType.OnGameClear, Unit => isGamePlay = false);
         // プレイヤーの設定データを反映させる
         jumpPower = playerSettingsData.JumpPower;
         jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;
@@ -249,6 +254,12 @@ public partial class Player : MonoBehaviour
     /// <returns>タップ入力されている : true,タップ入力されていない : false</returns>
     bool IsTapInput()
     {
+        // ゲームプレイ中じゃなければ
+        if (!isGamePlay)
+        {
+            // falseを返す
+            return false;
+        }
         // タップ判定の入力がされているとき
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
         {
@@ -263,6 +274,12 @@ public partial class Player : MonoBehaviour
     /// <returns>タップ入力された瞬間の判定 : true,タップ入力された瞬間の判定じゃない : false</returns>
     bool IsTapInputMoment()
     {
+        // ゲームプレイ中じゃなければ
+        if(!isGamePlay)
+        {
+            // falseを返す
+            return false;
+        }
         // タップ判定の入力がされているとき
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
         {
@@ -295,6 +312,12 @@ public partial class Player : MonoBehaviour
     /// <returns>タップ入力されている : true,タップ入力されていない : false</returns>
     bool IsTapInput()
     {
+        // ゲームプレイ中じゃなければ
+        if(!isGamePlay)
+        {
+            // falseを返す
+            return false;
+        }
         if (Input.touchCount > 0)
         {
             return true;
@@ -308,6 +331,12 @@ public partial class Player : MonoBehaviour
     /// <returns>タップ入力された瞬間の判定 : true,タップ入力された瞬間の判定じゃない : false</returns>
     bool IsTapInputMoment()
     {
+        // ゲームプレイ中じゃなければ
+        if(!isGamePlay)
+        {
+            // falseを返す
+            return false;
+        }
         // タップ判定の入力がされているとき
         if (Input.touchCount > 0)
         {

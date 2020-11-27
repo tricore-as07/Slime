@@ -8,6 +8,7 @@ using System;
 public class SaveData
 {
     public StageSaveData stageSaveData = default;                               //ステージのセーブデータ
+    public int clearStageNum = 1;
 
     /// <summary>
     /// デフォルトコンストラクタ

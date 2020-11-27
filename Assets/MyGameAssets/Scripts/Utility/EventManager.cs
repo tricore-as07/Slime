@@ -17,7 +17,9 @@ public enum SubjectType
     OnOpenConfig,           // 設定が開かれた時のイベント
     OnCloseConfig,          // 設定が閉じられた時のイベント
     OnFoundHook,            // フックが見つかった時のイベント
-    OnNotFoundHook          // フックが見つからなくなった時もイベント
+    OnNotFoundHook,         // フックが見つからなくなった時もイベント
+    OnOpenLevels,
+    OnCloseLevels
 }
 
 /// <summary>
@@ -32,7 +34,7 @@ public class EventManager : Singleton<EventManager>
     /// </summary>
     /// <param name="type">Subscribeするイベントの種類</param>
     /// <param name="action">イベントが呼ばれた時に実行されるデリゲート</param>
-    public void Subscribe(SubjectType type,Action<Unit> action)
+    public IDisposable Subscribe(SubjectType type,Action<Unit> action)
     {
         // Subscribeする種類のイベントが存在していなかったら
         if (!eventDictionary.ContainsKey(type))
@@ -40,7 +42,7 @@ public class EventManager : Singleton<EventManager>
             CreateSubject(type);
         }
         // Subscribeする
-        eventDictionary[type].Subscribe(action);
+        return eventDictionary[type].Subscribe(action);
     }
 
     /// <summary>

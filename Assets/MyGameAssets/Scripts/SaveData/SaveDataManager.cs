@@ -67,4 +67,15 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
         // 該当ステージが存在しない場合は新しくDiamondAcquisitionDataを作って返す
         return new DiamondAcquisitionData();
     }
+
+    public void SaveClearStageNum(int clearStageNum)
+    {
+        saveData.clearStageNum = clearStageNum;
+        JsonDataSaver.Save<SaveData>(saveData);
+    }
+
+    public int GetClearStageNum()
+    {
+        return saveData.clearStageNum;
+    }
 }

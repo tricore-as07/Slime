@@ -7,7 +7,7 @@ public class WindGimmick : MonoBehaviour
 {
     static float windPower = 0f;                                    //風の強さ（加速度）
     static float limitSpeed = 0f;                                   //風で加速させる最大の速度
-    static Rigidbody playerRigidbody;                               //プレイヤーのRigidbody
+    Rigidbody playerRigidbody;                               //プレイヤーのRigidbody
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される

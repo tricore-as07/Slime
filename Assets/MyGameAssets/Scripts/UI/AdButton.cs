@@ -18,6 +18,9 @@ public class AdButton : MonoBehaviour
     /// </summary>
     public void OnPurchaseComplete(Product product)
     {
-        //this.gameObject.SetActive(false);
+        if(product.transactionID == AdMobManager.Inst.AdRemovingName)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }

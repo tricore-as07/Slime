@@ -13,6 +13,8 @@ public class SceneSetting : MonoBehaviour
     /// </summary>
     void Start()
     {
+        // ホーム画面のイベントを呼ぶ
+        EventManager.Inst.InvokeEvent(SubjectType.OnHome);   
         // ゲームクリアしたらクリアしたステージ数をセーブする
         EventManager.Inst.Subscribe(SubjectType.OnGameClear,Unit => SaveDataManager.Inst.SaveClearStageNum(stageNumber));    
     }

@@ -74,10 +74,14 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
     /// <param name="clearStageNum">クリアしたステージ数</param>
     public void SaveClearStageNum(int clearStageNum)
     {
-        // クリアしたステージ数を上書き
-        saveData.clearStageNum = clearStageNum;
-        // 保存
-        JsonDataSaver.Save<SaveData>(saveData);
+        // クリアしたステージ数がセーブされているステージ数より大きければ上書き保存する
+        if(saveData.clearStageNum < clearStageNum)
+        {
+            // クリアしたステージ数を上書き
+            saveData.clearStageNum = clearStageNum;
+            // 保存
+            JsonDataSaver.Save<SaveData>(saveData);
+        }
     }
 
     /// <summary>

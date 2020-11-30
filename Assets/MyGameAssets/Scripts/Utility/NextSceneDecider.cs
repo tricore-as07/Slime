@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using VMUnityLib;
-using System;
 
 /// <summary>
 /// 次のシーンを決定する
@@ -11,18 +10,24 @@ public class NextSceneDecider : MonoBehaviour
     [SerializeField] SceneList sceneList = default;             //シーンのリスト
 
     /// <summary>
-    /// Updateが最初に呼び出される前のフレームで呼び出される
+    /// オブジェクトがアクティブになった時に呼ばれる
     /// </summary>
     private void OnEnable()
     {
+        // 今のシーンの名前を取得
         string nowSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        // 次のシーンの要素数を取得
         int nextSceneIndex = sceneList.Scenes.IndexOf(nowSceneName) + 1;
+        // 次のシーンの要素数がシーンの総数より小さければ
         if (nextSceneIndex < sceneList.Scenes.Count)
         {
+            // 次のシーンに遷移させる
             sceneChanger.SceneName = sceneList.Scenes[nextSceneIndex];
         }
+        // 次のシーンの要素数がシーンの総数をオーバーしているなら
         else
         {
+            // 最初のシーンに遷移させる
             sceneChanger.SceneName = sceneList.Scenes[0];
         }
     }

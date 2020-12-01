@@ -40,6 +40,7 @@ public partial class Player : MonoBehaviour
     [SerializeField] PlayerTentacle playerTentacle = default;                   //プレイヤーがフックを引っ掛けている状態の時に使う触手のゲームオブジェクト
     [SerializeField] PlayerSettingsData playerSettingsData = default;           //プレイヤーの設定データ
     [SerializeField] PhysicMaterial physicMaterial = default;                   //物理特性を設定するマテリアル
+    [SerializeField] MeshRenderer meshRenderer = default;
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -72,11 +73,13 @@ public partial class Player : MonoBehaviour
         EventManager.Inst.Subscribe(SubjectType.OnGameStart, Unit => isGamePlay = true);
         EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => isGamePlay = false);
         EventManager.Inst.Subscribe(SubjectType.OnGameClear, Unit => isGamePlay = false);
+        EventManager.Inst.Subscribe(SubjectType.OnChangeSkin, Unit => meshRenderer.material = SkinManager.Inst.GetNowMaterial());
         // プレイヤーの設定データを反映させる
         jumpPower = playerSettingsData.JumpPower;
         jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;
         meltIceTime = playerSettingsData.MeltIceTime;
         physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
+        meshRenderer.material = SkinManager.Inst.GetNowMaterial();
     }
 
     /// <summary>
@@ -306,6 +309,7 @@ public partial class Player : MonoBehaviour
         tapMomentTime = 0f;
         return false;
     }
+
 #elif UNITY_IOS || UNITY_ANDROID
     /// <summary>
     /// タップ入力されているかどうか

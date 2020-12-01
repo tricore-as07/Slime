@@ -92,4 +92,23 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
     {
         return saveData.clearStageNum;
     }
+
+    /// <summary>
+    /// プレイヤーのマテリアルデータをセーブする
+    /// </summary>
+    /// <param name="id">上書きするマテリアルID</param>
+    public void SavePlayerMaterialID(MaterialId id)
+    {
+        saveData.playerMaterialId = id;
+        JsonDataSaver.Save<SaveData>(saveData);
+    }
+
+    /// <summary>
+    /// マテリアルIDを取得する
+    /// </summary>
+    /// <returns>マテリアルID</returns>
+    public MaterialId GetMaterialID()
+    {
+        return saveData.playerMaterialId;
+    }
 }

@@ -128,3 +128,4 @@ MonoBehaviour:
   playerTentacle: {fileID: 0}
   playerSettingsData: {fileID: 11400000, guid: 3ab15718052974696afa2472c3b98cf9, type: 2}
   physicMaterial: {fileID: 13400000, guid: 0b1f525df6ee24eb8944fd95cd7598b6, type: 2}
+  meshRenderer: {fileID: 9035310291506971109}

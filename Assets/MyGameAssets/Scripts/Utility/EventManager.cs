@@ -22,7 +22,9 @@ public enum SubjectType
     OnCloseLevels,          // ステージ選択UIが閉じられた時のイベント
     OnOpenSkins,
     OnCloseSkins,
-    OnChangeSkin
+    OnChangeSkin,
+    StartFadeOut,
+    EndFadeIn
 }
 
 /// <summary>

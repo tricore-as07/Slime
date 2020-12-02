@@ -18,7 +18,8 @@ public partial class Player : MonoBehaviour
         Stay,           //静止状態（ゲームが開始されていない時の状態）
         Normal,         //何もしてない状態
         Hook,           //フックを引っ掛けている状態
-        FreeFall        //自由落下している状態
+        FreeFall,       //自由落下している状態
+        DoNotAcceptInput//入力を受け付けない状態
     }
     PlayerStateMachine<Player> stateMachine = default;                          //ステートマシン
     GameObject hookObject;                                                      //フックのオブジェクト
@@ -69,9 +70,8 @@ public partial class Player : MonoBehaviour
         EventManager.Inst.Subscribe(SubjectType.OnRetry, Unit => Restart());
         EventManager.Inst.Subscribe(SubjectType.OnNextStage, Unit => Restart());
         // 呼ばれたイベントに応じてゲーム中かどうかのフラグを切り替える
-        EventManager.Inst.Subscribe(SubjectType.OnGameStart, Unit => isGamePlay = true);
-        EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => isGamePlay = false);
-        EventManager.Inst.Subscribe(SubjectType.OnGameClear, Unit => isGamePlay = false);
+        EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => stateMachine.SendEvent((int)PlayerStateEventId.DoNotAcceptInput));
+        EventManager.Inst.Subscribe(SubjectType.OnGameClear, Unit => stateMachine.SendEvent((int)PlayerStateEventId.DoNotAcceptInput));
         // プレイヤーの設定データを反映させる
         jumpPower = playerSettingsData.JumpPower;
         jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;
@@ -108,12 +108,17 @@ public partial class Player : MonoBehaviour
         stateMachine.AddTransition<PlayerStayState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         // 通常状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerNormalState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
+        stateMachine.AddTransition<PlayerNormalState, PlayerDoNotAcceptInputState>((int)PlayerStateEventId.DoNotAcceptInput);
         // フックを使用している状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerHookState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         stateMachine.AddTransition<PlayerHookState, PlayerNormalState>((int)PlayerStateEventId.Normal);
+        stateMachine.AddTransition<PlayerHookState, PlayerDoNotAcceptInputState>((int)PlayerStateEventId.DoNotAcceptInput);
         // 自由落下している状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerFreeFallState, PlayerHookState>((int)PlayerStateEventId.Hook);
         stateMachine.AddTransition<PlayerFreeFallState, PlayerNormalState>((int)PlayerStateEventId.Normal);
+        stateMachine.AddTransition<PlayerFreeFallState, PlayerDoNotAcceptInputState>((int)PlayerStateEventId.DoNotAcceptInput);
+        // 入力を受け付けない状態からの状態遷移の記述
+        stateMachine.AddTransition<PlayerDoNotAcceptInputState, PlayerStayState>((int)PlayerStateEventId.Stay);
         // 起動ステートを設定（起動ステートは PlayerNormalState）
         stateMachine.SetStartState<PlayerStayState>();
     }
@@ -255,12 +260,6 @@ public partial class Player : MonoBehaviour
     /// <returns>タップ入力されている : true,タップ入力されていない : false</returns>
     bool IsTapInput()
     {
-        // ゲームプレイ中じゃなければ
-        if (!isGamePlay)
-        {
-            // falseを返す
-            return false;
-        }
         // タップ判定の入力がされているとき
 #if UNITY_EDITOR
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
@@ -279,12 +278,6 @@ public partial class Player : MonoBehaviour
     /// <returns>タップ入力された瞬間の判定 : true,タップ入力された瞬間の判定じゃない : false</returns>
     bool IsTapInputMoment()
     {
-        // ゲームプレイ中じゃなければ
-        if(!isGamePlay)
-        {
-            // falseを返す
-            return false;
-        }
         // タップ判定の入力がされているとき
 #if UNITY_EDITOR
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))

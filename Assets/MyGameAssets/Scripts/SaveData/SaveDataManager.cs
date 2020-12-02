@@ -67,4 +67,29 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
         // 該当ステージが存在しない場合は新しくDiamondAcquisitionDataを作って返す
         return new DiamondAcquisitionData();
     }
+
+    /// <summary>
+    /// クリアしたステージ数をセーブする
+    /// </summary>
+    /// <param name="clearStageNum">クリアしたステージ数</param>
+    public void SaveClearStageNum(int clearStageNum)
+    {
+        // クリアしたステージ数がセーブされているステージ数より大きければ上書き保存する
+        if(saveData.clearStageNum < clearStageNum)
+        {
+            // クリアしたステージ数を上書き
+            saveData.clearStageNum = clearStageNum;
+            // 保存
+            JsonDataSaver.Save<SaveData>(saveData);
+        }
+    }
+
+    /// <summary>
+    /// クリアしたステージ数を取得する
+    /// </summary>
+    /// <returns>クリアしたステージ数</returns>
+    public int GetClearStageNum()
+    {
+        return saveData.clearStageNum;
+    }
 }

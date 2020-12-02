@@ -20,6 +20,7 @@ public static class TagName
 	public const string Diamond = "Diamond";
 	public const string DiamondManager = "DiamondManager";
 	public const string StageSettingsOwner = "StageSettingsOwner";
+	public const string LevelContentManager = "LevelContentManager";
 	
 	/// <summary>
 	/// タグ名の配列を取得
@@ -43,6 +44,7 @@ public static class TagName
 		tagNames.Add(TagName.Diamond);
 		tagNames.Add(TagName.DiamondManager);
 		tagNames.Add(TagName.StageSettingsOwner);
+		tagNames.Add(TagName.LevelContentManager);
 		return tagNames.ToArray();
 	}
 }

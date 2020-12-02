@@ -8,12 +8,18 @@ using System;
 /// </summary>
 public enum SubjectType
 {
+    OnHome,                 // ホームの戻る時のイベント
     OnGameStart,            // ゲームが開始された時のイベント
     OnGameClear,            // ゲームがクリアされた時のイベント
     OnGameOver,             // ゲームオーバーになった時のイベント
     OnRetry,                // リトライされた時のイベント
+    OnNextStage,            // 次のステージに進む時のイベント
+    OnOpenConfig,           // 設定が開かれた時のイベント
+    OnCloseConfig,          // 設定が閉じられた時のイベント
     OnFoundHook,            // フックが見つかった時のイベント
-    OnNotFoundHook          // フックが見つからなくなった時もイベント
+    OnNotFoundHook,         // フックが見つからなくなった時もイベント
+    OnOpenLevels,           // ステージ選択UIが開かれた時のイベント
+    OnCloseLevels           // ステージ選択UIが閉じられた時のイベント
 }
 
 /// <summary>
@@ -28,7 +34,8 @@ public class EventManager : Singleton<EventManager>
     /// </summary>
     /// <param name="type">Subscribeするイベントの種類</param>
     /// <param name="action">イベントが呼ばれた時に実行されるデリゲート</param>
-    public void Subscribe(SubjectType type,Action<Unit> action)
+    /// <returns>イベントの解除に必要なIDisposable</returns>
+    public IDisposable Subscribe(SubjectType type,Action<Unit> action)
     {
         // Subscribeする種類のイベントが存在していなかったら
         if (!eventDictionary.ContainsKey(type))
@@ -36,7 +43,7 @@ public class EventManager : Singleton<EventManager>
             CreateSubject(type);
         }
         // Subscribeする
-        eventDictionary[type].Subscribe(action);
+        return eventDictionary[type].Subscribe(action);
     }
 
     /// <summary>

@@ -14,13 +14,13 @@ public class StageElementUpdater : MonoBehaviour
     /// </summary>
     void Start()
     {
-        StageElementUpdate();
+        UpdateStageElement();
     }
 
     /// <summary>
     /// ステージの要素を更新する
     /// </summary>
-    public void StageElementUpdate()
+    public void UpdateStageElement()
     {
         // ダイヤモンドの獲得情報をセーブデータから取得する
         DiamondAcquisitionData diamondAcquisitionData = SaveDataManager.Inst.GetDiamondAcquisitionData(stageSelectButton.StageNum);
@@ -29,7 +29,7 @@ public class StageElementUpdater : MonoBehaviour
             // ダイヤモンドの数だけ取得情報を表示するUIをアクティブにする
             itemList[i].gameObject.SetActive(true);
             // ダイヤモンドが取得されているかどうかを更新する
-            itemList[i].UpdateAcquisitionStatus(diamondAcquisitionData.isDiamondAcquisitionList[i]);
+            itemList[i].UpdateColorByStatus(diamondAcquisitionData.isDiamondAcquisitionList[i]);
         }
     }
 }

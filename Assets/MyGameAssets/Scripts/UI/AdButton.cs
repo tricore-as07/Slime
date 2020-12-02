@@ -11,7 +11,7 @@ public class AdButton : MonoBehaviour
     /// </summary>
     void Start()
     {
-        this.gameObject.SetActive(AdMobManager.Inst.IsShowAd);
+        gameObject.SetActive(AdMobManager.Inst.IsShowAd);
     }
     /// <summary>
     /// 購入処理が完了したときに呼ばれる
@@ -22,7 +22,7 @@ public class AdButton : MonoBehaviour
         if(product.transactionID == AdMobManager.Inst.AdRemovingName)
         {
             // 広告削除ボタンを非表示にする
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

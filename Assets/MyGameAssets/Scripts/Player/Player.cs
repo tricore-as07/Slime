@@ -248,7 +248,7 @@ public partial class Player : MonoBehaviour
         stateMachine.OnTriggerExit(other);
     }
 
-#if UNITY_EDITOR
+
     /// <summary>
     /// タップ入力されているかどうか
     /// </summary>
@@ -262,7 +262,11 @@ public partial class Player : MonoBehaviour
             return false;
         }
         // タップ判定の入力がされているとき
+#if UNITY_EDITOR
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+#elif UNITY_IOS || UNITY_ANDROID
+        if (Input.touchCount > 0)
+#endif
         {
             return true;
         }
@@ -282,7 +286,11 @@ public partial class Player : MonoBehaviour
             return false;
         }
         // タップ判定の入力がされているとき
+#if UNITY_EDITOR
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+#elif UNITY_IOS || UNITY_ANDROID
+        if (Input.touchCount > 0)
+#endif
         {
             // 前にタップされた時間が記録されてないなら
             if (tapMomentTime == 0f)
@@ -306,61 +314,4 @@ public partial class Player : MonoBehaviour
         tapMomentTime = 0f;
         return false;
     }
-#elif UNITY_IOS || UNITY_ANDROID
-    /// <summary>
-    /// タップ入力されているかどうか
-    /// </summary>
-    /// <returns>タップ入力されている : true,タップ入力されていない : false</returns>
-    bool IsTapInput()
-    {
-        // ゲームプレイ中じゃなければ
-        if(!isGamePlay)
-        {
-            // falseを返す
-            return false;
-        }
-        if (Input.touchCount > 0)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    /// <summary>
-    /// タップ入力された瞬間かどうか（誤差許容あり）
-    /// </summary>
-    /// <returns>タップ入力された瞬間の判定 : true,タップ入力された瞬間の判定じゃない : false</returns>
-    bool IsTapInputMoment()
-    {
-        // ゲームプレイ中じゃなければ
-        if(!isGamePlay)
-        {
-            // falseを返す
-            return false;
-        }
-        // タップ判定の入力がされているとき
-        if (Input.touchCount > 0)
-        {
-            // 前にタップされた時間が記録されてないなら
-            if (tapMomentTime == 0f)
-            {
-                // 前にタップされた時間を記録してtrueを返す
-                tapMomentTime = Time.realtimeSinceStartup;
-                return true;
-            }
-            // 前にタップされた時間から経った時間が誤差許容時間なら
-            if (Time.realtimeSinceStartup - tapMomentTime < playerSettingsData.TapErrorToleranceTime)
-            {
-                return true;
-            }
-            // 誤差許容時間以上の時間が経っていたなら
-            else
-            {
-                return false;
-            }
-        }
-        tapMomentTime = 0f;
-        return false;
-    }
-#endif
 }

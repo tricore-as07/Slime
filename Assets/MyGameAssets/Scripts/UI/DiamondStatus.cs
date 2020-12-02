@@ -14,7 +14,7 @@ public class DiamondStatus : MonoBehaviour
     /// 取得状況を更新する
     /// </summary>
     /// <param name="status">取得状況</param>
-    public void UpdateAcquisitionStatus(bool status)
+    public void UpdateColorByStatus(bool status)
     {
         // 取得しているなら
         if(status)

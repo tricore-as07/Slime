@@ -29,7 +29,7 @@ public class StageElementUpdater : MonoBehaviour
             // ダイヤモンドの数だけ取得情報を表示するUIをアクティブにする
             itemList[i].gameObject.SetActive(true);
             // ダイヤモンドが取得されているかどうかを更新する
-            itemList[i].UpdateAcquisitionStatus(diamondAcquisitionData.isDiamondAcquisitionList[i]);
+            itemList[i].UpdateColorByStatus(diamondAcquisitionData.isDiamondAcquisitionList[i]);
         }
     }
 }

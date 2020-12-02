@@ -30,16 +30,8 @@ public class LevelContntManager : SingletonMonoBehaviour<LevelContntManager>
         int clearStageNum = SaveDataManager.Inst.GetClearStageNum();
         for (int i = 0; i < levels.Count; i++)
         {
-            // クリアしたステージ数以下ならアクティブにする
-            if(i <= clearStageNum)
-            {
-                levels[i].gameObject.SetActive(true);
-            }
-            // それ以外は非アクティブにする
-            else
-            {
-                levels[i].gameObject.SetActive(false);
-            }
+            // クリアしたステージ数以下ならアクティブ、そうでない場合は非アクティブにする
+            levels[i].gameObject.SetActive(i <= clearStageNum);
         }
     }
 
@@ -49,6 +41,14 @@ public class LevelContntManager : SingletonMonoBehaviour<LevelContntManager>
     /// <param name="updateStageNum">更新するコンテンツのステージ数</param>
     public void UpdateContent(int updateStageNum)
     {
-        levels[updateStageNum - 1].StageElementUpdate();
+        //更新するステージ数がUIで用意されているステージの数以内なら
+        if(updateStageNum <= levels.Count)
+        {
+            levels[updateStageNum - 1].UpdateStageElement();
+        }
+        else
+        {
+            Debug.LogError("設定されているステージ数が用意されているUIの数をオーバーしています。\n現在のシーンに設定されているステージ数を見直すか、UIのステージ選択用のプレハブを増やしてください。");
+        }
     }
 }

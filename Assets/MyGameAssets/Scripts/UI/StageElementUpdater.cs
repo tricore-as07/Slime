@@ -14,13 +14,13 @@ public class StageElementUpdater : MonoBehaviour
     /// </summary>
     void Start()
     {
-        StageElementUpdate();
+        UpdateStageElement();
     }
 
     /// <summary>
     /// ステージの要素を更新する
     /// </summary>
-    public void StageElementUpdate()
+    public void UpdateStageElement()
     {
         // ダイヤモンドの獲得情報をセーブデータから取得する
         DiamondAcquisitionData diamondAcquisitionData = SaveDataManager.Inst.GetDiamondAcquisitionData(stageSelectButton.StageNum);

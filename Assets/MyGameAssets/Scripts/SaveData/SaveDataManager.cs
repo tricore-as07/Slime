@@ -81,6 +81,8 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
             saveData.clearStageNum = clearStageNum;
             // 保存
             JsonDataSaver.Save<SaveData>(saveData);
+            // クリアしたステージ数が変更されたイベントを呼ぶ
+            EventManager.Inst.InvokeEvent(SubjectType.OnChangeClearStageNum);
         }
     }
 
@@ -110,5 +112,14 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
     public MaterialId GetMaterialID()
     {
         return saveData.playerMaterialId;
+    }
+
+    /// <summary>
+    /// ダイヤモンドの獲得データのリストを取得する
+    /// </summary>
+    /// <returns>ダイヤモンドの獲得データのリスト</returns>
+    public List<DiamondAcquisitionData> GetDiamondAcquisitionDataList()
+    {
+        return saveData.stageSaveData.diamondAcquisitionDataList;
     }
 }

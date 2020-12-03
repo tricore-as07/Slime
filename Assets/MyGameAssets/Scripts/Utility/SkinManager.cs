@@ -26,19 +26,19 @@ public class SkinManager : SingletonMonoBehaviour<SkinManager>
     }
 
     /// <summary>
-    /// IDと対応したマテリアルを取得する
+    /// IDと対応したスキンを取得する
     /// </summary>
     /// <param name="id">ID</param>
-    /// <returns>引数として渡したIDに対応したマテリアル</returns>
+    /// <returns>引数として渡したIDに対応したスキン</returns>
     public GameObject GetSkin(SkinId id)
     {
         return skinDictionary[id];
     }
 
     /// <summary>
-    /// 今のマテリアルを取得する
+    /// 今のスキンを取得する
     /// </summary>
-    /// <returns>今のマテリアル</returns>
+    /// <returns>今のスキン</returns>
     public GameObject GetNowSkin()
     {
         return skinDictionary[nowSkinId];

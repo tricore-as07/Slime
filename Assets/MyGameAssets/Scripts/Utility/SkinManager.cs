@@ -7,53 +7,53 @@ using VMUnityLib;
 /// </summary>
 public class SkinManager : SingletonMonoBehaviour<SkinManager>
 {
-    [SerializeField] PlayerMaterialData playerMaterialData;
-    Dictionary<MaterialId, Material> materialDictionary;
-    MaterialId nowMaterialId;
+    [SerializeField] PlayerSkinData playerSkinData;
+    Dictionary<SkinId, GameObject> skinDictionary;
+    SkinId nowSkinId;
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
     /// </summary>
     void Awake()
     {
-        nowMaterialId = SaveDataManager.Inst.GetMaterialID();
-        materialDictionary = new Dictionary<MaterialId, Material>();
-        foreach (var materialData in playerMaterialData.Materials)
+        nowSkinId = SaveDataManager.Inst.GetSkinID();
+        skinDictionary = new Dictionary<SkinId, GameObject>();
+        foreach (var skinData in playerSkinData.Skins)
         {
-            materialDictionary.Add(materialData.id, materialData.material);
+            skinDictionary.Add(skinData.id, skinData.skin);
         }
         EventManager.Inst.InvokeEvent(SubjectType.OnChangeSkin);
     }
 
     /// <summary>
-    /// IDと対応したマテリアルを取得する
+    /// IDと対応したスキンを取得する
     /// </summary>
     /// <param name="id">ID</param>
-    /// <returns>引数として渡したIDに対応したマテリアル</returns>
-    public Material GetMaterial(MaterialId id)
+    /// <returns>引数として渡したIDに対応したスキン</returns>
+    public GameObject GetSkin(SkinId id)
     {
-        return materialDictionary[id];
+        return skinDictionary[id];
     }
 
     /// <summary>
-    /// 今のマテリアルを取得する
+    /// 今のスキンを取得する
     /// </summary>
-    /// <returns>今のマテリアル</returns>
-    public Material GetNowMaterial()
+    /// <returns>今のスキン</returns>
+    public GameObject GetNowSkin()
     {
-        return materialDictionary[nowMaterialId];
+        return skinDictionary[nowSkinId];
     }
 
     /// <summary>
     /// スキンを選択したときに呼ばれる
     /// </summary>
     /// <param name="id">選択されたID</param>
-    public void OnSelectSkin(MaterialId id)
+    public void OnSelectSkin(SkinId id)
     {
-        if(nowMaterialId != id)
+        if(nowSkinId != id)
         {
-            nowMaterialId = id;
-            SaveDataManager.Inst.SavePlayerMaterialID(nowMaterialId);
+            nowSkinId = id;
+            SaveDataManager.Inst.SavePlayerSkinID(nowSkinId);
             EventManager.Inst.InvokeEvent(SubjectType.OnChangeSkin);
         }
     }

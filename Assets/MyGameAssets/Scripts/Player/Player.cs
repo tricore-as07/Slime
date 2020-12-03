@@ -34,6 +34,7 @@ public partial class Player : MonoBehaviour
     float meltIceTime;                                                          //溶ける時間
     float tapMomentTime;                                                        //タップされた瞬間を判定する時の誤差の許容範囲をカウントする変数
     bool isGamePlay;                                                            //ゲームプレイ中かどうか
+    GameObject playerLooks = default;                                           //プレイヤーの見た目のオブジェクト
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
@@ -41,7 +42,6 @@ public partial class Player : MonoBehaviour
     [SerializeField] PlayerTentacle playerTentacle = default;                   //プレイヤーがフックを引っ掛けている状態の時に使う触手のゲームオブジェクト
     [SerializeField] PlayerSettingsData playerSettingsData = default;           //プレイヤーの設定データ
     [SerializeField] PhysicMaterial physicMaterial = default;                   //物理特性を設定するマテリアル
-    [SerializeField] MeshRenderer meshRenderer = default;
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -71,7 +71,7 @@ public partial class Player : MonoBehaviour
         EventManager.Inst.Subscribe(SubjectType.OnRetry, Unit => Restart());
         EventManager.Inst.Subscribe(SubjectType.OnNextStage, Unit => Restart());
         // 呼ばれたイベントに応じてゲーム中かどうかのフラグを切り替える
-        EventManager.Inst.Subscribe(SubjectType.OnChangeSkin, Unit => meshRenderer.material = SkinManager.Inst.GetNowMaterial());
+        EventManager.Inst.Subscribe(SubjectType.OnChangeSkin, Unit => ChangeSkin());
         EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => stateMachine.SendEvent((int)PlayerStateEventId.DoNotAcceptInput));
         EventManager.Inst.Subscribe(SubjectType.OnGameClear, Unit => stateMachine.SendEvent((int)PlayerStateEventId.DoNotAcceptInput));
         // プレイヤーの設定データを反映させる
@@ -79,7 +79,7 @@ public partial class Player : MonoBehaviour
         jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;
         meltIceTime = playerSettingsData.MeltIceTime;
         physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
-        meshRenderer.material = SkinManager.Inst.GetNowMaterial();
+        playerLooks = Instantiate(SkinManager.Inst.GetNowSkin(),transform);
     }
 
     /// <summary>
@@ -256,6 +256,14 @@ public partial class Player : MonoBehaviour
         stateMachine.OnTriggerExit(other);
     }
 
+    /// <summary>
+    /// スキンを変更させる
+    /// </summary>
+    void ChangeSkin()
+    {
+        Destroy(playerLooks);
+        playerLooks = Instantiate(SkinManager.Inst.GetNowSkin(), transform);
+    }
 
     /// <summary>
     /// タップ入力されているかどうか

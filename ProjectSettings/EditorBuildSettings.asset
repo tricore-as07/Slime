@@ -15,15 +15,15 @@ EditorBuildSettings:
     path: Assets/MyGameAssets/Scenes/GameDemoScene.unity
     guid: 1b7fa1895591d4d2ba3d6650e5549a7d
   - enabled: 1
-    path: Assets/MyGameAssets/Yokota/sample_03.unity
-    guid: 912d01925de4bd14b94dff10c87acb96
-  - enabled: 1
-    path: Assets/MyGameAssets/Yokota/sample_02.unity
-    guid: eab847972af1349e0b15abac1e7f4cbe
+    path: Assets/MyGameAssets/Yokota/sample_00.unity
+    guid: 12dbd5ec36885b84b807e1d5fcf648e1
   - enabled: 1
     path: Assets/MyGameAssets/Yokota/sample_01.unity
     guid: 7f1f6eec0c21e3d4ebaa5502bc30e726
   - enabled: 1
-    path: Assets/MyGameAssets/Yokota/sample_00.unity
-    guid: 12dbd5ec36885b84b807e1d5fcf648e1
+    path: Assets/MyGameAssets/Yokota/sample_02.unity
+    guid: eab847972af1349e0b15abac1e7f4cbe
+  - enabled: 1
+    path: Assets/MyGameAssets/Yokota/sample_03.unity
+    guid: 912d01925de4bd14b94dff10c87acb96
   m_configObjects: {}

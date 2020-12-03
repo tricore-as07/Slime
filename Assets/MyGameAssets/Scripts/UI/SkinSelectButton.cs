@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class SkinSelectButton : MonoBehaviour
 {
     [SerializeField] Button button;
-    [SerializeField] MaterialId id;                             //ボタンが押された時に変更されるマテリアル
+    [SerializeField] SkinId id;                                 //ボタンが押された時に変更されるスキン
     [SerializeField] UnlockType unlockType = UnlockType.None;   //スキンを開放する条件
     [SerializeField] int unlockNum = default;                   //開放する際の条件となる数
 

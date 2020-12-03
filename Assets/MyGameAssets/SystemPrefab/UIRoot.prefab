@@ -12181,7 +12181,7 @@ MonoBehaviour:
   button: {fileID: 3970772568355432218}
   id: 1
   unlockType: 1
-  unlockNum: 2
+  unlockNum: 1
 --- !u!1 &8220883831579432325
 GameObject:
   m_ObjectHideFlags: 0

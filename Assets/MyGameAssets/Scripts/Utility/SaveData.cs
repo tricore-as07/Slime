@@ -8,8 +8,8 @@ using System;
 public class SaveData
 {
     public StageSaveData stageSaveData = default;                               //ステージのセーブデータ
-    public int clearStageNum = 1;
-    public MaterialId playerMaterialId = MaterialId.None;
+    public int clearStageNum = 1;                                               //クリアしたステージ数
+    public SkinId playerSkinId = SkinId.None;                                   //プレイヤーのスキンのID
 
     /// <summary>
     /// デフォルトコンストラクタ

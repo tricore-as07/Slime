@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
@@ -9,8 +7,8 @@ using UnityEngine.UI;
 /// </summary>
 public class SkinSelectButton : MonoBehaviour
 {
-    [SerializeField] Button button;
-    [SerializeField] SkinId id;                                 //ボタンが押された時に変更されるスキン
+    [SerializeField] Button button = default;                   //自分のボタンコンポーネント
+    [SerializeField] SkinId id = default;                       //ボタンが押された時に変更されるスキン
     [SerializeField] UnlockType unlockType = UnlockType.None;   //スキンを開放する条件
     [SerializeField] int unlockNum = default;                   //開放する際の条件となる数
 
@@ -19,17 +17,9 @@ public class SkinSelectButton : MonoBehaviour
     /// </summary>
     public enum UnlockType
     {
-        None,                   //なし
+        None,                   //解除条件なし
         clearStageNum,          //ステージのクリア数
         diamondNum              //ダイヤモンドの取得数
-    }
-
-    /// <summary>
-    /// Editor上で初期化する際の処理
-    /// </summary>
-    void Reset()
-    {
-        button = button ?? GetComponent<Button>();
     }
 
     /// <summary>
@@ -39,7 +29,7 @@ public class SkinSelectButton : MonoBehaviour
     {
         switch (unlockType)
         {
-            case UnlockType.None: break;
+            case UnlockType.None: break;    // 解除条件ないので処理なし
             case UnlockType.clearStageNum:
                 {
                     UpdateIsUnlockByClearStageNum();

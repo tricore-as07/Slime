@@ -8,8 +8,8 @@ using System;
 [CreateAssetMenu(menuName = "MyGameSettings/PlayerSkinData", fileName = "PlayerSkin")]
 public class PlayerSkinData : ScriptableObject
 {
-    [SerializeField] List<SkinPair> skins;
-    public List<SkinPair> Skins => skins;
+    [SerializeField] List<SkinPair> skins = default;            //スキンのリスト
+    public IReadOnlyList<SkinPair> Skins => skins;              //スキンのリストを外部に公開するためのプロパティ
 }
 
 /// <summary>
@@ -28,6 +28,6 @@ public enum SkinId
 [Serializable]
 public class SkinPair
 {
-    [SerializeField] public SkinId id;
-    [SerializeField] public GameObject skin;
+    [SerializeField] public SkinId id = default;
+    [SerializeField] public GameObject skin = default;
 }

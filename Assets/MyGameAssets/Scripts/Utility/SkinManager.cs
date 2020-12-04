@@ -7,7 +7,7 @@ using VMUnityLib;
 /// </summary>
 public class SkinManager : SingletonMonoBehaviour<SkinManager>
 {
-    [SerializeField] PlayerSkinData playerSkinData;
+    [SerializeField] PlayerSkinData playerSkinData = default;
     Dictionary<SkinId, GameObject> skinDictionary;
     SkinId nowSkinId;
 
@@ -32,7 +32,16 @@ public class SkinManager : SingletonMonoBehaviour<SkinManager>
     /// <returns>引数として渡したIDに対応したスキン</returns>
     public GameObject GetSkin(SkinId id)
     {
-        return skinDictionary[id];
+        GameObject skinObject;
+        if (skinDictionary.TryGetValue(id, out skinObject)) 
+        {
+            return skinObject;
+        }
+        else
+        {
+            Debug.LogError("IDの対応したスキンが登録されていません。/nPlayerSkinDataにIDとプレハブを登録してください。");
+            return null;
+        }
     }
 
     /// <summary>
@@ -41,7 +50,16 @@ public class SkinManager : SingletonMonoBehaviour<SkinManager>
     /// <returns>今のスキン</returns>
     public GameObject GetNowSkin()
     {
-        return skinDictionary[nowSkinId];
+        GameObject skinObject;
+        if (skinDictionary.TryGetValue(nowSkinId, out skinObject))
+        {
+            return skinObject;
+        }
+        else
+        {
+            Debug.LogError("IDの対応したスキンが登録されていません。/nPlayerSkinDataにIDとプレハブを登録してください。");
+            return null;
+        }
     }
 
     /// <summary>

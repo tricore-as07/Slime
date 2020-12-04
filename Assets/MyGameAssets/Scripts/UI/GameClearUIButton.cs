@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// ゲームクリアした時のUIのボタン
 /// </summary>
 public class GameClearUIButton : MonoBehaviour
 {
-    [SerializeField] int movieAdInterval = default;
-    [SerializeField] int myCompanyAdInterval = default;
+    [SerializeField] int movieAdInterval = default;         //動画広告を表示する間隔
+    [SerializeField] int myCompanyAdInterval = default;     //自社広告を表示する間隔
 
     /// <summary>
     /// ゲームクリアのUIのボタンが押された時

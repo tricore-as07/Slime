@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// ゲームオーバー時のリトライボタン
 /// </summary>
 public class GameOverRetryButton : MonoBehaviour
 {
-    [SerializeField] int firstShowAd = default;
-    [SerializeField] int intervalShowAd = default;
+    [SerializeField] int firstShowAd = default;         //最初に広告を表示する回数
+    [SerializeField] int intervalShowAd = default;      //広告を表示する間隔
 
     /// <summary>
     /// リトライボタンが押された時の処理

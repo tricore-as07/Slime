@@ -118,7 +118,7 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
     /// ダイヤモンドの獲得データのリストを取得する
     /// </summary>
     /// <returns>ダイヤモンドの獲得データのリスト</returns>
-    public List<DiamondAcquisitionData> GetDiamondAcquisitionDataList()
+    public IReadOnlyList<DiamondAcquisitionData> GetDiamondAcquisitionDataList()
     {
         return saveData.stageSaveData.diamondAcquisitionDataList;
     }

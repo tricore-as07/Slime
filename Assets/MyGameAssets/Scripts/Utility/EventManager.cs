@@ -19,7 +19,12 @@ public enum SubjectType
     OnFoundHook,            // フックが見つかった時のイベント
     OnNotFoundHook,         // フックが見つからなくなった時もイベント
     OnOpenLevels,           // ステージ選択UIが開かれた時のイベント
-    OnCloseLevels           // ステージ選択UIが閉じられた時のイベント
+    OnCloseLevels,          // ステージ選択UIが閉じられた時のイベント
+    OnOpenSkins,            // スキンん選択UIが開かれた時のイベント
+    OnCloseSkins,           // スキン選択UIが閉じられた時のイベント
+    OnChangeSkin,           // スキンが変更された時のイベント
+    OnChangeDiamondNum,     // 取得しているダイヤモンドの数が更新された時のイベント
+    OnChangeClearStageNum   // クリアしたステージ数が更新された時のイベント
 }
 
 /// <summary>

@@ -84,6 +84,8 @@ public class DiamondManager : MonoBehaviour
         }
         // ダイヤモンドの獲得状況をセーブする
         SaveDataManager.Inst.SaveDiamondAcquisitionData(stageSerialNum,diamondAcquisitionData);
+        // ダイヤモンドの合計数を更新する
+        DiamondCounter.Inst.UpdateDiamondTotalNum();
         // クリアしたステージのダイヤの取得情報をUIに反映させる
         LevelContntManager.Inst.UpdateContent(stageSerialNum);
     }

@@ -7,9 +7,9 @@ using VMUnityLib;
 /// </summary>
 public class SkinManager : SingletonMonoBehaviour<SkinManager>
 {
-    [SerializeField] PlayerSkinData playerSkinData = default;
-    Dictionary<SkinId, GameObject> skinDictionary;
-    SkinId nowSkinId;
+    [SerializeField] PlayerSkinData playerSkinData = default;   //プレイヤーのスキンデータ
+    Dictionary<SkinId, GameObject> skinDictionary;              //スキンデータをDictionaryに変換するためのもの
+    SkinId nowSkinId;                                           //今のスキンのID
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される

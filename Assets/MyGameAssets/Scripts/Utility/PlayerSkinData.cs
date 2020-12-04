@@ -28,6 +28,6 @@ public enum SkinId
 [Serializable]
 public class SkinPair
 {
-    [SerializeField] public SkinId id = default;
-    [SerializeField] public GameObject skin = default;
+    [SerializeField] public SkinId id = default;            //スキンのID
+    [SerializeField] public GameObject skin = default;      //IDに対応したプレイヤーのスキン
 }

@@ -1199,6 +1199,9 @@ MonoBehaviour:
   ios_NativeExpress: ca-app-pub-3940256099942544/3986624511
   myNendNative: {fileID: 114763152679354838}
   adRemovingName: slimedelad
+  iosId: 3896590
+  androidId: 3896591
+  isTest: 1
 --- !u!1 &1640017550533942
 GameObject:
   m_ObjectHideFlags: 0
@@ -2900,6 +2903,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 655270648537752526, guid: e2d1b4b8e624b4d45904966f6fe927e1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00018310547
+      objectReference: {fileID: 0}
     - target: {fileID: 690882174205959413, guid: e2d1b4b8e624b4d45904966f6fe927e1,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2979,6 +2987,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 998376927092835812, guid: e2d1b4b8e624b4d45904966f6fe927e1,
+        type: 3}
+      propertyPath: invokeEventType
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1055708467106874430, guid: e2d1b4b8e624b4d45904966f6fe927e1,
         type: 3}
@@ -3064,6 +3077,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551873555853857188, guid: e2d1b4b8e624b4d45904966f6fe927e1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00012207031
       objectReference: {fileID: 0}
     - target: {fileID: 1584592735632010076, guid: e2d1b4b8e624b4d45904966f6fe927e1,
         type: 3}
@@ -3598,7 +3616,7 @@ PrefabInstance:
     - target: {fileID: 4879231497154741503, guid: e2d1b4b8e624b4d45904966f6fe927e1,
         type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0.9999999
       objectReference: {fileID: 0}
     - target: {fileID: 4879231497154741503, guid: e2d1b4b8e624b4d45904966f6fe927e1,
         type: 3}
@@ -3720,6 +3738,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6314465244467642547, guid: e2d1b4b8e624b4d45904966f6fe927e1,
+        type: 3}
+      propertyPath: invokeEventType
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 6343453284543582927, guid: e2d1b4b8e624b4d45904966f6fe927e1,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -3859,6 +3882,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7685494318659385708, guid: e2d1b4b8e624b4d45904966f6fe927e1,
+        type: 3}
+      propertyPath: invokeEventType
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7760188813536497631, guid: e2d1b4b8e624b4d45904966f6fe927e1,
         type: 3}
@@ -3875,6 +3903,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7824505279893420921, guid: e2d1b4b8e624b4d45904966f6fe927e1,
+        type: 3}
+      propertyPath: enableEvents.Array.data[0]
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7824505279893420921, guid: e2d1b4b8e624b4d45904966f6fe927e1,
+        type: 3}
+      propertyPath: disableEvents.Array.data[0]
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7900924871166686917, guid: e2d1b4b8e624b4d45904966f6fe927e1,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -4075,7 +4113,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4167911065066353909, guid: e2d1b4b8e624b4d45904966f6fe927e1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e2d1b4b8e624b4d45904966f6fe927e1, type: 3}
 --- !u!1 &2856497331751673576 stripped
 GameObject:

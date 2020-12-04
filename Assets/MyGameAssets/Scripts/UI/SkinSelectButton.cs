@@ -19,7 +19,7 @@ public class SkinSelectButton : MonoBehaviour
     /// </summary>
     public enum UnlockType
     {
-        None,                   //なし
+        None,                   //なし(開放済)
         clearStageNum,          //ステージのクリア数
         diamondNum              //ダイヤモンドの取得数
     }
@@ -39,7 +39,9 @@ public class SkinSelectButton : MonoBehaviour
     {
         switch (unlockType)
         {
-            case UnlockType.None: break;
+            case UnlockType.None:
+                // 開放済み
+                break;
             case UnlockType.clearStageNum:
                 {
                     UpdateIsUnlockByClearStageNum();

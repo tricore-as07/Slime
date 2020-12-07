@@ -6,7 +6,7 @@ using Com.LuisPedroFonseca.ProCamera2D;
 /// </summary>
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] new ProCamera2D camera = default;      //ProCamera2Dのコンポーネント
+    [SerializeField] ProCamera2D proCamera = default;       //ProCamera2Dのコンポーネント
     float cameraOffsetX;                                    //ターゲットからのオフセット
     float cameraOffsetY;                                    //ターゲットからのオフセット
     GameObject player;                                      //プレイヤー
@@ -18,8 +18,8 @@ public class CameraController : MonoBehaviour
     {
         // 必要な情報のキャッシュ
         player = GameObject.FindGameObjectWithTag(TagName.Player);
-        cameraOffsetX = camera.OffsetX;
-        cameraOffsetY = camera.OffsetY;
+        cameraOffsetX = proCamera.OffsetX;
+        cameraOffsetY = proCamera.OffsetY;
         // イベントの登録
         EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => OnGameOver());
         EventManager.Inst.Subscribe(SubjectType.OnHome, Unit => OnRetry());
@@ -32,10 +32,10 @@ public class CameraController : MonoBehaviour
     void OnGameOver()
     {
         // カメラのターゲットを無くす
-        camera.RemoveAllCameraTargets();
+        proCamera.RemoveAllCameraTargets();
         // カメラのオフセットを0にする
-        camera.OffsetX = 0f;
-        camera.OffsetY = 0f;
+        proCamera.OffsetX = 0f;
+        proCamera.OffsetY = 0f;
     }
 
     /// <summary>
@@ -44,9 +44,9 @@ public class CameraController : MonoBehaviour
     void OnRetry()
     {
         // カメラのターゲットにプレイヤーを追加
-        camera.AddCameraTarget(player.transform);
+        proCamera.AddCameraTarget(player.transform);
         // カメラのオフセットを設定
-        camera.OffsetX = cameraOffsetX;
-        camera.OffsetY = cameraOffsetY;
+        proCamera.OffsetX = cameraOffsetX;
+        proCamera.OffsetY = cameraOffsetY;
     }
 }

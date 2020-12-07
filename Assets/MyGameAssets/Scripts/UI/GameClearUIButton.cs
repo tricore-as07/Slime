@@ -16,6 +16,8 @@ public class GameClearUIButton : MonoBehaviour
         // 自社広告を表示するタイミング
         if((CommonGameData.Inst.GameClearCount % movieAdInterval) - myCompanyAdInterval == 0)
         {
+            // TODO: 居本
+            // 自社広告を表示予定
             Debug.Log("自社広告を表示予定");
         }
         // 動画広告を表示するタイミング

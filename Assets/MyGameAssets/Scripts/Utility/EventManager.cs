@@ -1,4 +1,4 @@
-﻿using VMUnityLib;
+using VMUnityLib;
 using UniRx;
 using System.Collections.Generic;
 using System;
@@ -20,6 +20,8 @@ public enum SubjectType
     OnNotFoundHook,         // フックが見つからなくなった時もイベント
     OnOpenLevels,           // ステージ選択UIが開かれた時のイベント
     OnCloseLevels,          // ステージ選択UIが閉じられた時のイベント
+    StartFadeOut,           // フェードアウトが始まった時のイベント
+    EndFadeIn,              // フェードインが終わった時のイベント
     OnOpenSkins,            // スキンん選択UIが開かれた時のイベント
     OnCloseSkins,           // スキン選択UIが閉じられた時のイベント
     OnChangeSkin,           // スキンが変更された時のイベント

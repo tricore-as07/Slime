@@ -14,6 +14,7 @@ TagManager:
   - DiamondManager
   - StageSettingsOwner
   - LevelContentManager
+  - SceneSettings
   layers:
   - Default
   - TransparentFX

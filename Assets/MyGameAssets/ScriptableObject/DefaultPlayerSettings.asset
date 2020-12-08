@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b50390bd285049b8adc4c2ce68bded3, type: 3}
   m_Name: DefaultPlayerSettings
   m_EditorClassIdentifier: 
-  jumpPower: 750
+  jumpPower: 650
   jumpPowerByIceConditionFactor: 0.5
   meltIceTime: 1
   extendTentacleTime: 0.2

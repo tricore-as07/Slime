@@ -282,6 +282,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FX_Ice_Big_03
       objectReference: {fileID: 0}
+    - target: {fileID: 6837287922870356090, guid: 663b4f3c81fbe4c4ab1b723ab2478ad3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6842480963626663224, guid: 663b4f3c81fbe4c4ab1b723ab2478ad3,
         type: 3}
       propertyPath: m_LocalPosition.x

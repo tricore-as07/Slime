@@ -1,9 +1,8 @@
 fileFormatVersion: 2
-TextScriptImporter:
+guid: 4eedda7bd8044442fa9117ec4c08f97e
+NativeFormatImporter:
   externalObjects: {}
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-labels:
-- gvh
-- gvh_manifest

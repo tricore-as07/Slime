@@ -67,4 +67,59 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
         // 該当ステージが存在しない場合は新しくDiamondAcquisitionDataを作って返す
         return new DiamondAcquisitionData();
     }
+
+    /// <summary>
+    /// クリアしたステージ数をセーブする
+    /// </summary>
+    /// <param name="clearStageNum">クリアしたステージ数</param>
+    public void SaveClearStageNum(int clearStageNum)
+    {
+        // クリアしたステージ数がセーブされているステージ数より大きければ上書き保存する
+        if(saveData.clearStageNum < clearStageNum)
+        {
+            // クリアしたステージ数を上書き
+            saveData.clearStageNum = clearStageNum;
+            // 保存
+            JsonDataSaver.Save<SaveData>(saveData);
+            // クリアしたステージ数が変更されたイベントを呼ぶ
+            EventManager.Inst.InvokeEvent(SubjectType.OnChangeClearStageNum);
+        }
+    }
+
+    /// <summary>
+    /// クリアしたステージ数を取得する
+    /// </summary>
+    /// <returns>クリアしたステージ数</returns>
+    public int GetClearStageNum()
+    {
+        return saveData.clearStageNum;
+    }
+
+    /// <summary>
+    /// プレイヤーのマテリアルデータをセーブする
+    /// </summary>
+    /// <param name="id">上書きするマテリアルID</param>
+    public void SavePlayerSkinID(SkinId id)
+    {
+        saveData.playerSkinId = id;
+        JsonDataSaver.Save<SaveData>(saveData);
+    }
+
+    /// <summary>
+    /// マテリアルIDを取得する
+    /// </summary>
+    /// <returns>マテリアルID</returns>
+    public SkinId GetSkinID()
+    {
+        return saveData.playerSkinId;
+    }
+
+    /// <summary>
+    /// ダイヤモンドの獲得データのリストを取得する
+    /// </summary>
+    /// <returns>ダイヤモンドの獲得データのリスト</returns>
+    public IReadOnlyList<DiamondAcquisitionData> GetDiamondAcquisitionDataList()
+    {
+        return saveData.stageSaveData.diamondAcquisitionDataList;
+    }
 }

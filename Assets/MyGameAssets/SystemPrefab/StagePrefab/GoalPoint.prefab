@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagName: Player
-  subjectType: 1
+  subjectType: 2
 --- !u!1001 &6865691931657447429
 PrefabInstance:
   m_ObjectHideFlags: 0

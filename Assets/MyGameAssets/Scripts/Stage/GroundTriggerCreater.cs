@@ -19,6 +19,7 @@ public class GroundTriggerCreater : MonoBehaviour
         // トリガーになるオブジェクトの大きさを左右にスペースを開けるように調整する
         trigger.transform.localScale = new Vector3(1f - marginReciprocalNumber, trigger.transform.localScale.y, trigger.transform.localScale.z);
         // トリガーになるオブジェクトのローカルポジションを自分の縦幅の半分に設定する
-        trigger.transform.localPosition = new Vector3(0f, 0.5f, 0f);
+        const float localPositionY = 0.5f;
+        trigger.transform.localPosition = new Vector3(0f, localPositionY, 0f);
     }
 }

@@ -18,7 +18,8 @@ public partial class Player : MonoBehaviour
         Stay,           //静止状態（ゲームが開始されていない時の状態）
         Normal,         //何もしてない状態
         Hook,           //フックを引っ掛けている状態
-        FreeFall        //自由落下している状態
+        FreeFall,       //自由落下している状態
+        DoNotAcceptInput//入力を受け付けない状態
     }
     PlayerStateMachine<Player> stateMachine = default;                          //ステートマシン
     GameObject hookObject;                                                      //フックのオブジェクト
@@ -32,6 +33,8 @@ public partial class Player : MonoBehaviour
     float jumpPowerByIceConditionFactor;                                        //氷の状態の時のジャンプ力の係数
     float meltIceTime;                                                          //溶ける時間
     float tapMomentTime;                                                        //タップされた瞬間を判定する時の誤差の許容範囲をカウントする変数
+    bool isGamePlay;                                                            //ゲームプレイ中かどうか
+    GameObject playerLooks = default;                                           //プレイヤーの見た目のオブジェクト
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
@@ -66,11 +69,17 @@ public partial class Player : MonoBehaviour
         startPosition = transform.position;
         // ゲームオーバーになったらリスタートの関数が呼ばれるようにする
         EventManager.Inst.Subscribe(SubjectType.OnRetry, Unit => Restart());
+        EventManager.Inst.Subscribe(SubjectType.OnNextStage, Unit => Restart());
+        // 呼ばれたイベントに応じてゲーム中かどうかのフラグを切り替える
+        EventManager.Inst.Subscribe(SubjectType.OnChangeSkin, Unit => ChangeSkin());
+        EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => stateMachine.SendEvent((int)PlayerStateEventId.DoNotAcceptInput));
+        EventManager.Inst.Subscribe(SubjectType.OnGameClear, Unit => stateMachine.SendEvent((int)PlayerStateEventId.DoNotAcceptInput));
         // プレイヤーの設定データを反映させる
         jumpPower = playerSettingsData.JumpPower;
         jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;
         meltIceTime = playerSettingsData.MeltIceTime;
         physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
+        playerLooks = Instantiate(SkinManager.Inst.GetNowSkin(),transform);
     }
 
     /// <summary>
@@ -102,12 +111,17 @@ public partial class Player : MonoBehaviour
         stateMachine.AddTransition<PlayerStayState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         // 通常状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerNormalState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
+        stateMachine.AddTransition<PlayerNormalState, PlayerDoNotAcceptInputState>((int)PlayerStateEventId.DoNotAcceptInput);
         // フックを使用している状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerHookState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         stateMachine.AddTransition<PlayerHookState, PlayerNormalState>((int)PlayerStateEventId.Normal);
+        stateMachine.AddTransition<PlayerHookState, PlayerDoNotAcceptInputState>((int)PlayerStateEventId.DoNotAcceptInput);
         // 自由落下している状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerFreeFallState, PlayerHookState>((int)PlayerStateEventId.Hook);
         stateMachine.AddTransition<PlayerFreeFallState, PlayerNormalState>((int)PlayerStateEventId.Normal);
+        stateMachine.AddTransition<PlayerFreeFallState, PlayerDoNotAcceptInputState>((int)PlayerStateEventId.DoNotAcceptInput);
+        // 入力を受け付けない状態からの状態遷移の記述
+        stateMachine.AddTransition<PlayerDoNotAcceptInputState, PlayerStayState>((int)PlayerStateEventId.Stay);
         // 起動ステートを設定（起動ステートは PlayerNormalState）
         stateMachine.SetStartState<PlayerStayState>();
     }
@@ -242,7 +256,15 @@ public partial class Player : MonoBehaviour
         stateMachine.OnTriggerExit(other);
     }
 
-#if UNITY_EDITOR
+    /// <summary>
+    /// スキンを変更させる
+    /// </summary>
+    void ChangeSkin()
+    {
+        Destroy(playerLooks);
+        playerLooks = Instantiate(SkinManager.Inst.GetNowSkin(), transform);
+    }
+
     /// <summary>
     /// タップ入力されているかどうか
     /// </summary>
@@ -250,7 +272,11 @@ public partial class Player : MonoBehaviour
     bool IsTapInput()
     {
         // タップ判定の入力がされているとき
+#if UNITY_EDITOR
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+#elif UNITY_IOS || UNITY_ANDROID
+        if (Input.touchCount > 0)
+#endif
         {
             return true;
         }
@@ -264,7 +290,11 @@ public partial class Player : MonoBehaviour
     bool IsTapInputMoment()
     {
         // タップ判定の入力がされているとき
+#if UNITY_EDITOR
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+#elif UNITY_IOS || UNITY_ANDROID
+        if (Input.touchCount > 0)
+#endif
         {
             // 前にタップされた時間が記録されてないなら
             if (tapMomentTime == 0f)
@@ -288,49 +318,4 @@ public partial class Player : MonoBehaviour
         tapMomentTime = 0f;
         return false;
     }
-#elif UNITY_IOS || UNITY_ANDROID
-    /// <summary>
-    /// タップ入力されているかどうか
-    /// </summary>
-    /// <returns>タップ入力されている : true,タップ入力されていない : false</returns>
-    bool IsTapInput()
-    {
-        if (Input.touchCount > 0)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    /// <summary>
-    /// タップ入力された瞬間かどうか（誤差許容あり）
-    /// </summary>
-    /// <returns>タップ入力された瞬間の判定 : true,タップ入力された瞬間の判定じゃない : false</returns>
-    bool IsTapInputMoment()
-    {
-        // タップ判定の入力がされているとき
-        if (Input.touchCount > 0)
-        {
-            // 前にタップされた時間が記録されてないなら
-            if (tapMomentTime == 0f)
-            {
-                // 前にタップされた時間を記録してtrueを返す
-                tapMomentTime = Time.realtimeSinceStartup;
-                return true;
-            }
-            // 前にタップされた時間から経った時間が誤差許容時間なら
-            if (Time.realtimeSinceStartup - tapMomentTime < playerSettingsData.TapErrorToleranceTime)
-            {
-                return true;
-            }
-            // 誤差許容時間以上の時間が経っていたなら
-            else
-            {
-                return false;
-            }
-        }
-        tapMomentTime = 0f;
-        return false;
-    }
-#endif
 }

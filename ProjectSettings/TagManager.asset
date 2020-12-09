@@ -13,6 +13,8 @@ TagManager:
   - Diamond
   - DiamondManager
   - StageSettingsOwner
+  - LevelContentManager
+  - SceneSettings
   layers:
   - Default
   - TransparentFX
@@ -25,7 +27,7 @@ TagManager:
   - FitPlayerObject
   - Player
   - HookPoint
-  - 
+  - PlayerLooks
   - 
   - 
   - 

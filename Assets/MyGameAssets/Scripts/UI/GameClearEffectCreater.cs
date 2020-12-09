@@ -54,7 +54,6 @@ public class GameClearEffectCreater : MonoBehaviour
             CreateGameClearEffect();
             // 作成の間隔分待つ
             yield return new WaitForSeconds(createIntervalTime + Random.Range(-randomRange,randomRange));
-
         }
         yield break;
     }

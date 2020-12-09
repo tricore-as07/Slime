@@ -1070,7 +1070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableEvents: 00000000
-  disableEvents: 
+  disableEvents: 0c000000
 --- !u!1 &1368520570966970631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,7 +1453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableEvents: 000000000400000005000000
-  disableEvents: 01000000
+  disableEvents: 010000000c000000
 --- !u!1 &1706860096669845962
 GameObject:
   m_ObjectHideFlags: 0
@@ -4224,7 +4224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableEvents: 000000000200000003000000
-  disableEvents: 01000000
+  disableEvents: 010000000c000000
 --- !u!1 &3399791092697536738
 GameObject:
   m_ObjectHideFlags: 0

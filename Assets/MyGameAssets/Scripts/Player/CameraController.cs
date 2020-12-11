@@ -24,6 +24,8 @@ public class CameraController : MonoBehaviour
         EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => OnGameOver());
         EventManager.Inst.Subscribe(SubjectType.OnHome, Unit => OnRetry());
         EventManager.Inst.Subscribe(SubjectType.OnRetry, Unit => OnRetry());
+        // カメラのターゲットにプレイヤーを追加
+        proCamera.AddCameraTarget(player.transform);
     }
 
     /// <summary>

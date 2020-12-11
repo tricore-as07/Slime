@@ -10,6 +10,7 @@ public class SaveData
     public StageSaveData stageSaveData = default;                               //ステージのセーブデータ
     public int clearStageNum = 0;                                               //クリアしたステージ数
     public SkinId playerSkinId = SkinId.None;                                   //プレイヤーのスキンのID
+    public bool isPlaySound = true;                                             //サウンドを鳴らすかどうか
 
     /// <summary>
     /// デフォルトコンストラクタ

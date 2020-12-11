@@ -122,4 +122,23 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
     {
         return saveData.stageSaveData.diamondAcquisitionDataList;
     }
+
+    /// <summary>
+    /// 音を鳴らすかどうかを取得する
+    /// </summary>
+    /// <returns>鳴らすかどうか</returns>
+    public bool GetIsPlaySound()
+    {
+        return saveData.isPlaySound;
+    }
+
+    /// <summary>
+    /// 音を鳴らすかどうかをセーブする
+    /// </summary>
+    /// <param name="isPlaySound">音を鳴らすかどうか</param>
+    public void SaveIsPlaySound(bool isPlaySound)
+    {
+        saveData.isPlaySound = isPlaySound;
+        JsonDataSaver.Save<SaveData>(saveData);
+    }
 }

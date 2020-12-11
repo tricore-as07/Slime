@@ -2412,7 +2412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a869c8d3a881d4f6f863baa6c0404180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invokeEventType: 0
+  invokeEventType: 4
 --- !u!1 &2135519825909952142
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,11 +16,125 @@ MonoBehaviour:
     UserAgreesToHaveItOnTheScene: 0
     UserAgreesToHaveItInsideThePluginsFolder: 0
     GoogleLiveSyncIsUptoDate: 1
-    mTerms: []
+    mTerms:
+    - Term: RetryButtonText
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u30EA\u30C8\u30E9\u30A4"
+      - Retry
+      - "\u91CD\u8BD5"
+      - "\u91CD\u8A66"
+      Flags: 00000000
+      Languages_Touch: []
+    - Term: Skip Level
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u30EC\u30D9\u30EB\u3092\u30B9\u30AD\u30C3\u30D7"
+      - SkipLevel
+      - "\u8DF3\u8FC7\u6C34\u5E73"
+      - "\u8DF3\u904E\u6C34\u5E73"
+      Flags: 00000000
+      Languages_Touch: []
+    - Term: Title
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u30ED\u30FC\u30EA\u30F3\u30B0\u30B9\u30E9\u30A4\u30E0"
+      - Rolling Slime
+      - "\u6EDA\u52A8\u6CE5"
+      - "\u6EFE\u52D5\u6CE5"
+      Flags: 00000000
+      Languages_Touch: []
+    - Term: LEVEL
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u30EC\u30D9\u30EB"
+      - LEVELS
+      - "\u6C34\u5E73"
+      - "\u6C34\u5E73"
+      Flags: 00000000
+      Languages_Touch: []
+    - Term: SKIN
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u30B9\u30AD\u30F3"
+      - SKINS
+      - "\u76AE\u80A4"
+      - "\u76AE\u819A"
+      Flags: 00000000
+      Languages_Touch: []
+    - Term: REMOVE ADS
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u5E83\u544A\u524A\u9664"
+      - REMOVE ADS
+      - "\u5E7F\u544A\u79FB\u9664"
+      - "\u5EE3\u544A\u79FB\u9664"
+      Flags: 00000000
+      Languages_Touch: []
+    - Term: Recommended Game
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u304A\u3059\u3059\u3081\u306E\n\u30B2\u30FC\u30E0"
+      - 'Recommended
+
+        Game'
+      - "\u63A8\u8350\u7684\n\u6E38\u620F"
+      - "\u63A8\u85A6\u7684\n\u904A\u6232"
+      Flags: 00000000
+      Languages_Touch: []
+    - Term: Settings
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u8A2D\u5B9A"
+      - Settings
+      - "\u7EC4\u6001"
+      - "\u7D44\u614B"
+      Flags: 00000000
+      Languages_Touch: []
+    - Term: NEXT LEVEL
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u6B21\u306E\u30EC\u30D9\u30EB"
+      - Next Level
+      - "\u4E0B\u4E00\u7EA7"
+      - "\u4E0B\u4E00\u7D1A"
+      Flags: 00000000
+      Languages_Touch: []
+    - Term: Levels
+      TermType: 0
+      Description: 
+      Languages:
+      - 
+      - 
+      - 
+      - 
+      Flags: 00000000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 
-    mLanguages: []
+    mLanguages:
+    - Name: Japanese
+      Code: ja
+      Flags: 0
+    - Name: English
+      Code: en
+      Flags: 0
+    - Name: Chinese_SC
+      Code: zh-CN
+      Flags: 0
+    - Name: Chinese_TC
+      Code: zh-TW
+      Flags: 0
     IgnoreDeviceLanguage: 0
     _AllowUnloadingLanguages: 0
     Google_WebServiceURL: 

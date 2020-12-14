@@ -109,14 +109,34 @@ MonoBehaviour:
       - "\u4E0B\u4E00\u7D1A"
       Flags: 00000000
       Languages_Touch: []
-    - Term: Levels
+    - Term: Font
+      TermType: 9
+      Description: 
+      Languages:
+      - NotoSansJP-Regular SDF
+      - NotoSans-Regular SDF
+      - NotoSansSC-Regular SDF
+      - NotoSansTC-Regular SDF
+      Flags: 00000000
+      Languages_Touch: []
+    - Term: "\u65E5\u672C\u8A9E"
       TermType: 0
       Description: 
       Languages:
-      - 
-      - 
-      - 
-      - 
+      - "\u65E5\u672C\u8A9E"
+      - "\u65E5\u672C\u8A9E"
+      - "\u65E5\u672C\u8A9E"
+      - "\u65E5\u672C\u8A9E"
+      Flags: 00000000
+      Languages_Touch: []
+    - Term: English
+      TermType: 0
+      Description: 
+      Languages:
+      - English
+      - English
+      - English
+      - English
       Flags: 00000000
       Languages_Touch: []
     CaseInsensitiveTerms: 0
@@ -146,7 +166,12 @@ MonoBehaviour:
     GoogleInEditorCheckFrequency: 2
     GoogleUpdateSynchronization: 1
     GoogleUpdateDelay: 0
-    Assets: []
+    Assets:
+    - {fileID: 11400000, guid: f674eddccb75249ea86e1aea950ae14b, type: 2}
+    - {fileID: 11400000, guid: 9dd324b2f2353411591a9a010b337b4d, type: 2}
+    - {fileID: 11400000, guid: e1ebb6f6b5b7f4bcb8af3c03b0c3d838, type: 2}
+    - {fileID: 11400000, guid: fe872721d6d6d47b18490d8f2fcd3fa3, type: 2}
+    - {fileID: 12800000, guid: 315017c38c6954162b5e241cb7fadf81, type: 3}
     Spreadsheet_LocalFileName: 
     Spreadsheet_LocalCSVSeparator: ','
     Spreadsheet_LocalCSVEncoding: utf-8

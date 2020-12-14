@@ -12,8 +12,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     [SerializeField] AudioSource audioSource = default;         //オーディオソースコンポーネント
     [SerializeField] GameObject soundOnUiObject = default;      //サウンドオンの時のUIオブジェクト
     [SerializeField] GameObject soundOffUiObject = default;     //サウンドオフの時のUIオブジェクト
-    bool isPlaySound = true;                                    //音を鳴らすかどうか
-    bool IsPlaySound => isPlaySound;                            //外部に公開するためのプロパティ
+    public bool isPlaySound { get; private set; }               //音を鳴らすかどうか
 
     /// <summary>
     /// Updateが最初に呼び出される前のフレームで呼び出される

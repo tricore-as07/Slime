@@ -1070,7 +1070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableEvents: 00000000
-  disableEvents: 
+  disableEvents: 0c000000
 --- !u!1 &1368520570966970631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,7 +1453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableEvents: 000000000400000005000000
-  disableEvents: 01000000
+  disableEvents: 010000000c000000
 --- !u!1 &1706860096669845962
 GameObject:
   m_ObjectHideFlags: 0
@@ -2252,7 +2252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a869c8d3a881d4f6f863baa6c0404180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invokeEventType: 0
+  invokeEventType: 4
 --- !u!1 &2135519825909952142
 GameObject:
   m_ObjectHideFlags: 0
@@ -2699,7 +2699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a869c8d3a881d4f6f863baa6c0404180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invokeEventType: 12
+  invokeEventType: 14
 --- !u!1 &2608776661677942439
 GameObject:
   m_ObjectHideFlags: 0
@@ -3696,7 +3696,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7448897894084201730}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.19999997
+  m_Size: 0.2
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4224,7 +4224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableEvents: 000000000200000003000000
-  disableEvents: 01000000
+  disableEvents: 010000000c000000
 --- !u!1 &3399791092697536738
 GameObject:
   m_ObjectHideFlags: 0
@@ -5013,8 +5013,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 984e3f5f4e86448149882fc3310e9e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableEvents: 0c000000
-  disableEvents: 0d000000
+  enableEvents: 0e000000
+  disableEvents: 0f000000
 --- !u!1 &4217932925695336811
 GameObject:
   m_ObjectHideFlags: 0
@@ -5948,7 +5948,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 131222922774069104}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.3333333
+  m_Size: 0.33333334
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7497,7 +7497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a869c8d3a881d4f6f863baa6c0404180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invokeEventType: 13
+  invokeEventType: 15
 --- !u!1 &6770870465043306075
 GameObject:
   m_ObjectHideFlags: 0

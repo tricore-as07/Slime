@@ -42,7 +42,7 @@ public class LevelContntManager : SingletonMonoBehaviour<LevelContntManager>
     public void UpdateContent(int updateStageNum)
     {
         //更新するステージ数がUIで用意されているステージの数以内なら
-        if(updateStageNum <= levels.Count)
+        if(updateStageNum < levels.Count)
         {
             levels[updateStageNum - 1].UpdateStageElement();
         }

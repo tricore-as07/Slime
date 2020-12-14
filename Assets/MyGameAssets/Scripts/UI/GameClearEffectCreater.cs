@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System;
 
 /// <summary>
 /// ゲームクリア時のエフェクトを作成する
@@ -12,19 +14,32 @@ public class GameClearEffectCreater : MonoBehaviour
     [SerializeField] float randomRange = default;           //作成する間隔
     [SerializeField] GameObject createArea = default;       //作成するエリア
     bool isCreateEffect;                                    //エフェクトを作成するかどうか
+    List<IDisposable> disposables = new List<IDisposable>();//イベント解除用のリスト
 
     /// <summary>
-    /// Updateが最初に呼び出される前のフレームで呼び出される
+    /// オブジェクトがアクティブになった時
     /// </summary>
-    void Start()
+    void OnEnable()
     {
         isCreateEffect = false;
         // ゲームクリア時にエフェクトの作成を始めるようにイベントを登録
-        EventManager.Inst.Subscribe(SubjectType.OnGameClear,Unit => StartCreatingGameClearEffect());
+        disposables.Add(EventManager.Inst.Subscribe(SubjectType.OnGameClear,Unit => StartCreatingGameClearEffect()));
         // エフェクトの作成をやめる際のイベントを登録
-        EventManager.Inst.Subscribe(SubjectType.OnNextStage,Unit => isCreateEffect = false);
-        EventManager.Inst.Subscribe(SubjectType.OnHome,Unit => isCreateEffect = false);
-        EventManager.Inst.Subscribe(SubjectType.OnRetry,Unit => isCreateEffect = false);
+        disposables.Add(EventManager.Inst.Subscribe(SubjectType.OnNextStage,Unit => isCreateEffect = false));
+        disposables.Add(EventManager.Inst.Subscribe(SubjectType.OnHome,Unit => isCreateEffect = false));
+        disposables.Add(EventManager.Inst.Subscribe(SubjectType.OnRetry,Unit => isCreateEffect = false));
+    }
+
+    /// <summary>
+    /// オブジェクトが非アクティブになった時
+    /// </summary>
+    void OnDisable()
+    {
+        foreach (var disposable in disposables)
+        {
+            disposable.Dispose();
+        }
+        disposables.Clear();
     }
 
     /// <summary>
@@ -53,7 +68,7 @@ public class GameClearEffectCreater : MonoBehaviour
             // エフェクトを作成する
             CreateGameClearEffect();
             // 作成の間隔分待つ
-            yield return new WaitForSeconds(createIntervalTime + Random.Range(-randomRange,randomRange));
+            yield return new WaitForSeconds(createIntervalTime + UnityEngine.Random.Range(-randomRange,randomRange));
         }
         yield break;
     }
@@ -65,9 +80,9 @@ public class GameClearEffectCreater : MonoBehaviour
     {
         // ポジションをエリア内でランダムで選出
         var randomPosition = new Vector3
-            (Random.Range(createArea.transform.localScale.x * -0.5f, createArea.transform.localScale.x * 0.5f),
-            Random.Range(createArea.transform.localScale.y * -0.5f, createArea.transform.localScale.y * 0.5f),
-            Random.Range(createArea.transform.localScale.z * -0.5f, createArea.transform.localScale.z * 0.5f));
+            (UnityEngine.Random.Range(createArea.transform.localScale.x * -0.5f, createArea.transform.localScale.x * 0.5f),
+            UnityEngine.Random.Range(createArea.transform.localScale.y * -0.5f, createArea.transform.localScale.y * 0.5f),
+            UnityEngine.Random.Range(createArea.transform.localScale.z * -0.5f, createArea.transform.localScale.z * 0.5f));
         // 作成するポジション
         var createPosition = createArea.transform.position + randomPosition;
         // エフェクトを作成

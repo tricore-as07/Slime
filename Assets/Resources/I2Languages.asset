@@ -119,24 +119,24 @@ MonoBehaviour:
       - NotoSansTC-Regular SDF
       Flags: 00000000
       Languages_Touch: []
-    - Term: "\u65E5\u672C\u8A9E"
+    - Term: SkinTermsText_Stage
       TermType: 0
       Description: 
       Languages:
-      - "\u65E5\u672C\u8A9E"
-      - "\u65E5\u672C\u8A9E"
-      - "\u65E5\u672C\u8A9E"
-      - "\u65E5\u672C\u8A9E"
+      - "\u30EC\u30D9\u30EB{0}\u3092\u30AF\u30EA\u30A2"
+      - Clear level {0}
+      - "\u6E05\u9664\u7EA7\u522B{0}"
+      - "\u6E05\u9664\u7D1A\u5225{0}"
       Flags: 00000000
       Languages_Touch: []
-    - Term: English
+    - Term: SkinTermsText_Diamond
       TermType: 0
       Description: 
       Languages:
-      - English
-      - English
-      - English
-      - English
+      - "\u30C0\u30A4\u30E4\u30E2\u30F3\u30C9\u3092{0}\u500B\u96C6\u3081\u308B"
+      - Collect {0} diamonds
+      - "\u6536\u96C6{0}\u9897\u94BB\u77F3"
+      - "\u6536\u96C6{0}\u9846\u947D\u77F3"
       Flags: 00000000
       Languages_Touch: []
     CaseInsensitiveTerms: 0

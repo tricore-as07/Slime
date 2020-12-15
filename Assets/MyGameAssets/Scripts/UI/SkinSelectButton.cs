@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using I2.Loc;
+using TMPro;
 
 [RequireComponent(typeof(Button))]
 /// <summary>
@@ -11,6 +13,9 @@ public class SkinSelectButton : MonoBehaviour
     [SerializeField] SkinId id = default;                       //ボタンが押された時に変更されるスキン
     [SerializeField] UnlockType unlockType = UnlockType.None;   //スキンを開放する条件
     [SerializeField] int unlockNum = default;                   //開放する際の条件となる数
+    [SerializeField] GameObject lockImage = default;            //ロック状態の時に表示するイメージ画像
+    [SerializeField] TextMeshProUGUI unlockTermsText = default; //アンロック条件を表示するテキスト
+    bool isUnlock;                                              //アンロックされているかどうか
 
     /// <summary>
     /// 解除する条件の種類
@@ -29,7 +34,11 @@ public class SkinSelectButton : MonoBehaviour
     {
         switch (unlockType)
         {
-            case UnlockType.None: break;    // 解除条件ないので処理なし
+            case UnlockType.None:
+                {
+                    isUnlock = true;
+                    break; 
+                }
             case UnlockType.clearStageNum:
                 {
                     UpdateIsUnlockByClearStageNum();
@@ -51,7 +60,10 @@ public class SkinSelectButton : MonoBehaviour
     void UpdateIsUnlockByClearStageNum()
     {
         var clearStageNum = SaveDataManager.Inst.GetClearStageNum();
-        button.interactable = clearStageNum >= unlockNum;
+        // アンロックされているかどうか
+        isUnlock = clearStageNum >= unlockNum;
+        // ロックされている時のイメージ画像のアクティブを更新
+        lockImage.SetActive(!isUnlock);
     }
 
     /// <summary>
@@ -60,7 +72,10 @@ public class SkinSelectButton : MonoBehaviour
     void UpdateIsUnlockByDiamondNum()
     {
         var diamondNum = DiamondCounter.Inst.DiamondToralNum;
-        button.interactable = diamondNum >= unlockNum;
+        // アンロックされているかどうか
+        isUnlock = diamondNum >= unlockNum;
+        // ロックされている時のイメージ画像のアクティブを更新
+        lockImage.SetActive(!isUnlock);
     }
 
     /// <summary>
@@ -69,5 +84,29 @@ public class SkinSelectButton : MonoBehaviour
     public void OnClick()
     {
         SkinManager.Inst.OnSelectSkin(id);
+        // アンロックされていない場合
+        if(isUnlock)
+        {
+            unlockTermsText.text = "";
+        }
+        else
+        {
+            ChangeUnlockTermsText();
+        }
+    }
+
+    /// <summary>
+    /// アンロック条件のテキストを変更する
+    /// </summary>
+    void ChangeUnlockTermsText()
+    {
+        if(unlockType == UnlockType.clearStageNum)
+        {
+            unlockTermsText.text = string.Format(ScriptLocalization.SkinTermsText_Stage, unlockNum);
+        }
+        else if(unlockType == UnlockType.diamondNum)
+        {
+            unlockTermsText.text = string.Format(ScriptLocalization.SkinTermsText_Diamond, unlockNum);
+        }
     }
 }

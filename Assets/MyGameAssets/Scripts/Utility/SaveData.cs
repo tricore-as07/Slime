@@ -11,6 +11,7 @@ public class SaveData
     public int clearStageNum = 0;                                               //クリアしたステージ数
     public SkinId playerSkinId = SkinId.None;                                   //プレイヤーのスキンのID
     public bool isPlaySound = true;                                             //サウンドを鳴らすかどうか
+    public UsedSkinData usedSkinData = default;                                 //使用したことのあるスキンのデータ
 
     /// <summary>
     /// デフォルトコンストラクタ
@@ -18,6 +19,24 @@ public class SaveData
     public SaveData()
     {
         stageSaveData = new StageSaveData();
+        usedSkinData = new UsedSkinData();
+    }
+}
+
+/// <summary>
+/// 使用したスキンのデータをリストで管理する
+/// </summary>
+[Serializable]
+public class UsedSkinData
+{
+    public List<SkinId> skinIdList = default;                                   //スキンIDのリスト
+
+    /// <summary>
+    /// デフォルトコンストラクタ
+    /// </summary>
+    public UsedSkinData()
+    {
+        skinIdList = new List<SkinId>();
     }
 }
 

@@ -14,6 +14,7 @@ public class SkinSelectButton : MonoBehaviour
     [SerializeField] UnlockType unlockType = UnlockType.None;   //スキンを開放する条件
     [SerializeField] int unlockNum = default;                   //開放する際の条件となる数
     [SerializeField] GameObject lockImage = default;            //ロック状態の時に表示するイメージ画像
+    [SerializeField] GameObject newImage = default;             //使用されていない時に表示するイメージ画像
     [SerializeField] TextMeshProUGUI unlockTermsText = default; //アンロック条件を表示するテキスト
     bool isUnlock;                                              //アンロックされているかどうか
 
@@ -64,6 +65,11 @@ public class SkinSelectButton : MonoBehaviour
         isUnlock = clearStageNum >= unlockNum;
         // ロックされている時のイメージ画像のアクティブを更新
         lockImage.SetActive(!isUnlock);
+        // まだスキンを使っていなかったら
+        if(!SaveDataManager.Inst.GetIsUsedSkin(id))
+        {
+            newImage.SetActive(isUnlock);
+        }
     }
 
     /// <summary>
@@ -76,6 +82,11 @@ public class SkinSelectButton : MonoBehaviour
         isUnlock = diamondNum >= unlockNum;
         // ロックされている時のイメージ画像のアクティブを更新
         lockImage.SetActive(!isUnlock);
+        // まだスキンを使っていなかったら
+        if (!SaveDataManager.Inst.GetIsUsedSkin(id))
+        {
+            newImage.SetActive(isUnlock);
+        }
     }
 
     /// <summary>
@@ -83,11 +94,13 @@ public class SkinSelectButton : MonoBehaviour
     /// </summary>
     public void OnClick()
     {
-        SkinManager.Inst.OnSelectSkin(id);
-        // アンロックされていない場合
-        if(isUnlock)
+        // アンロックされている場合
+        if (isUnlock)
         {
+            SkinManager.Inst.OnSelectSkin(id);
             unlockTermsText.text = "";
+            newImage.SetActive(false);
+            SaveDataManager.Inst.SaveUsedSkin(id);
         }
         else
         {

@@ -21250,7 +21250,7 @@ PrefabInstance:
     - target: {fileID: 6874300390018521931, guid: 645b93648bb614747ad3e91da698910f,
         type: 3}
       propertyPath: unlockNum
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6874300390018521931, guid: 645b93648bb614747ad3e91da698910f,
         type: 3}
@@ -22066,7 +22066,7 @@ PrefabInstance:
     - target: {fileID: 6874300390018521931, guid: 645b93648bb614747ad3e91da698910f,
         type: 3}
       propertyPath: unlockNum
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8979026732193601010, guid: 645b93648bb614747ad3e91da698910f,
         type: 3}

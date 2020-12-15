@@ -141,4 +141,26 @@ public class SaveDataManager : SingletonMonoBehaviour<SaveDataManager>
         saveData.isPlaySound = isPlaySound;
         JsonDataSaver.Save<SaveData>(saveData);
     }
+
+    /// <summary>
+    /// 使用したスキンのIDをセーブする
+    /// </summary>
+    /// <param name="skinId"></param>
+    public void SaveUsedSkin(SkinId skinId)
+    {
+        if(!saveData.usedSkinData.skinIdList.Contains(skinId))
+        {
+            saveData.usedSkinData.skinIdList.Add(skinId);
+        }
+    }
+
+    /// <summary>
+    /// スキンが使用されたことがあるかどうか
+    /// </summary>
+    /// <param name="skinId">使用確認をするスキンのID</param>
+    /// <returns>使用されたことがあるかどうか</returns>
+    public bool GetIsUsedSkin(SkinId skinId)
+    {
+        return saveData.usedSkinData.skinIdList.Contains(skinId);
+    }
 }

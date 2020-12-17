@@ -39,7 +39,7 @@ namespace Kalagaan
             if(m_rigidbody != null)
             {
                 float scale = (transform.lossyScale.x + transform.lossyScale.y + transform.lossyScale.z) / 3f;
-                m_rigidbody.mass = scale;
+                //m_rigidbody.mass = scale;
                if ( m_rigidbody.velocity.magnitude>0)
                {                    
                     m_fallingSensor.transform.position = transform.position - m_rigidbody.velocity.normalized * .5f * scale;                    

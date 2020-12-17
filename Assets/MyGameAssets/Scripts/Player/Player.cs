@@ -79,7 +79,7 @@ public partial class Player : MonoBehaviour
         jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;
         meltIceTime = playerSettingsData.MeltIceTime;
         physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
-        playerLooks = Instantiate(SkinManager.Inst.GetNowSkin(),transform);
+        //playerLooks = Instantiate(SkinManager.Inst.GetNowSkin(),transform.parent);
     }
 
     /// <summary>
@@ -262,7 +262,7 @@ public partial class Player : MonoBehaviour
     void ChangeSkin()
     {
         Destroy(playerLooks);
-        playerLooks = Instantiate(SkinManager.Inst.GetNowSkin(), transform);
+        playerLooks = Instantiate(SkinManager.Inst.GetNowSkin(), transform.parent);
     }
 
     /// <summary>

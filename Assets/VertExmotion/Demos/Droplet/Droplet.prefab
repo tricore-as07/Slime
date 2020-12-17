@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7412430238168393760
+--- !u!1 &8913984559106554871
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,240 +8,62 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 331891315838462679}
-  - component: {fileID: 2823639062568475945}
+  - component: {fileID: 8913984559106554827}
+  - component: {fileID: 8913984559106554824}
+  - component: {fileID: 8913984559106554825}
+  - component: {fileID: 8913984559106554870}
+  - component: {fileID: 8913984559106554829}
+  - component: {fileID: 8913984559106554826}
+  - component: {fileID: 8913984559106554828}
   m_Layer: 0
-  m_Name: VertExmotion Sensor
+  m_Name: Droplet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &331891315838462679
+  m_IsActive: 0
+--- !u!4 &8913984559106554827
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7412430238168393760}
+  m_GameObject: {fileID: 8913984559106554871}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.14, y: 6.12, z: -0.09018451}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 9035310291506971107}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2823639062568475945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7412430238168393760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 698fbf4fce2fab744bfa4e75c8ef9346, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  className: VertExmotionSensor
-  m_parent: {fileID: 9035310291506971107}
-  m_parentSensor: {fileID: 0}
-  m_envelopRadius: 0.96036726
-  m_center: {x: 0, y: 0, z: 0}
-  m_motionDirection: {x: 0, y: 0, z: 0}
-  m_motionTorqueForce: 0
-  m_torqueAxis: {x: 0, y: 0, z: 0}
-  m_centripetalForce: 0
-  m_collision: {x: 0, y: 0, z: 0}
-  m_params:
-    translation:
-      amplitudeMultiplier: 0
-      outerMaxDistance: 0.2
-      innerMaxDistance: 0.2
-      axisLimits: 0
-      axisOuterMaxDistance: {x: 1, y: 1, z: 1}
-      axisInnerMaxDistance: {x: 1, y: 1, z: 1}
-      worldOffset: {x: 0, y: 0, z: 0}
-      localOffset: {x: 0, y: 0, z: 0}
-      gravityInOut: {x: 0, y: 0}
-    rotation:
-      angle: 0
-      axis: {x: 0, y: 0, z: 1}
-    torque:
-      amplitude: 0
-      smooth: 0
-      max: 0
-      damping: 0
-      bouncing: 0
-    fx:
-      stretch: 0.2
-      stretchMax: 1
-      stretchMinSpeed: 2
-      squash: 0
-    power: 1
-    inflate: 0
-    scale: {x: 1, y: 1, z: 1}
-    damping: 30
-    bouncing: 2.13
-    globalSmooth: 0
-  m_pidTime: 1
-  m_pid:
-    m_target: {x: 0, y: 0, z: 0}
-    m_params:
-      kp: 30
-      ki: 2.13
-      kd: 0
-      limits: {x: -3.4028235e+38, y: 3.4028235e+38}
-    m_pidX:
-      lastTime: 0
-      m_target: 0
-      m_timeScale: 1
-      m_unscaledTime: 0
-      m_params:
-        kp: 1
-        ki: 0.5
-        kd: 0
-        limits: {x: -3.4028235e+38, y: 3.4028235e+38}
-      m_lastInput: 0
-    m_pidY:
-      lastTime: 0
-      m_target: 0
-      m_timeScale: 1
-      m_unscaledTime: 0
-      m_params:
-        kp: 1
-        ki: 0.5
-        kd: 0
-        limits: {x: -3.4028235e+38, y: 3.4028235e+38}
-      m_lastInput: 0
-    m_pidZ:
-      lastTime: 0
-      m_target: 0
-      m_timeScale: 1
-      m_unscaledTime: 0
-      m_params:
-        kp: 1
-        ki: 0.5
-        kd: 0
-        limits: {x: -3.4028235e+38, y: 3.4028235e+38}
-      m_lastInput: 0
-    m_useGlobalParameters: 1
-  m_layerID: 0
-  m_executeOnLateUpdate: 1
-  m_sensorDirection: {x: 0, y: 0, z: 0}
-  m_lastPosition: {x: 0, y: 0, z: 0}
-  m_lastMotionDirection: {x: 0, y: 0, z: 0}
-  m_torqueForcePID:
-    lastTime: 0
-    m_target: 0
-    m_timeScale: 1
-    m_unscaledTime: 0
-    m_params:
-      kp: 1
-      ki: 0.5
-      kd: 0
-      limits: {x: -3.4028235e+38, y: 3.4028235e+38}
-    m_lastInput: 0
-  m_torqueAxisPID:
-    m_target: {x: 0, y: 0, z: 0}
-    m_params:
-      kp: 1
-      ki: 0.5
-      kd: 0
-      limits: {x: -3.4028235e+38, y: 3.4028235e+38}
-    m_pidX:
-      lastTime: 0
-      m_target: 0
-      m_timeScale: 1
-      m_unscaledTime: 0
-      m_params:
-        kp: 1
-        ki: 0.5
-        kd: 0
-        limits: {x: -3.4028235e+38, y: 3.4028235e+38}
-      m_lastInput: 0
-    m_pidY:
-      lastTime: 0
-      m_target: 0
-      m_timeScale: 1
-      m_unscaledTime: 0
-      m_params:
-        kp: 1
-        ki: 0.5
-        kd: 0
-        limits: {x: -3.4028235e+38, y: 3.4028235e+38}
-      m_lastInput: 0
-    m_pidZ:
-      lastTime: 0
-      m_target: 0
-      m_timeScale: 1
-      m_unscaledTime: 0
-      m_params:
-        kp: 1
-        ki: 0.5
-        kd: 0
-        limits: {x: -3.4028235e+38, y: 3.4028235e+38}
-      m_lastInput: 0
-    m_useGlobalParameters: 1
-  m_speed: {x: 0, y: 0, z: 0}
-  m_lastSpeed: {x: 0, y: 0, z: 0}
-  m_speedStrech: {x: 0, y: 0, z: 0}
-  m_accStretch: {x: 0, y: 0, z: 0}
-  m_stretch: 0
-  m_motionReference: {fileID: 0}
-  m_oldScaleFactorFixed: 0
---- !u!1 &9035310291506971104
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9035310291506971107}
-  - component: {fileID: 9035310291506971108}
-  - component: {fileID: 9035310291506971109}
-  - component: {fileID: 9035310291506971106}
-  - component: {fileID: 9035310291506971111}
-  - component: {fileID: 9035310291506971110}
-  - component: {fileID: 444966235286306350}
-  m_Layer: 9
-  m_Name: Player
-  m_TagString: Player
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9035310291506971107
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9035310291506971104}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 331891315838462679}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &9035310291506971108
+--- !u!33 &8913984559106554824
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9035310291506971104}
+  m_GameObject: {fileID: 8913984559106554871}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &9035310291506971109
+--- !u!135 &8913984559106554825
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8913984559106554871}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &8913984559106554870
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9035310291506971104}
+  m_GameObject: {fileID: 8913984559106554871}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -253,7 +75,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 966731d733a104831ade01a2d9c05420, type: 2}
+  - {fileID: 2100000, guid: 9dd37d32b9d2c864fa56ce2bd8039609, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -262,7 +84,7 @@ MeshRenderer:
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_ReceiveGI: 1
-  m_PreserveUVs: 0
+  m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
@@ -274,85 +96,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &9035310291506971106
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9035310291506971104}
-  m_Material: {fileID: 13400000, guid: c919d63f037d54aeda7ddb5900d52d1f, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &9035310291506971111
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9035310291506971104}
-  serializedVersion: 2
-  m_Mass: 2
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 8
-  m_CollisionDetection: 0
---- !u!114 &9035310291506971110
+--- !u!114 &8913984559106554829
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9035310291506971104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e414f2a19965144c6954a97ac70e111c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidbody: {fileID: 9035310291506971111}
-  playerIce: {fileID: 0}
-  playerTentacle: {fileID: 0}
-  playerSettingsData: {fileID: 11400000, guid: 3ab15718052974696afa2472c3b98cf9, type: 2}
-  physicMaterial: {fileID: 13400000, guid: 0b1f525df6ee24eb8944fd95cd7598b6, type: 2}
---- !u!114 &444966235286306350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9035310291506971104}
+  m_GameObject: {fileID: 8913984559106554871}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 000b62482df0b064da5f449c29977db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_version: 1.8.0
+  m_version: 1.8.8
   className: VertExmotion
   m_executeOnLateUpdate: 1
   m_dontCheckShaderCompatibility: 0
   m_params:
-    usePaintDataFromMeshColors: 1
+    usePaintDataFromMeshColors: 0
   m_editorParams:
     lastSensorSelected: 0
     m_showMaterialIDWireFrame: 0
     m_hideUnselectedMaterialID: 0
     m_gradientFactor: 0.6
   m_VertExmotionSensors: []
-  m_sensorsLinks:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  m_sensorsLinks: []
   m_vertexColors:
   - serializedVersion: 2
     rgba: 4294967295
@@ -1386,22 +1154,253 @@ MonoBehaviour:
     rgba: 4294967295
   m_initialShaders:
   - {fileID: 4800000, guid: b7fcc4454c9adfe49b6daee13c03a995, type: 3}
-  m_shareMesh: 1
+  m_shareMesh: 0
   m_meshCopy: 0
-  m_showEditorPanel: 0
+  m_showEditorPanel: 1
   m_editMode: 1
-  m_shaderSensorPos: []
-  m_shaderMotionDirection: []
-  m_shaderRCT: []
-  m_shaderSquashStrech: []
-  m_shaderSpeed: []
-  m_shaderMotionAxis: []
-  m_shaderAxisScaleX: []
-  m_shaderAxisScaleY: []
-  m_shaderAxisScaleZ: []
-  m_shaderLink: []
-  m_normalCorrection: 0
-  m_normalSmooth: 0.2
+  m_shaderSensorPos:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderMotionDirection:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderRCT:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderSquashStrech:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderSpeed:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderMotionAxis:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  m_shaderAxisScaleX:
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  - {x: 1, y: 0, z: 0, w: 1}
+  m_shaderAxisScaleY:
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  - {x: 0, y: 1, z: 0, w: 1}
+  m_shaderAxisScaleZ:
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
+  m_shaderLink:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  m_normalCorrection: 1
+  m_normalSmooth: 0
   m_smr: {fileID: 0}
   m_mf: {fileID: 0}
-  m_renderer: {fileID: 9035310291506971109}
+  m_renderer: {fileID: 8913984559106554870}
+--- !u!54 &8913984559106554826
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8913984559106554871}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &8913984559106554828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8913984559106554871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439d05825e855194ea8185e1928dced4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_collisionInflate: 0.4
+  m_deformationSpeed: 0.2
+  m_velocityDeformation: 0.1

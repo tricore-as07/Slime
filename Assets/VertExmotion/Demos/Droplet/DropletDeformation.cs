@@ -36,15 +36,15 @@ namespace Kalagaan
 
         private void Update()
         {
-            if(m_rigidbody != null)
+            if (m_rigidbody != null)
             {
                 float scale = (transform.lossyScale.x + transform.lossyScale.y + transform.lossyScale.z) / 3f;
                 m_rigidbody.mass = scale;
-               if ( m_rigidbody.velocity.magnitude>0)
-               {                    
-                    m_fallingSensor.transform.position = transform.position - m_rigidbody.velocity.normalized * .5f * scale;                    
-                    m_fallingSensor.m_params.translation.worldOffset = -m_rigidbody.velocity * m_velocityDeformation * scale;                    
-               }
+                if (m_rigidbody.velocity.magnitude > 0)
+                {
+                    m_fallingSensor.transform.position = transform.position - m_rigidbody.velocity.normalized * .5f * scale;
+                    m_fallingSensor.m_params.translation.worldOffset = -m_rigidbody.velocity * m_velocityDeformation * scale;
+                }
             }
 
 
@@ -53,7 +53,7 @@ namespace Kalagaan
 
         void FixedUpdate()
         {
-            float scale = (transform.lossyScale.x+ transform.lossyScale.y + transform.lossyScale.z)/3f;
+            float scale = (transform.lossyScale.x + transform.lossyScale.y + transform.lossyScale.z) / 3f;
 
             for (int i = 0; i < m_collisionSensors.Count; ++i)
             {
@@ -63,7 +63,7 @@ namespace Kalagaan
             }
 
             Ray r = new Ray();
-            r.origin = transform.position+ Vector3.up * .1f;
+            r.origin = transform.position + Vector3.up * .1f;
             r.direction = Vector3.down;
 
             //check collisions on the sphere
@@ -77,20 +77,20 @@ namespace Kalagaan
                 {
                     Vector3 hitpoint = raycastResult[i].collider.ClosestPoint(transform.position);//closest point doesn't work with MeshCollider
                     Vector3 hitDir = (hitpoint - transform.position);
-                   
+
                     if (m_collisionSensors.Count == id)
                     {
                         //create a new sensor in the pool                        
-                        m_collisionSensors.Add( m_vtm.CreateSensor("Collision") );
+                        m_collisionSensors.Add(m_vtm.CreateSensor("Collision"));
                         m_vtm.AddSensor(m_collisionSensors[id]);
                         m_collisionSensors[id].m_envelopRadius = 1f;
                         m_collisionSensors[id].m_params.translation.motionFactor = 0f;//disable wobble FX on collision sensors
 
                     }
-                    
+
                     m_collisionSensors[id].transform.position = hitpoint + hitDir.normalized * .3f * scale;
-                    m_collisionSensors[id].m_params.inflate += Time.deltaTime*10f* m_deformationSpeed;
-                    m_collisionSensors[id].m_params.inflate = Mathf.Clamp(m_collisionSensors[id].m_params.inflate, 0f, m_collisionInflate*(1f-(hitDir.magnitude-m_selfCollider.radius* scale)));
+                    m_collisionSensors[id].m_params.inflate += Time.deltaTime * 10f * m_deformationSpeed;
+                    m_collisionSensors[id].m_params.inflate = Mathf.Clamp(m_collisionSensors[id].m_params.inflate, 0f, m_collisionInflate * (1f - (hitDir.magnitude - m_selfCollider.radius * scale)));
                     id++;
                 }
             }

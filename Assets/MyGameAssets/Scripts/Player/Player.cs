@@ -36,6 +36,7 @@ public partial class Player : MonoBehaviour
     float tapMomentTime;                                                        //タップされた瞬間を判定する時の誤差の許容範囲をカウントする変数
     bool isGamePlay;                                                            //ゲームプレイ中かどうか
     GameObject playerLooks = default;                                           //プレイヤーの見た目のオブジェクト
+    VertExmotionSensorBase sensor = default;                                    //プレイヤーのVertMotion用センサー
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
@@ -43,7 +44,6 @@ public partial class Player : MonoBehaviour
     [SerializeField] PlayerTentacle playerTentacle = default;                   //プレイヤーがフックを引っ掛けている状態の時に使う触手のゲームオブジェクト
     [SerializeField] PlayerSettingsData playerSettingsData = default;           //プレイヤーの設定データ
     [SerializeField] PhysicMaterial physicMaterial = default;                   //物理特性を設定するマテリアル
-    [SerializeField] VertExmotionSensorBase sensor = default;                   //プレイヤーのVertMotion用センサー
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -81,7 +81,7 @@ public partial class Player : MonoBehaviour
         jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;
         meltIceTime = playerSettingsData.MeltIceTime;
         physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
-        //playerLooks = Instantiate(SkinManager.Inst.GetNowSkin(),transform.parent);
+        ChangeSkin();
     }
 
     /// <summary>
@@ -265,6 +265,7 @@ public partial class Player : MonoBehaviour
     {
         Destroy(playerLooks);
         playerLooks = Instantiate(SkinManager.Inst.GetNowSkin(), transform.parent);
+        sensor = playerLooks.transform.GetChild(0).GetComponent<VertExmotionSensorBase>();
     }
 
     /// <summary>

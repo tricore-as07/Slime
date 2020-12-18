@@ -7,6 +7,11 @@ public class FitPlayer : MonoBehaviour
 {
     [SerializeField] GameObject player = default;       //プレイヤーのオブジェクト
 
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag(TagName.Player);
+    }
+
     /// <summary>
     /// 毎フレーム呼び出される
     /// </summary>

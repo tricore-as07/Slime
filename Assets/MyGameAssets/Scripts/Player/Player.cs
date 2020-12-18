@@ -2,6 +2,7 @@ using UnityEngine;
 using UniRx;
 using System;
 using System.Collections;
+using Kalagaan;
 
 // 必要なコンポーネントを定義
 [RequireComponent(typeof(SphereCollider))]
@@ -42,6 +43,7 @@ public partial class Player : MonoBehaviour
     [SerializeField] PlayerTentacle playerTentacle = default;                   //プレイヤーがフックを引っ掛けている状態の時に使う触手のゲームオブジェクト
     [SerializeField] PlayerSettingsData playerSettingsData = default;           //プレイヤーの設定データ
     [SerializeField] PhysicMaterial physicMaterial = default;                   //物理特性を設定するマテリアル
+    [SerializeField] VertExmotionSensorBase sensor = default;                   //プレイヤーのVertMotion用センサー
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される

@@ -10,6 +10,16 @@ public partial class Player : MonoBehaviour
     /// </summary>
     private class PlayerNormalState : PlayerStateMachine<Player>.PlayerState
     {
+        float stretch;
+        /// <summary>
+        /// 状態へ突入時の処理はこのEnterで行う
+        /// </summary>
+        protected internal override void Enter()
+        {
+            stretch = Context.sensor.m_params.fx.stretch;
+            Context.sensor.m_params.fx.stretch = 0f;
+        }
+
         /// <summary>
         /// 状態の更新はこのUpdateで行う
         /// </summary>
@@ -26,6 +36,14 @@ public partial class Player : MonoBehaviour
                 // 自由落下している状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.FreeFall);
             }
+        }
+
+        /// <summary>
+        /// 別の状態に変更される時の処理はこのExitで行う
+        /// </summary>
+        protected internal override void Exit()
+        {
+            Context.sensor.m_params.fx.stretch = stretch;
         }
 
         /// <summary>

@@ -30,7 +30,6 @@ namespace Kalagaan
             m_fallingSensor.m_params.translation.motionFactor = 0f;//disable wobble FX on falling sensors
             m_vtm.AddSensor(m_fallingSensor);
 
-
         }
 
 
@@ -102,7 +101,8 @@ namespace Kalagaan
                 m_collisionSensors[i].m_params.inflate = 0f;
             }
 
-           
+
+
         }
     }
 }

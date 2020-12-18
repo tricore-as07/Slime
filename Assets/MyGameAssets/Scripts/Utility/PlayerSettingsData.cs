@@ -28,5 +28,7 @@ public class PlayerSettingsData : ScriptableObject
     [InfoBox("タップの押された瞬間を\r\n判定する時の誤差許容範囲", InfoMessageType.None, 0)]
     [SerializeField] float tapErrorToleranceTime = 0f;                          //タップされた瞬間を判定する時の誤差の許容範囲
     public float TapErrorToleranceTime => tapErrorToleranceTime;                //外部に公開するためのプロパティ
-
+    [InfoBox("触手の最大の太さ", InfoMessageType.None, 0)]
+    [SerializeField] float tentacleMaxThickness = 1.0f;                         //タップされた瞬間を判定する時の誤差の許容範囲
+    public float TentacleMaxThickness => tentacleMaxThickness;                  //外部に公開するためのプロパティ
 }

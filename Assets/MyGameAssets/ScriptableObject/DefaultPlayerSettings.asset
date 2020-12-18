@@ -19,3 +19,4 @@ MonoBehaviour:
   normalPlayerFriction: 0.4
   frozenPlayerFriction: 0
   tapErrorToleranceTime: 1
+  tentacleMaxThickness: 0.6

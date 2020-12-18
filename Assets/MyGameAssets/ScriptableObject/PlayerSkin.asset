@@ -16,6 +16,6 @@ MonoBehaviour:
   - id: 0
     skin: {fileID: 5825239835334732453, guid: f2047e8b979ad46f6bd569f94cd7ae40, type: 3}
   - id: 1
-    skin: {fileID: 5492404092789708835, guid: c978576561b56416fae4b1a43f800885, type: 3}
+    skin: {fileID: 5825239835334732453, guid: b129501a489d54fe7bd139ab96ee528e, type: 3}
   - id: 2
-    skin: {fileID: 4152939582173687380, guid: 12eb7086e290d420686dee3211c48850, type: 3}
+    skin: {fileID: 5825239835334732453, guid: ce40641b1086740be8a1b2c7507a25b9, type: 3}

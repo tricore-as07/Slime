@@ -9,8 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Slime
   m_Shader: {fileID: 4800000, guid: b7fcc4454c9adfe49b6daee13c03a995, type: 3}
-  m_ShaderKeywords: _GLOSSYREFLECTIONS_OFF
-  m_LightmapFlags: 6
+  m_ShaderKeywords: _EMISSION _GLOSSYREFLECTIONS_OFF
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -73,9 +73,9 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
-    - _Glossiness: 0
+    - _Glossiness: 0.369
     - _GlossyReflections: 0
-    - _Metallic: 0
+    - _Metallic: 1
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -93,7 +93,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0, g: 0.6812067, b: 1, a: 1}
     - _Color: {r: 0.3726415, g: 0.92511505, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.17697582, g: 0.31528154, b: 0.38679248, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
 --- !u!114 &3796602264486346462
 MonoBehaviour:

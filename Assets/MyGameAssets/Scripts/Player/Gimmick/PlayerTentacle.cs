@@ -12,7 +12,8 @@ public class PlayerTentacle : MonoBehaviour
     float extendTime;                               //触手を伸ばすのにかかる時間
     float extendElapsedTime;                        //触手を伸ばすのにかかった経過時間
     bool endExtendTentacle;                         //触手を伸ばし終えたかどうか
-    float tentacleMaxThickness;                        //触手の太さ
+    float tentacleMaxThickness;                     //触手の最大の太さ
+    float tentacleMinThickness;                     //触手の最小の太さ
     [SerializeField] MeshRenderer mesh = default;   //メッシュコンポーネント
 
     /// <summary>
@@ -34,7 +35,7 @@ public class PlayerTentacle : MonoBehaviour
     /// <param name="argExtendTime">フックを伸ばすのにかかる時間</param>
     /// <param name="material">プレイヤーの見た目のマテリアル</param>
     /// <param name="tentacleMaxThickness">触手の最大の太さ</param>
-    public void ExtendTentacle(GameObject playerObject,Vector3 hookPosition,float argExtendTime,Material material,float tentacleMaxThickness)
+    public void ExtendTentacle(GameObject playerObject,Vector3 hookPosition,float argExtendTime,Material material,float tentacleMaxThickness,float tentacleMinThickness)
     {
         endExtendTentacle = false;
         extendElapsedTime = 0f;
@@ -44,6 +45,7 @@ public class PlayerTentacle : MonoBehaviour
         gameObject.SetActive(true);
         mesh.material = material;
         this.tentacleMaxThickness = tentacleMaxThickness;
+        this.tentacleMinThickness = tentacleMinThickness;
         FixTentacle();
     }
 
@@ -79,7 +81,7 @@ public class PlayerTentacle : MonoBehaviour
             }
             // フックとプレイヤーの中間のポジションを求める
             mediumPos = (player.transform.position + hook) * 0.5f;
-            tentacleThickness = 0.1f;
+            tentacleThickness = tentacleMinThickness;
         }
         else
         {
@@ -87,7 +89,8 @@ public class PlayerTentacle : MonoBehaviour
             dist *= extendPercentage;
             // 触手の長さから触手のオブジェクトの中心位置を求める
             mediumPos = player.transform.position + (hook - player.transform.position) * extendPercentage * 0.5f;
-            tentacleThickness = 0.1f * (tentacleMaxThickness / extendPercentage);
+            // 触手の太さを伸ばす割合に応じて計算する
+            tentacleThickness = tentacleMinThickness + ((tentacleMaxThickness - tentacleMinThickness) * extendPercentage);
         }
         // 各パラメータを決定
         transform.position = mediumPos;

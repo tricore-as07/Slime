@@ -40,7 +40,8 @@ public partial class Player : MonoBehaviour
                 joint.transform.position - new Vector3(0f,joint.transform.localScale.y * 0.5f),
                 Context.playerSettingsData.ExtendTentacleTime,
                 Context.playerLooks.GetComponent<MeshRenderer>().material,
-                Context.playerSettingsData.TentacleMaxThickness);
+                Context.playerSettingsData.TentacleMaxThickness,
+                Context.playerSettingsData.TentacleMinThickness);
         }
 
         /// <summary>

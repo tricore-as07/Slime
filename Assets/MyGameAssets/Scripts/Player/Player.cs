@@ -265,6 +265,11 @@ public partial class Player : MonoBehaviour
     {
         Destroy(playerLooks);
         playerLooks = Instantiate(SkinManager.Inst.GetNowSkin(), transform.parent);
+        // プレイヤーのスキンオブジェクトの子オブジェクトが１つじゃなかったら
+        if(playerLooks.transform.childCount != 1)
+        {
+            Debug.LogError("プレイヤースキンオブジェクトの子オブジェクトが一つではありません。\r\nプレイヤーのシステムが正常に動作しない可能性があります。");
+        }
         sensor = playerLooks.transform.GetChild(0).GetComponent<VertExmotionSensorBase>();
     }
 

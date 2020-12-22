@@ -22,6 +22,7 @@ public class SpineObject : MonoBehaviour
             if(!player.IsFrozen)
             {
                 // ゲームオーバー処理を実行する
+                player.OnGameOverBySpine();
                 EventManager.Inst.InvokeEvent(SubjectType.OnGameOver);
             }
         }

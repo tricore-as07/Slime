@@ -44,6 +44,8 @@ public partial class Player : MonoBehaviour
     [SerializeField] PlayerTentacle playerTentacle = default;                   //プレイヤーがフックを引っ掛けている状態の時に使う触手のゲームオブジェクト
     [SerializeField] PlayerSettingsData playerSettingsData = default;           //プレイヤーの設定データ
     [SerializeField] PhysicMaterial physicMaterial = default;                   //物理特性を設定するマテリアル
+    [SerializeField] GameObject gameOverEffectBySpine = default;                //棘でゲームオーバーになった時のエフェクトオブジェクト
+    [SerializeField] GameObject gameOverEffectByFlame = default;                //炎でゲームオーバーになった時のエフェクトオブジェクト
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -98,6 +100,7 @@ public partial class Player : MonoBehaviour
         // 氷状態の情報を初期化
         isFrozen = false;
         playerIce.SetActive(false);
+        playerLooks.SetActive(true);
         meltIceCoroutine = null;
         physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
     }
@@ -320,5 +323,23 @@ public partial class Player : MonoBehaviour
         // 前にタップされた時間の記録をリセット
         tapMomentTime = 0f;
         return false;
+    }
+
+    /// <summary>
+    /// 棘のオブジェクトでゲームオーバーになった時に呼ばれる
+    /// </summary>
+    public void OnGameOverBySpine()
+    {
+        Instantiate(gameOverEffectBySpine,transform);
+        playerLooks.SetActive(false);
+    }
+
+    /// <summary>
+    /// 炎のオブジェクトでゲームオーバーになった時に呼ばれる
+    /// </summary>
+    public void OnGameOverByFlame()
+    {
+        Instantiate(gameOverEffectByFlame, transform);
+        playerLooks.SetActive(false);
     }
 }

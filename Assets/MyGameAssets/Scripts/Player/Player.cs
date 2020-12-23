@@ -2,6 +2,7 @@ using UnityEngine;
 using UniRx;
 using System;
 using System.Collections;
+using Kalagaan;
 
 // 必要なコンポーネントを定義
 [RequireComponent(typeof(SphereCollider))]
@@ -35,6 +36,7 @@ public partial class Player : MonoBehaviour
     float tapMomentTime;                                                        //タップされた瞬間を判定する時の誤差の許容範囲をカウントする変数
     bool isGamePlay;                                                            //ゲームプレイ中かどうか
     GameObject playerLooks = default;                                           //プレイヤーの見た目のオブジェクト
+    VertExmotionSensorBase sensor = default;                                    //プレイヤーのVertMotion用センサー
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
@@ -79,7 +81,7 @@ public partial class Player : MonoBehaviour
         jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;
         meltIceTime = playerSettingsData.MeltIceTime;
         physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
-        playerLooks = Instantiate(SkinManager.Inst.GetNowSkin(),transform);
+        ChangeSkin();
     }
 
     /// <summary>
@@ -262,7 +264,13 @@ public partial class Player : MonoBehaviour
     void ChangeSkin()
     {
         Destroy(playerLooks);
-        playerLooks = Instantiate(SkinManager.Inst.GetNowSkin(), transform);
+        playerLooks = Instantiate(SkinManager.Inst.GetNowSkin(), transform.parent);
+        // プレイヤーのスキンオブジェクトの子オブジェクトが１つじゃなかったら
+        if(playerLooks.transform.childCount != 1)
+        {
+            Debug.LogError("プレイヤースキンオブジェクトの子オブジェクトが一つではありません。\r\nプレイヤーのシステムが正常に動作しない可能性があります。");
+        }
+        sensor = playerLooks.transform.GetChild(0).GetComponent<VertExmotionSensorBase>();
     }
 
     /// <summary>

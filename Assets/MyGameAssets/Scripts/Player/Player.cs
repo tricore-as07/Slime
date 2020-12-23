@@ -330,7 +330,9 @@ public partial class Player : MonoBehaviour
     /// </summary>
     public void OnGameOverBySpine()
     {
-        Instantiate(gameOverEffectBySpine,transform);
+        // エフェクトを作成
+        var obj = Instantiate(gameOverEffectBySpine,transform.parent);
+        obj.transform.position = transform.position;
         playerLooks.SetActive(false);
     }
 
@@ -339,7 +341,9 @@ public partial class Player : MonoBehaviour
     /// </summary>
     public void OnGameOverByFlame()
     {
-        Instantiate(gameOverEffectByFlame, transform);
+        // エフェクトを作成
+        var obj = Instantiate(gameOverEffectByFlame, transform.parent);
+        obj.transform.position = transform.position;
         playerLooks.SetActive(false);
     }
 }

@@ -38,7 +38,10 @@ public partial class Player : MonoBehaviour
             Context.playerTentacle.ExtendTentacle(
                 Context.gameObject,
                 joint.transform.position - new Vector3(0f,joint.transform.localScale.y * 0.5f),
-                Context.playerSettingsData.ExtendTentacleTime);
+                Context.playerSettingsData.ExtendTentacleTime,
+                Context.playerLooks.GetComponent<MeshRenderer>().material,
+                Context.playerSettingsData.TentacleMaxThickness,
+                Context.playerSettingsData.TentacleMinThickness);
         }
 
         /// <summary>

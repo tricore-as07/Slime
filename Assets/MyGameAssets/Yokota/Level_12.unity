@@ -252,7 +252,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 428678285}
+      objectReference: {fileID: 0}
     - target: {fileID: 4099183644081215515, guid: 8819d990782ef4020b728c39c59b01ba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -562,6 +562,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 654874888}
     m_Modifications:
+    - target: {fileID: 43998558143883491, guid: e5df875f3758d4e359f7faf5cbe51272,
+        type: 3}
+      propertyPath: playerIce
+      value: 
+      objectReference: {fileID: 119401290}
+    - target: {fileID: 43998558143883491, guid: e5df875f3758d4e359f7faf5cbe51272,
+        type: 3}
+      propertyPath: playerTentacle
+      value: 
+      objectReference: {fileID: 1317528688}
     - target: {fileID: 9035310291506971104, guid: e5df875f3758d4e359f7faf5cbe51272,
         type: 3}
       propertyPath: m_Name
@@ -634,12 +644,6 @@ PrefabInstance:
       objectReference: {fileID: 1317528688}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5df875f3758d4e359f7faf5cbe51272, type: 3}
---- !u!1 &428678285 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9035310291506971104, guid: e5df875f3758d4e359f7faf5cbe51272,
-    type: 3}
-  m_PrefabInstance: {fileID: 428678284}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &654874887
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1090,12 +1094,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageSettingsData: {fileID: 11400000, guid: 3bcd666f88db84c3ca742e61e641d598, type: 2}
---- !u!4 &1195341984 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9035310291506971107, guid: e5df875f3758d4e359f7faf5cbe51272,
-    type: 3}
-  m_PrefabInstance: {fileID: 428678284}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1317528687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3031,7 +3029,7 @@ PrefabInstance:
         type: 3}
       propertyPath: CameraTargets.Array.data[0].TargetTransform
       value: 
-      objectReference: {fileID: 1195341984}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82c16718f879146b3b81a88fdbbd0ef7, type: 3}
 --- !u!4 &1912099475 stripped

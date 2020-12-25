@@ -63,7 +63,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8843923818730768574}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -128,4 +128,7 @@ MonoBehaviour:
   playerTentacle: {fileID: 0}
   playerSettingsData: {fileID: 11400000, guid: 3ab15718052974696afa2472c3b98cf9, type: 2}
   physicMaterial: {fileID: 13400000, guid: 0b1f525df6ee24eb8944fd95cd7598b6, type: 2}
-  sensor: {fileID: 0}
+  gameOverEffectBySpine: {fileID: 1489431029902184, guid: 4430919f14c50f84085d287cbcb2c30e,
+    type: 3}
+  gameOverEffectByFlame: {fileID: 1698068915230344, guid: 05f7c156786bd024e8da3bb1a4b8aa09,
+    type: 3}

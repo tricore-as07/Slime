@@ -21,6 +21,7 @@ public class FlameGimmick : MonoBehaviour
             // プレイヤーが氷の状態じゃなければゲームオーバーにする
             if (!player.IsFrozen)
             {
+                player.OnGameOverByFlame();
                 // ゲームオーバー処理を実行する
                 EventManager.Inst.InvokeEvent(SubjectType.OnGameOver);
             }

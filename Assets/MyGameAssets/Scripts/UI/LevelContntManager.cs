@@ -16,9 +16,9 @@ public class LevelContntManager : SingletonMonoBehaviour<LevelContntManager>
     {
         SwitchLevels();
         // アクティブを切り替える可能性があるイベントに更新関数を登録
-        EventManager.Inst.Subscribe(SubjectType.OnHome,Unit => SwitchLevels());
-        EventManager.Inst.Subscribe(SubjectType.OnRetry,Unit => SwitchLevels());
-        EventManager.Inst.Subscribe(SubjectType.OnNextStage,Unit => SwitchLevels());
+        EventManager.Inst.Subscribe(SubjectType.OnHome,Unit => SwitchLevels(), gameObject);
+        EventManager.Inst.Subscribe(SubjectType.OnRetry,Unit => SwitchLevels(), gameObject);
+        EventManager.Inst.Subscribe(SubjectType.OnNextStage,Unit => SwitchLevels(), gameObject);
     }
 
     /// <summary>

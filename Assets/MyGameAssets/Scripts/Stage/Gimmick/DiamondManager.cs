@@ -17,7 +17,7 @@ public class DiamondManager : MonoBehaviour
     void Start()
     {
         Initialize();
-        EventManager.Inst.Subscribe(SubjectType.OnGameClear, Unit => OnGameClearProcess());
+        EventManager.Inst.Subscribe(SubjectType.OnGameClear, Unit => OnGameClearProcess(), gameObject);
     }
 
     /// <summary>

@@ -14,9 +14,9 @@ public class LevelSkipButton : MonoBehaviour
     /// </summary>
     void Awake()
     {
-        EventManager.Inst.Subscribe(SubjectType.OnGameOver,Unit => OnGameOver());
-        EventManager.Inst.Subscribe(SubjectType.OnGameClear,Unit => OnGameClear());
-        EventManager.Inst.Subscribe(SubjectType.OnNextStage,Unit => ResetGameOverCount());
+        EventManager.Inst.Subscribe(SubjectType.OnGameOver,Unit => OnGameOver(), gameObject);
+        EventManager.Inst.Subscribe(SubjectType.OnGameClear,Unit => OnGameClear(), gameObject);
+        EventManager.Inst.Subscribe(SubjectType.OnNextStage,Unit => ResetGameOverCount(), gameObject);
         gameObject.SetActive(false);
     }
 

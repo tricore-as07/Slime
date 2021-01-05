@@ -12,8 +12,8 @@ public class DiamondObject : MonoBehaviour
     /// </summary>
     void Start()
     {
-        EventManager.Inst.Subscribe(SubjectType.OnGameStart,Unit => isAcquisition = gameObject.activeSelf);
-        EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => gameObject.SetActive(isAcquisition));
+        EventManager.Inst.Subscribe(SubjectType.OnGameStart,Unit => isAcquisition = gameObject.activeSelf, gameObject);
+        EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => gameObject.SetActive(isAcquisition), gameObject);
     }
 
     /// <summary>

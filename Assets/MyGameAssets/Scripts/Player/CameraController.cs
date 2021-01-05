@@ -21,9 +21,9 @@ public class CameraController : MonoBehaviour
         cameraOffsetX = proCamera.OffsetX;
         cameraOffsetY = proCamera.OffsetY;
         // イベントの登録
-        EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => OnGameOver());
-        EventManager.Inst.Subscribe(SubjectType.OnHome, Unit => OnRetry());
-        EventManager.Inst.Subscribe(SubjectType.OnRetry, Unit => OnRetry());
+        EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => OnGameOver(), gameObject);
+        EventManager.Inst.Subscribe(SubjectType.OnHome, Unit => OnRetry(), gameObject);
+        EventManager.Inst.Subscribe(SubjectType.OnRetry, Unit => OnRetry(), gameObject);
         // カメラのターゲットにプレイヤーを追加
         proCamera.AddCameraTarget(player.transform);
     }

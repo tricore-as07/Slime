@@ -8,10 +8,13 @@ public class PlayerTentacle : MonoBehaviour
     GameObject player;                              //プレイヤーのゲームオブジェクト
     Vector3 hook;                                   //フックのポジション
     Vector3 mediumPos;                              //プレイヤーのポジションとフックのポジションの中間
+    Vector3 dire;                                   //フックの方向
     float dist;                                     //プレイヤーとフックの距離
     float extendTime;                               //触手を伸ばすのにかかる時間
-    float extendElapsedTime;                        //触手を伸ばすのにかかった経過時間
+    float shrinkTime;                               //触手を縮ませるのにかかる時間
+    float elapsedTime;                              //触手を伸ばすのにかかった経過時間
     bool endExtendTentacle;                         //触手を伸ばし終えたかどうか
+    bool isShrinkingTentacle;                       //触手を収縮させるかどうか
     float tentacleMaxThickness;                     //触手の最大の太さ
     float tentacleMinThickness;                     //触手の最小の太さ
     [SerializeField] MeshRenderer mesh = default;   //メッシュコンポーネント
@@ -35,17 +38,19 @@ public class PlayerTentacle : MonoBehaviour
     /// <param name="argExtendTime">フックを伸ばすのにかかる時間</param>
     /// <param name="material">プレイヤーの見た目のマテリアル</param>
     /// <param name="tentacleMaxThickness">触手の最大の太さ</param>
-    public void ExtendTentacle(GameObject playerObject,Vector3 hookPosition,float argExtendTime,Material material,float tentacleMaxThickness,float tentacleMinThickness)
+    public void ExtendTentacle(GameObject playerObject,Vector3 hookPosition,Material material,PlayerSettingsData playerSettingsData)
     {
         endExtendTentacle = false;
-        extendElapsedTime = 0f;
-        extendTime = argExtendTime;
+        isShrinkingTentacle = false;
+        elapsedTime = 0f;
+        extendTime = playerSettingsData.ExtendTentacleTime;
+        shrinkTime = playerSettingsData.ShrinkTentacleTime;
         player = playerObject;
         hook = hookPosition;
         gameObject.SetActive(true);
         mesh.material = material;
-        this.tentacleMaxThickness = tentacleMaxThickness;
-        this.tentacleMinThickness = tentacleMinThickness;
+        this.tentacleMaxThickness = playerSettingsData.TentacleMaxThickness;
+        this.tentacleMinThickness = playerSettingsData.TentacleMinThickness;
         FixTentacle();
     }
 
@@ -54,9 +59,9 @@ public class PlayerTentacle : MonoBehaviour
     /// </summary>
     public void ShrinkTentacle()
     {
-        player = null;
-        hook = Vector3.zero;
-        gameObject.SetActive(false);
+        isShrinkingTentacle = true;
+        elapsedTime = 0f;
+        dire = (hook - player.transform.position).normalized;
     }
 
     /// <summary>
@@ -64,16 +69,32 @@ public class PlayerTentacle : MonoBehaviour
     /// </summary>
     void FixTentacle()
     {
-        extendElapsedTime += Time.deltaTime;
+        //触手を収縮されるかどうか
+        if(!isShrinkingTentacle)
+        {
+            ExtendingTentacle();
+        }
+        else
+        {
+            ShrinkingTentacle();
+        }
+    }
+
+    /// <summary>
+    /// 触手を伸ばす
+    /// </summary>
+    void ExtendingTentacle()
+    {
+        elapsedTime += Time.deltaTime;
         //経過時間でプレイヤーからフックまでのどのくらいの割合まで触手を伸ばすかを決定する
-        float extendPercentage = extendElapsedTime / extendTime;
+        float extendPercentage = elapsedTime / extendTime;
         float tentacleThickness;
         dist = Vector3.Distance(player.transform.position, hook);
         //伸ばす割合が１以上なら
         if (extendPercentage >= 1)
         {
             // 触手を伸ばし終えてるフラグが立っていなかったら
-            if(!endExtendTentacle)
+            if (!endExtendTentacle)
             {
                 //フラグを立てて触手を伸ばし終えたイベントを呼ぶ
                 endExtendTentacle = true;
@@ -96,5 +117,30 @@ public class PlayerTentacle : MonoBehaviour
         transform.position = mediumPos;
         transform.localScale = new Vector3(tentacleThickness, tentacleThickness, dist);
         transform.LookAt(hook);
+    }
+
+    /// <summary>
+    /// 触手を縮ませる
+    /// </summary>
+    void ShrinkingTentacle()
+    {
+        elapsedTime += Time.deltaTime;
+        float shrinkPercentage = elapsedTime / shrinkTime;
+        float tentacleThickness;
+        float shinkingDist;
+        if (shrinkPercentage >= 1)
+        {
+            player = null;
+            hook = Vector3.zero;
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            shinkingDist = dist * (1 - shrinkPercentage);
+            mediumPos = player.transform.position + (dire * shinkingDist * 0.5f);
+            tentacleThickness = tentacleMaxThickness - ((tentacleMaxThickness - tentacleMinThickness) * shrinkPercentage);
+            transform.position = mediumPos;
+            transform.localScale = new Vector3(tentacleThickness, tentacleThickness, shinkingDist);
+        }
     }
 }

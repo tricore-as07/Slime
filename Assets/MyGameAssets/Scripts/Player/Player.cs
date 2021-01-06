@@ -68,16 +68,16 @@ public partial class Player : MonoBehaviour
         rigidbody.useGravity = false;
         // ゲームが開始されたら重力を有効にする
         Action<Unit> action = Unit => rigidbody.useGravity = true;
-        EventManager.Inst.Subscribe(SubjectType.OnGameStart, action);
+        EventManager.Inst.Subscribe(SubjectType.OnGameStart, action, gameObject);
         // 開始時のポジションを記憶しておく
         startPosition = transform.position;
         // ゲームオーバーになったらリスタートの関数が呼ばれるようにする
-        EventManager.Inst.Subscribe(SubjectType.OnRetry, Unit => Restart());
-        EventManager.Inst.Subscribe(SubjectType.OnNextStage, Unit => Restart());
+        EventManager.Inst.Subscribe(SubjectType.OnRetry, Unit => Restart(), gameObject);
+        EventManager.Inst.Subscribe(SubjectType.OnNextStage, Unit => Restart(), gameObject);
         // 呼ばれたイベントに応じてゲーム中かどうかのフラグを切り替える
-        EventManager.Inst.Subscribe(SubjectType.OnChangeSkin, Unit => ChangeSkin());
-        EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => stateMachine.SendEvent((int)PlayerStateEventId.DoNotAcceptInput));
-        EventManager.Inst.Subscribe(SubjectType.OnGameClear, Unit => stateMachine.SendEvent((int)PlayerStateEventId.DoNotAcceptInput));
+        EventManager.Inst.Subscribe(SubjectType.OnChangeSkin, Unit => ChangeSkin(), gameObject);
+        EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => stateMachine.SendEvent((int)PlayerStateEventId.DoNotAcceptInput), gameObject);
+        EventManager.Inst.Subscribe(SubjectType.OnGameClear, Unit => stateMachine.SendEvent((int)PlayerStateEventId.DoNotAcceptInput), gameObject);
         // プレイヤーの設定データを反映させる
         jumpPower = playerSettingsData.JumpPower;
         jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;

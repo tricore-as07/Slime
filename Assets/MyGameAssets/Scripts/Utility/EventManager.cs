@@ -2,6 +2,7 @@ using VMUnityLib;
 using UniRx;
 using System.Collections.Generic;
 using System;
+using UnityEngine;
 
 /// <summary>
 /// イベントの種類
@@ -42,7 +43,7 @@ public class EventManager : Singleton<EventManager>
     /// <param name="type">Subscribeするイベントの種類</param>
     /// <param name="action">イベントが呼ばれた時に実行されるデリゲート</param>
     /// <returns>イベントの解除に必要なIDisposable</returns>
-    public IDisposable Subscribe(SubjectType type,Action<Unit> action)
+    public IDisposable Subscribe(SubjectType type,Action<Unit> action,GameObject gameObject = null)
     {
         // Subscribeする種類のイベントが存在していなかったら
         if (!eventDictionary.ContainsKey(type))
@@ -50,7 +51,14 @@ public class EventManager : Singleton<EventManager>
             CreateSubject(type);
         }
         // Subscribeする
-        return eventDictionary[type].Subscribe(action);
+        if(gameObject == null)
+        {
+            return eventDictionary[type].Subscribe(action);
+        }
+        else
+        {
+            return eventDictionary[type].Subscribe(action).AddTo(gameObject);
+        }
     }
 
     /// <summary>

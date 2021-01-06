@@ -26,12 +26,12 @@ public class GameUI : MonoBehaviour
         // アクティブにするイベントを登録する
         foreach(var enableEvent in enableEvents)
         {
-            EventManager.Inst.Subscribe(enableEvent, Unit => gameObject.SetActive(true));
+            EventManager.Inst.Subscribe(enableEvent, Unit => gameObject.SetActive(true), gameObject);
         }
         // 非アクティブにするイベントを登録する
         foreach (var disableEvent in disableEvents)
         {
-            EventManager.Inst.Subscribe(disableEvent, Unit => gameObject.SetActive(false));
+            EventManager.Inst.Subscribe(disableEvent, Unit => gameObject.SetActive(false), gameObject);
         }
     }
 }

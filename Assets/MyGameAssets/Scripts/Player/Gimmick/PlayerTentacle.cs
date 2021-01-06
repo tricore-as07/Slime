@@ -40,6 +40,7 @@ public class PlayerTentacle : MonoBehaviour
     /// <param name="tentacleMaxThickness">触手の最大の太さ</param>
     public void ExtendTentacle(GameObject playerObject,Vector3 hookPosition,Material material,PlayerSettingsData playerSettingsData)
     {
+        // 触手を伸ばす際の初期値の設定
         endExtendTentacle = false;
         isShrinkingTentacle = false;
         elapsedTime = 0f;
@@ -125,20 +126,29 @@ public class PlayerTentacle : MonoBehaviour
     void ShrinkingTentacle()
     {
         elapsedTime += Time.deltaTime;
+        // 経過時間で触手を収縮する割合を決める
         float shrinkPercentage = elapsedTime / shrinkTime;
+        // 触手の太さ
         float tentacleThickness;
+        // 触手の長さ
         float shinkingDist;
+        // 触手を収縮する割合が１以上なら
         if (shrinkPercentage >= 1)
         {
+            // リセット
             player = null;
             hook = Vector3.zero;
             gameObject.SetActive(false);
         }
         else
         {
+            // 触手の長さを伸ばした時の最長の長さから割合分縮める
             shinkingDist = dist * (1 - shrinkPercentage);
+            // 中間のポジションを計算する
             mediumPos = player.transform.position + (dire * shinkingDist * 0.5f);
+            // 触手の太さを計算する
             tentacleThickness = tentacleMaxThickness - ((tentacleMaxThickness - tentacleMinThickness) * shrinkPercentage);
+            // 各パラメータを決定
             transform.position = mediumPos;
             transform.localScale = new Vector3(tentacleThickness, tentacleThickness, shinkingDist);
         }

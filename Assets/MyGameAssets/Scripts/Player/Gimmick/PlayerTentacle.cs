@@ -8,7 +8,7 @@ public class PlayerTentacle : MonoBehaviour
     GameObject player;                              //プレイヤーのゲームオブジェクト
     Vector3 hook;                                   //フックのポジション
     Vector3 mediumPos;                              //プレイヤーのポジションとフックのポジションの中間
-    Vector3 dire;                                   //フックの方向
+    Vector3 direction;                              //フックの方向
     float dist;                                     //プレイヤーとフックの距離
     float extendTime;                               //触手を伸ばすのにかかる時間
     float shrinkTime;                               //触手を縮ませるのにかかる時間
@@ -62,7 +62,7 @@ public class PlayerTentacle : MonoBehaviour
     {
         isShrinkingTentacle = true;
         elapsedTime = 0f;
-        dire = (hook - player.transform.position).normalized;
+        direction = (hook - player.transform.position).normalized;
     }
 
     /// <summary>
@@ -145,7 +145,7 @@ public class PlayerTentacle : MonoBehaviour
             // 触手の長さを伸ばした時の最長の長さから割合分縮める
             shinkingDist = dist * (1 - shrinkPercentage);
             // 中間のポジションを計算する
-            mediumPos = player.transform.position + (dire * shinkingDist * 0.5f);
+            mediumPos = player.transform.position + (direction * shinkingDist * 0.5f);
             // 触手の太さを計算する
             tentacleThickness = tentacleMaxThickness - ((tentacleMaxThickness - tentacleMinThickness) * shrinkPercentage);
             // 各パラメータを決定

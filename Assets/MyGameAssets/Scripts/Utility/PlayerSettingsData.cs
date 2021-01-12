@@ -19,6 +19,9 @@ public class PlayerSettingsData : ScriptableObject
     [InfoBox("触手が伸びきるまでの時間です", InfoMessageType.None, 0)]
     [SerializeField] float extendTentacleTime = 0f;                             //触手が伸びきるまでにかかる時間
     public float ExtendTentacleTime => extendTentacleTime;                      //外部に公開するためのプロパティ
+    [InfoBox("触手が縮みきるまでの時間です", InfoMessageType.None, 0)]
+    [SerializeField] float shrinkTentacleTime = 0f;                             //触手が縮みきるまでにかかる時間
+    public float ShrinkTentacleTime => shrinkTentacleTime;                      //外部に公開するためのプロパティ
     [InfoBox("通常状態のプレイヤーの摩擦の大きさです", InfoMessageType.None, 0)]
     [SerializeField, Range(0f, 1f)] float normalPlayerFriction = 0f;            //通常状態のプレイヤーの摩擦の大きさ
     public float NormalPlayerFriction => normalPlayerFriction;                  //外部に公開するためのプロパティ

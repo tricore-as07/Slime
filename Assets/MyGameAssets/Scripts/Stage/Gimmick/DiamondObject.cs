@@ -6,6 +6,7 @@
 public class DiamondObject : MonoBehaviour
 {
     bool isAcquisition = false;     //獲得したかどうか
+    [SerializeField] GameObject getDiamondEffect = default;
 
     /// <summary>
     /// Updateが最初に呼び出される前のフレームで呼び出される
@@ -25,6 +26,11 @@ public class DiamondObject : MonoBehaviour
         if(other.tag == TagName.Player)
         {
             gameObject.SetActive(false);
+            if(getDiamondEffect != null)
+            {
+                var obj = Instantiate(getDiamondEffect, transform.parent);
+                obj.transform.position = transform.position;
+            }
         }
     }
 }

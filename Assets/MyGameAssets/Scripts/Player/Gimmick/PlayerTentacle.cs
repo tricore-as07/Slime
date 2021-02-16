@@ -18,6 +18,7 @@ public class PlayerTentacle : MonoBehaviour
     float tentacleMaxThickness;                     //触手の最大の太さ
     float tentacleMinThickness;                     //触手の最小の太さ
     [SerializeField] MeshRenderer mesh = default;   //メッシュコンポーネント
+    [SerializeField] GameObject effect = default;   //触手がフックについた時に生成するエフェクト
 
     /// <summary>
     /// 毎フレーム呼び出される
@@ -99,6 +100,8 @@ public class PlayerTentacle : MonoBehaviour
             {
                 //フラグを立てて触手を伸ばし終えたイベントを呼ぶ
                 endExtendTentacle = true;
+                var obj = Instantiate(effect,transform.parent);
+                obj.transform.position = hook;
                 EventManager.Inst.InvokeEvent(SubjectType.OnNotFoundHook);
             }
             // フックとプレイヤーの中間のポジションを求める

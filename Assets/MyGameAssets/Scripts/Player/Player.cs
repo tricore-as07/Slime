@@ -47,6 +47,7 @@ public partial class Player : MonoBehaviour
     [SerializeField] GameObject gameOverEffectBySpine = default;                //棘でゲームオーバーになった時のエフェクトオブジェクト
     [SerializeField] GameObject gameOverEffectByFlame = default;                //炎でゲームオーバーになった時のエフェクトオブジェクト
     [SerializeField] GameObject freezeEffect = default;                         //凍る時のエフェクトオブジェクト
+    [SerializeField] GameObject collisionEffect = default;                      //衝突した時に表示するオブジェクト
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -225,6 +226,7 @@ public partial class Player : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         stateMachine.OnCollisionEnter(collision);
+        CreateCollisionEffect(collision);
     }
 
     /// <summary>
@@ -352,5 +354,22 @@ public partial class Player : MonoBehaviour
         var obj = Instantiate(gameOverEffectByFlame, transform.parent);
         obj.transform.position = transform.position;
         playerLooks.SetActive(false);
+    }
+
+    /// <summary>
+    /// 衝突エフェクトを生成する
+    /// </summary>
+    /// <param name="collision">衝突情報クラス</param>
+    void CreateCollisionEffect(Collision collision)
+    {
+        foreach(var contact in collision.contacts)
+        {
+            if(contact.otherCollider.tag == TagName.Ground)
+            {
+                var obj = Instantiate(collisionEffect,transform.parent);
+                obj.transform.position = contact.point;
+                obj.transform.up = contact.normal;
+            }
+        }
     }
 }

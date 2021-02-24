@@ -5,8 +5,8 @@
 /// </summary>
 public class DiamondObject : MonoBehaviour
 {
-    bool isAcquisition = false;     //獲得したかどうか
-    [SerializeField] GameObject getDiamondEffect = default;
+    bool isAcquisition = false;                                 //獲得したかどうか
+    [SerializeField] GameObject getDiamondEffect = default;     //ダイヤを取得した時のエフェクト
 
     /// <summary>
     /// Updateが最初に呼び出される前のフレームで呼び出される

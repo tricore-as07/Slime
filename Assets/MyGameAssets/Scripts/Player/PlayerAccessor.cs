@@ -4,19 +4,19 @@ using VMUnityLib;
 /// <summary>
 /// プレイヤーを所持するだけのシングルトンクラス
 /// </summary>
-public class PlayerOwner : Singleton<PlayerOwner>
+public class PlayerAccessor : Singleton<PlayerAccessor>
 {
     GameObject player = null;       //プレイヤー
 
     /// <summary>
     /// プレイヤーを取得する
     /// </summary>
-    /// <returns></returns>
+    /// <returns>プレイヤーオブジェクトのインスタンス</returns>
     public GameObject GetPlayer()
     {
-        if(player == null)
+        if (player == null)
         {
-            player = PlayerOwner.Inst.GetPlayer();
+            player = GameObject.FindGameObjectWithTag(TagName.Player);
         }
         return player;
     }

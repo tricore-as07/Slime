@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         // 必要な情報のキャッシュ
-        player = PlayerOwner.Inst.GetPlayer();
+        player = PlayerAccessor.Inst.GetPlayer();
         cameraOffsetX = proCamera.OffsetX;
         cameraOffsetY = proCamera.OffsetY;
         // イベントの登録

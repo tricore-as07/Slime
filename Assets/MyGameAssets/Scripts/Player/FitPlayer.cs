@@ -9,7 +9,7 @@ public class FitPlayer : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag(TagName.Player);
+        player = PlayerOwner.Inst.GetPlayer();
     }
 
     /// <summary>

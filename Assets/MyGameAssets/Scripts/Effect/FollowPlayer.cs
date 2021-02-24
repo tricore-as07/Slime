@@ -13,7 +13,7 @@ public class FollowPlayer : MonoBehaviour
     void Start()
     {
         //プレイヤーをキャッシュ
-        player = GameObject.FindGameObjectWithTag(TagName.Player);
+        player = PlayerOwner.Inst.GetPlayer();
     }
 
     /// <summary>

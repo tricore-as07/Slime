@@ -7,9 +7,12 @@ public class FitPlayer : MonoBehaviour
 {
     [SerializeField] GameObject player = default;       //プレイヤーのオブジェクト
 
+    /// <summary>
+    /// Updateが最初に呼び出される前のフレームで呼び出される
+    /// </summary>
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag(TagName.Player);
+        player = PlayerAccessor.Inst.GetPlayer();
     }
 
     /// <summary>

@@ -36,7 +36,7 @@ public class HookTarget : MonoBehaviour
     void OnFoundTargetHook()
     {
         gameObject.SetActive(true);
-        player = player ?? GameObject.FindGameObjectWithTag(TagName.Player).GetComponent<Player>();
+        player = player ?? PlayerAccessor.Inst.GetPlayer().GetComponent<Player>();
         targetPos = player.TargetHookPosition;
         FixTargetHook();
     }

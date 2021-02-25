@@ -107,6 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0d48efd18654c9686bfa9fcb6011db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  getDiamondEffect: {fileID: 1473356317183098, guid: 5b786d4844e8f47a8980535760345ffa,
+    type: 3}
 --- !u!1001 &5787708196636859273
 PrefabInstance:
   m_ObjectHideFlags: 0

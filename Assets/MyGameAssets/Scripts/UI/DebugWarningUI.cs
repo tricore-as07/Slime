@@ -23,7 +23,7 @@ public class DebugWarningUI : MonoBehaviour
         List<GameObject> hookObjectList = new List<GameObject>();
         hookObjectList.AddRange(GameObject.FindGameObjectsWithTag(TagName.HookPoint));
         // 必要なものがSerializeFieldに設定されていなければキャッシュする
-        player = player ?? GameObject.FindGameObjectWithTag(TagName.Player);
+        player = player ?? PlayerAccessor.Inst.GetPlayer();
         text = text ?? GetComponent<Text>();
         // 表示する文字列を空にしておく
         text.text = "";

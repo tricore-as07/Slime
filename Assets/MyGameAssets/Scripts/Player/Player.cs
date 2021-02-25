@@ -46,6 +46,8 @@ public partial class Player : MonoBehaviour
     [SerializeField] PhysicMaterial physicMaterial = default;                   //物理特性を設定するマテリアル
     [SerializeField] GameObject gameOverEffectBySpine = default;                //棘でゲームオーバーになった時のエフェクトオブジェクト
     [SerializeField] GameObject gameOverEffectByFlame = default;                //炎でゲームオーバーになった時のエフェクトオブジェクト
+    [SerializeField] GameObject freezeEffect = default;                         //凍る時のエフェクトオブジェクト
+    [SerializeField] GameObject collisionEffect = default;                      //衝突した時に表示するオブジェクト
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -156,6 +158,7 @@ public partial class Player : MonoBehaviour
         isFrozen = true;
         playerIce.SetActive(true);
         physicMaterial.dynamicFriction = playerSettingsData.FrozenPlayerFriction;
+        Instantiate(freezeEffect, transform.parent);
         // 氷を溶かしている途中だったら
         if (meltIceCoroutine != null)
         {
@@ -223,6 +226,7 @@ public partial class Player : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         stateMachine.OnCollisionEnter(collision);
+        CreateCollisionEffect(collision);
     }
 
     /// <summary>
@@ -350,5 +354,22 @@ public partial class Player : MonoBehaviour
         var obj = Instantiate(gameOverEffectByFlame, transform.parent);
         obj.transform.position = transform.position;
         playerLooks.SetActive(false);
+    }
+
+    /// <summary>
+    /// 衝突エフェクトを生成する
+    /// </summary>
+    /// <param name="collision">衝突情報クラス</param>
+    void CreateCollisionEffect(Collision collision)
+    {
+        foreach(var contact in collision.contacts)
+        {
+            if(contact.otherCollider.tag == TagName.Ground)
+            {
+                var obj = Instantiate(collisionEffect,transform.parent);
+                obj.transform.position = contact.point;
+                obj.transform.up = contact.normal;
+            }
+        }
     }
 }

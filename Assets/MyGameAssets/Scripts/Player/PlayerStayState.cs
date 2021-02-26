@@ -42,6 +42,7 @@ public partial class Player : MonoBehaviour
         protected internal override void Exit()
         {
             Context.rigidbody.useGravity = true;
+            Context.trailRenderer.enabled = true;
         }
     }
 }

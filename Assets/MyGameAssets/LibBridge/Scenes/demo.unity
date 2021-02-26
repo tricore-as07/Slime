@@ -423,7 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef79f8545565bf14ba0028a1ea869f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: Level_01
+  SceneName: sample_03
   FadeType: 2
   FadeColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &681600935

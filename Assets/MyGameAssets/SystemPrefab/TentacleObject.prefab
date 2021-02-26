@@ -107,3 +107,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mesh: {fileID: 5612428841440466439}
+  effect: {fileID: 1489431029902184, guid: 054217ebc963b4925a169abcc2268662, type: 3}

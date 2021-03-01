@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2800430185477429870}
   m_Layer: 0
-  m_Name: WindGimmik1_8
+  m_Name: WindGimmik1_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,8 +155,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2800430186537247301}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.65, z: 0}
-  m_LocalScale: {x: 1, y: 8, z: 1}
+  m_LocalPosition: {x: 0, y: 4.1, z: 0}
+  m_LocalScale: {x: 1, y: 7, z: 1}
   m_Children:
   - {fileID: 3602832327923848034}
   m_Father: {fileID: 2800430185477429870}
@@ -265,7 +265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4851578701543438, guid: 9efac3ef75f3a054f93c32ffa91c05e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.552
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4851578701543438, guid: 9efac3ef75f3a054f93c32ffa91c05e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -328,7 +328,7 @@ PrefabInstance:
     - target: {fileID: 198468570143173514, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 3.5
+      value: 8.1
       objectReference: {fileID: 0}
     - target: {fileID: 198468570143173514, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
         type: 3}
@@ -348,7 +348,7 @@ PrefabInstance:
     - target: {fileID: 198468570143173514, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
         type: 3}
       propertyPath: VelocityModule.y.scalar
-      value: 9
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 198468570143173514, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
         type: 3}
@@ -378,7 +378,17 @@ PrefabInstance:
     - target: {fileID: 198468570143173514, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
         type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
-      value: 3
+      value: 7.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 198468570143173514, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
+        type: 3}
+      propertyPath: simulationSpeed
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 198468570143173514, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
+        type: 3}
+      propertyPath: prewarm
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 199395434932147012, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
         type: 3}

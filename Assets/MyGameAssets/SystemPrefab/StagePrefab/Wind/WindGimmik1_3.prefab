@@ -265,7 +265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4851578701543438, guid: 9efac3ef75f3a054f93c32ffa91c05e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.52
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4851578701543438, guid: 9efac3ef75f3a054f93c32ffa91c05e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -328,7 +328,7 @@ PrefabInstance:
     - target: {fileID: 198468570143173514, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 1.8
+      value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 198468570143173514, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
         type: 3}
@@ -348,7 +348,7 @@ PrefabInstance:
     - target: {fileID: 198468570143173514, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
         type: 3}
       propertyPath: VelocityModule.y.scalar
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 198468570143173514, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
         type: 3}
@@ -378,7 +378,17 @@ PrefabInstance:
     - target: {fileID: 198468570143173514, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
         type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
-      value: 1.6
+      value: 3.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198468570143173514, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
+        type: 3}
+      propertyPath: simulationSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198468570143173514, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
+        type: 3}
+      propertyPath: prewarm
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 199395434932147012, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
         type: 3}

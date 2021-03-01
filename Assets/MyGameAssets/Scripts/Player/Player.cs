@@ -305,7 +305,6 @@ public partial class Player : MonoBehaviour
         if (Input.touchCount > 0)
 #endif
         {
-            Debug.Log("入力!!!!!!!!!!!!");
             return true;
         }
         return false;
@@ -329,13 +328,11 @@ public partial class Player : MonoBehaviour
             {
                 // 前にタップされた時間を記録してtrueを返す
                 tapMomentTime = Time.realtimeSinceStartup;
-                Debug.Log("入力!!!!!!!!!!!!");
                 return true;
             }
             // 前にタップされた時間から経った時間が誤差許容時間なら
             if (Time.realtimeSinceStartup - tapMomentTime < playerSettingsData.TapErrorToleranceTime)
             {
-                Debug.Log("入力!!!!!!!!!!!!");
                 return true;
             }
             // 誤差許容時間以上の時間が経っていたなら

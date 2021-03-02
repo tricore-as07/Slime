@@ -243,7 +243,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5744727527091027398}
   m_Layer: 0
-  m_Name: FlameGimick1_1
+  m_Name: IceGimick1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -430,33 +430,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198129363833666376, guid: aafad909270f83046bc79c06fe30321a,
         type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.r
-      value: 0.30980393
-      objectReference: {fileID: 0}
-    - target: {fileID: 198129363833666376, guid: aafad909270f83046bc79c06fe30321a,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 198129363833666376, guid: aafad909270f83046bc79c06fe30321a,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key2.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 198129363833666376, guid: aafad909270f83046bc79c06fe30321a,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key2.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198129363833666376, guid: aafad909270f83046bc79c06fe30321a,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key3.b
-      value: 0.49411765
-      objectReference: {fileID: 0}
-    - target: {fileID: 198129363833666376, guid: aafad909270f83046bc79c06fe30321a,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key3.r
-      value: 0
+      propertyPath: ColorModule.gradient.maxGradient.ctime1
+      value: 11951
       objectReference: {fileID: 0}
     - target: {fileID: 198841700523963682, guid: aafad909270f83046bc79c06fe30321a,
         type: 3}

@@ -15,7 +15,9 @@ public class StageSelectButton : MonoBehaviour
     [SerializeField] Image image = default;                     //ボタンのイメージ
     [SerializeField] TextMeshProUGUI text = default;            //ステージ数を表示するテキスト
 
-
+    /// <summary>
+    /// スクリプトのインスタンスがロードされたときに呼び出される
+    /// </summary>
     private void Awake()
     {
         stageNum = transform.parent.GetSiblingIndex() + 1;

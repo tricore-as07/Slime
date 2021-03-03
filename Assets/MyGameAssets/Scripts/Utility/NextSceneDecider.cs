@@ -7,7 +7,7 @@ using VMUnityLib;
 public class NextSceneDecider : MonoBehaviour
 {
     [SerializeField] SceneChanger sceneChanger = default;       //シーンを切り替える際に使用するクラス
-    [SerializeField] SceneList sceneList = default;             //シーンのリスト
+    [SerializeField] SceneSettingData sceneList = default;      //シーンのリスト
 
     /// <summary>
     /// オブジェクトがアクティブになった時に呼ばれる

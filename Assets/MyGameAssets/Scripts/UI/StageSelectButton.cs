@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using VMUnityLib;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// ステージを選択するボタンのスクリプト
@@ -12,13 +13,13 @@ public class StageSelectButton : MonoBehaviour
     [SerializeField] SceneSettingData sceneList = default;      //シーンのリスト
     [SerializeField] SceneChanger sceneChanger = default;       //シーンを切り替える際に使用するクラス
     [SerializeField] Image image = default;                     //ボタンのイメージ
+    [SerializeField] TextMeshProUGUI text = default;            //ステージ数を表示するテキスト
 
-    /// <summary>
-    /// Updateが最初に呼び出される前のフレームで呼び出される
-    /// </summary>
-    void Start()
+
+    private void Awake()
     {
-        stageNum = transform.GetSiblingIndex() + 1;
+        stageNum = transform.parent.GetSiblingIndex() + 1;
+        text.text = stageNum.ToString();
     }
 
     /// <summary>
@@ -34,10 +35,12 @@ public class StageSelectButton : MonoBehaviour
         if (nowSceneName == nextSceneName)
         {
             image.color = sceneList.SelectColor;
+            text.color = sceneList.NonSelectColor;
         }
         else
         {
             image.color = sceneList.NonSelectColor;
+            text.color = sceneList.SelectColor;
         }
     }
 

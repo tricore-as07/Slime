@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultSceneList
   m_EditorClassIdentifier: 
   scenes:
-  - Level_01
+  - Template
   - Level_02
   - Level_03
   - Level_04

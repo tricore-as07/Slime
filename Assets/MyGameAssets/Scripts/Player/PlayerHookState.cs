@@ -51,8 +51,7 @@ public partial class Player : MonoBehaviour
             // フックを切断するなら
             if (isDisconnectHook)
             {
-                // フックを切断して、状態を自由落下に変化させる
-                joint.connectedBody = null;
+                // 状態を自由落下に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.FreeFall);
             }
         }
@@ -62,6 +61,8 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Exit()
         {
+            // フックを切断する
+            joint.connectedBody = null;
             Context.playerTentacle.ShrinkTentacle();
         }
 

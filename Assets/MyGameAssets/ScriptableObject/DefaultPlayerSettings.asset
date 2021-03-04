@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpPower: 650
   jumpPowerByIceConditionFactor: 0.5
-  meltIceTime: 1
+  meltIceTime: 0.5
   extendTentacleTime: 0.2
   shrinkTentacleTime: 0.3
   normalPlayerFriction: 0.3

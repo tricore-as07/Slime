@@ -48,6 +48,7 @@ public partial class Player : MonoBehaviour
     [SerializeField] GameObject gameOverEffectByFlame = default;                //炎でゲームオーバーになった時のエフェクトオブジェクト
     [SerializeField] GameObject freezeEffect = default;                         //凍る時のエフェクトオブジェクト
     [SerializeField] GameObject collisionEffect = default;                      //衝突した時に表示するオブジェクト
+    [SerializeField] TrailRenderer trailRenderer = default;                     //トレールレンダラー
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される
@@ -93,6 +94,7 @@ public partial class Player : MonoBehaviour
     /// </summary>
     void Restart()
     {
+        trailRenderer.enabled = false;
         // プレイヤーのポジションをスタート地点に戻す
         transform.position = startPosition;
         // プレイヤーのRigidbodyのVelocityを0にする
@@ -105,6 +107,7 @@ public partial class Player : MonoBehaviour
         playerLooks.SetActive(true);
         meltIceCoroutine = null;
         physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
+        stateMachine.SendEvent((int)PlayerStateEventId.Stay);
     }
 
     /// <summary>
@@ -116,19 +119,24 @@ public partial class Player : MonoBehaviour
         stateMachine = new PlayerStateMachine<Player>(this);   // 自身がコンテキストになるので自身のインスタンスを渡す
         // 静止状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerStayState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
+        stateMachine.AddTransition<PlayerStayState, PlayerStayState>((int)PlayerStateEventId.Stay);
         // 通常状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerNormalState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         stateMachine.AddTransition<PlayerNormalState, PlayerDoNotAcceptInputState>((int)PlayerStateEventId.DoNotAcceptInput);
+        stateMachine.AddTransition<PlayerNormalState, PlayerStayState>((int)PlayerStateEventId.Stay);
         // フックを使用している状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerHookState, PlayerFreeFallState>((int)PlayerStateEventId.FreeFall);
         stateMachine.AddTransition<PlayerHookState, PlayerNormalState>((int)PlayerStateEventId.Normal);
         stateMachine.AddTransition<PlayerHookState, PlayerDoNotAcceptInputState>((int)PlayerStateEventId.DoNotAcceptInput);
+        stateMachine.AddTransition<PlayerHookState, PlayerStayState>((int)PlayerStateEventId.Stay);
         // 自由落下している状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerFreeFallState, PlayerHookState>((int)PlayerStateEventId.Hook);
         stateMachine.AddTransition<PlayerFreeFallState, PlayerNormalState>((int)PlayerStateEventId.Normal);
         stateMachine.AddTransition<PlayerFreeFallState, PlayerDoNotAcceptInputState>((int)PlayerStateEventId.DoNotAcceptInput);
+        stateMachine.AddTransition<PlayerFreeFallState, PlayerStayState>((int)PlayerStateEventId.Stay);
         // 入力を受け付けない状態からの状態遷移の記述
         stateMachine.AddTransition<PlayerDoNotAcceptInputState, PlayerStayState>((int)PlayerStateEventId.Stay);
+        //stateMachine.AddAnyTransition<PlayerStayState>((int)PlayerStateEventId.Stay);
         // 起動ステートを設定（起動ステートは PlayerNormalState）
         stateMachine.SetStartState<PlayerStayState>();
     }
@@ -139,6 +147,7 @@ public partial class Player : MonoBehaviour
     void Update()
     {
         stateMachine.Update();
+        transform.position = new Vector3(transform.position.x,transform.position.y,0);
     }
 
     /// <summary>
@@ -188,6 +197,9 @@ public partial class Player : MonoBehaviour
         // 設定されてる氷が溶ける時間待つ
         yield return new WaitForSeconds(meltIceTime);
         // 氷状態を解除して、溶かしている最中をやめる
+        // エフェクトを作成
+        var obj = Instantiate(gameOverEffectByFlame, transform.parent);
+        obj.transform.position = transform.position;
         isFrozen = false;
         playerIce.SetActive(false);
         meltIceCoroutine = null;
@@ -339,10 +351,14 @@ public partial class Player : MonoBehaviour
     /// </summary>
     public void OnGameOverBySpine()
     {
-        // エフェクトを作成
-        var obj = Instantiate(gameOverEffectBySpine,transform.parent);
-        obj.transform.position = transform.position;
-        playerLooks.SetActive(false);
+        if(playerLooks.activeSelf)
+        {
+            // エフェクトを作成
+            var obj = Instantiate(gameOverEffectBySpine, transform.parent);
+            obj.transform.position = transform.position;
+            playerLooks.SetActive(false);
+            trailRenderer.enabled = false;
+        }
     }
 
     /// <summary>
@@ -354,6 +370,7 @@ public partial class Player : MonoBehaviour
         var obj = Instantiate(gameOverEffectByFlame, transform.parent);
         obj.transform.position = transform.position;
         playerLooks.SetActive(false);
+        trailRenderer.enabled = false;
     }
 
     /// <summary>

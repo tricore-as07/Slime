@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scenes:
   - Template
-  - Level_02
-  - Level_03
+  - Template 1
+  - Template 2
   - Level_04
   - Level_05
   - Level_06

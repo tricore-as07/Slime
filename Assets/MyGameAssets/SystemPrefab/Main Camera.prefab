@@ -208,7 +208,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.1462264, g: 0.66252923, b: 1, a: 0}
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -261,7 +261,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b8c96e2cdc154e848a3d9fe62464d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraTargets: []
+  CameraTargets:
+  - TargetTransform: {fileID: 0}
+    TargetInfluenceH: 1
+    TargetInfluenceV: 1
+    TargetOffset: {x: 0, y: 0}
   CenterTargetOnStart: 1
   Axis: 0
   UpdateType: 0
@@ -270,7 +274,7 @@ MonoBehaviour:
   FollowVertical: 1
   VerticalFollowSmoothness: 0.2
   OffsetX: 0.4
-  OffsetY: 0
+  OffsetY: 0.1
   IsRelativeOffset: 1
   ZoomWithFOV: 0
   IgnoreTimeScale: 0

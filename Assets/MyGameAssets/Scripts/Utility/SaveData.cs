@@ -9,7 +9,7 @@ public class SaveData
 {
     public StageSaveData stageSaveData = default;                               //ステージのセーブデータ
     public int clearStageNum = 0;                                               //クリアしたステージ数
-    public SkinId playerSkinId = SkinId.None;                                   //プレイヤーのスキンのID
+    public SkinId playerSkinId = SkinId.Normal;                                 //プレイヤーのスキンのID
     public bool isPlaySound = true;                                             //サウンドを鳴らすかどうか
     public UsedSkinData usedSkinData = default;                                 //使用したことのあるスキンのデータ
 

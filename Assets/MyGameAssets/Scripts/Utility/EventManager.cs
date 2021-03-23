@@ -30,6 +30,13 @@ public enum SubjectType
     OnChangeClearStageNum,  // クリアしたステージ数が更新された時のイベント
     OnOpenRecommend,        // おすすめゲームを開いた時のイベント
     OnCloseRecommend,       // おすすめゲームを閉じた時のイベント
+    OnJump,                 // ジャンプした時のイベント
+    OnGetDiamond,           // ダイヤモンドをゲットした時のイベント
+    OnFreeze,               // 凍った時のイベント
+    OnHook,                 // フックを使った時のイベント
+    OnFireDead,             // 炎に当たって死んだ時のイベント
+    OnLanding,              // 着地した時のイベント
+    OnWind,                 // 風に吹かれた時のイベント
 }
 
 /// <summary>

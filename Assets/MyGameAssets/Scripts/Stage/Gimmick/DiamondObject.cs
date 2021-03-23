@@ -31,6 +31,7 @@ public class DiamondObject : MonoBehaviour
                 var obj = Instantiate(getDiamondEffect, transform.parent);
                 obj.transform.position = transform.position;
             }
+            EventManager.Inst.InvokeEvent(SubjectType.OnGetDiamond);
         }
     }
 }

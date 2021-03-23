@@ -40,6 +40,7 @@ public partial class Player : MonoBehaviour
                 joint.transform.position - new Vector3(0f,joint.transform.localScale.y * 0.5f),
                 Context.playerLooks.GetComponent<MeshRenderer>().material,
                 Context.playerSettingsData);
+            EventManager.Inst.InvokeEvent(SubjectType.OnHook);
         }
 
         /// <summary>

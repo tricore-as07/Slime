@@ -16,6 +16,7 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Enter()
         {
+            EventManager.Inst.InvokeEvent(SubjectType.OnLanding);
             stretch = Context.sensor.m_params.fx.stretch;
             Context.sensor.m_params.fx.stretch = 0f;
         }
@@ -35,6 +36,8 @@ public partial class Player : MonoBehaviour
                 Context.rigidbody.AddForce(Vector3.up * jumpPower);
                 // 自由落下している状態に変化させる
                 stateMachine.SendEvent((int)PlayerStateEventId.FreeFall);
+                // ジャンプのイベントを発行
+                EventManager.Inst.InvokeEvent(SubjectType.OnJump);
             }
         }
 

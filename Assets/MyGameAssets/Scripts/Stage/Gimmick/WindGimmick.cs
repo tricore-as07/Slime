@@ -20,6 +20,19 @@ public class WindGimmick : MonoBehaviour
     }
 
     /// <summary>
+    /// ２つのColliderが衝突した時に呼び出される（片方はisTriggerがtrueである時）
+    /// </summary>
+    /// <param name="other">この衝突に含まれるその他のCollider</param>
+    private void OnTriggerEnter(Collider other)
+    {
+        // 衝突したオブジェクトがプレイヤーなら
+        if (other.gameObject.tag == TagName.Player)
+        {
+            EventManager.Inst.InvokeEvent(SubjectType.OnWind);
+        }
+    }
+
+    /// <summary>
     /// ２つのColliderが衝突している最中に呼び出される（片方はisTriggerがtrueである時）
     /// </summary>
     /// <param name="other">この衝突に含まれるその他のCollider</param>

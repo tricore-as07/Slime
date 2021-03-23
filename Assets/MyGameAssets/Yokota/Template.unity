@@ -1482,6 +1482,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 654874888}
     m_Modifications:
+    - target: {fileID: 436774022499785067, guid: 82c16718f879146b3b81a88fdbbd0ef7,
+        type: 3}
+      propertyPath: audioList.Array.data[0].eventType
+      value: 21
+      objectReference: {fileID: 0}
     - target: {fileID: 6206027296667166888, guid: 82c16718f879146b3b81a88fdbbd0ef7,
         type: 3}
       propertyPath: m_Name
@@ -1717,7 +1722,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1667534
+  m_Name: pb_Mesh-1864
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

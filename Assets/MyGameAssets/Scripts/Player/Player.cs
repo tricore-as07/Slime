@@ -174,6 +174,10 @@ public partial class Player : MonoBehaviour
             StopCoroutine(meltIceCoroutine);
             meltIceCoroutine = null;
         }
+        else
+        {
+            EventManager.Inst.InvokeEvent(SubjectType.OnFreeze);
+        }
     }
 
     /// <summary>
@@ -371,6 +375,7 @@ public partial class Player : MonoBehaviour
         obj.transform.position = transform.position;
         playerLooks.SetActive(false);
         trailRenderer.enabled = false;
+        EventManager.Inst.InvokeEvent(SubjectType.OnFireDead);
     }
 
     /// <summary>

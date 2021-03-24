@@ -1696,12 +1696,12 @@ PrefabInstance:
     - target: {fileID: 6564490743183100469, guid: 8c2aa3630ea524e728e44d3556716a9c,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 15
+      value: 37.85
       objectReference: {fileID: 0}
     - target: {fileID: 6564490743183100469, guid: 8c2aa3630ea524e728e44d3556716a9c,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 3
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6564490743183100472, guid: 8c2aa3630ea524e728e44d3556716a9c,
         type: 3}

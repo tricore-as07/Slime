@@ -10,6 +10,7 @@ public class SkinManager : SingletonMonoBehaviour<SkinManager>
     [SerializeField] PlayerSkinData playerSkinData = default;   //プレイヤーのスキンデータ
     Dictionary<SkinId, GameObject> skinDictionary;              //スキンデータをDictionaryに変換するためのもの
     SkinId nowSkinId;                                           //今のスキンのID
+    public SkinId NowSkinID => nowSkinId;                       //外部に公開するためのプロパティ
 
     /// <summary>
     /// スクリプトのインスタンスがロードされたときに呼び出される

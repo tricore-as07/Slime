@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using I2.Loc;
 using TMPro;
+using UniRx;
 
 [RequireComponent(typeof(Button))]
 /// <summary>
@@ -15,6 +16,7 @@ public class SkinSelectButton : MonoBehaviour
     [SerializeField] int unlockNum = default;                   //開放する際の条件となる数
     [SerializeField] GameObject lockImage = default;            //ロック状態の時に表示するイメージ画像
     [SerializeField] GameObject newImage = default;             //使用されていない時に表示するイメージ画像
+    [SerializeField] GameObject selectImage = default;          //選択されているスキンに表示するイメージ画像
     [SerializeField] TextMeshProUGUI unlockTermsText = default; //アンロック条件を表示するテキスト
     bool isUnlock;                                              //アンロックされているかどうか
 
@@ -53,6 +55,9 @@ public class SkinSelectButton : MonoBehaviour
                     break;
                 }
         }
+        //現在のスキンとこのUIのスキンが一致している時は選択時UIをアクティブに
+        selectImage.SetActive(SkinManager.Inst.NowSkinID == id);
+        EventManager.Inst.Subscribe(SubjectType.OnChangeSkin,Unit => selectImage.SetActive(SkinManager.Inst.NowSkinID == id),gameObject);
     }
 
     /// <summary>

@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
 using VMUnityLib;
 
-// 必要なコンポーネントを定義
-[RequireComponent(typeof(AudioSource))]
-
 /// <summary>
 /// サウンドを管理する
 /// </summary>
 public class SoundManager : SingletonMonoBehaviour<SoundManager>
 {
-    [SerializeField] AudioSource audioSource = default;         //オーディオソースコンポーネント
     [SerializeField] GameObject soundOnUiObject = default;      //サウンドオンの時のUIオブジェクト
     [SerializeField] GameObject soundOffUiObject = default;     //サウンドオフの時のUIオブジェクト
     public bool isPlaySound { get; private set; }               //音を鳴らすかどうか
@@ -31,17 +27,5 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     public void ChangeIsPlaySound(bool isPlaySound)
     {
         this.isPlaySound = isPlaySound;
-    }
-
-    /// <summary>
-    /// サウンドを再生する
-    /// </summary>
-    /// <param name="audioClip">再生するサウンド</param>
-    public void PlayOneShot(AudioClip audioClip)
-    {
-        if(isPlaySound)
-        {
-            audioSource?.PlayOneShot(audioClip);
-        }
     }
 }

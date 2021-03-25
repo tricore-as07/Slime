@@ -18,7 +18,13 @@ public class SoundPlayer : MonoBehaviour
         //各オーディオとイベントを設定していく
         foreach(var audio in audioList)
         {
-            EventManager.Inst.Subscribe(audio.eventType, Unit => audio.audioSource.Play(),gameObject);
+            EventManager.Inst.Subscribe(audio.eventType, Unit =>
+            {
+                if(SoundManager.Inst.isPlaySound)
+                {
+                    audio.audioSource.Play();
+                }
+            },gameObject);
         }
     }
 }

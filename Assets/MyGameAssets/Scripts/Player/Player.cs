@@ -108,6 +108,10 @@ public partial class Player : MonoBehaviour
         playerLooks.SetActive(true);
         meltIceCoroutine = null;
         physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
+        if (sensor.m_envelopRadius == 0)
+        {
+            sensor.m_envelopRadius = saveSensorRadius;
+        }
         stateMachine.SendEvent((int)PlayerStateEventId.Stay);
     }
 

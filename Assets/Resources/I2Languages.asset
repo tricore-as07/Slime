@@ -139,6 +139,16 @@ MonoBehaviour:
       - "\u6536\u96C6{0}\u9846\u947D\u77F3"
       Flags: 00000000
       Languages_Touch: []
+    - Term: Recommend Game
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u304A\u3059\u3059\u3081\u30B2\u30FC\u30E0"
+      - Recommend Game
+      - "\u63A8\u8350\u6E38\u620F"
+      - "\u63A8\u85A6\u904A\u6232"
+      Flags: 00000000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 

@@ -481,6 +481,11 @@ PrefabInstance:
       propertyPath: m_RenderAlignment
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 199395434932147012, guid: 9efac3ef75f3a054f93c32ffa91c05e7,
+        type: 3}
+      propertyPath: m_MotionVectors
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9efac3ef75f3a054f93c32ffa91c05e7, type: 3}
 --- !u!4 &3602832327923848034 stripped

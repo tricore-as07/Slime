@@ -37,6 +37,7 @@ public partial class Player : MonoBehaviour
     bool isGamePlay;                                                            //ゲームプレイ中かどうか
     GameObject playerLooks = default;                                           //プレイヤーの見た目のオブジェクト
     VertExmotionSensorBase sensor = default;                                    //プレイヤーのVertMotion用センサー
+    float saveSensorRadius = 0f;                                                //センサーの値を保存しておくための変数
 
     // インスペクターに表示する変数
     [SerializeField] new Rigidbody rigidbody = default;                         //自分のRigidbody
@@ -168,6 +169,12 @@ public partial class Player : MonoBehaviour
         playerIce.SetActive(true);
         physicMaterial.dynamicFriction = playerSettingsData.FrozenPlayerFriction;
         Instantiate(freezeEffect, transform.parent);
+        if(sensor.m_envelopRadius != 0)
+        {
+            saveSensorRadius = sensor.m_envelopRadius;
+            sensor.m_envelopRadius = 0;
+        }
+        
         // 氷を溶かしている途中だったら
         if (meltIceCoroutine != null)
         {
@@ -208,6 +215,7 @@ public partial class Player : MonoBehaviour
         playerIce.SetActive(false);
         meltIceCoroutine = null;
         physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
+        sensor.m_envelopRadius = saveSensorRadius;
     }
 
     /// <summary>

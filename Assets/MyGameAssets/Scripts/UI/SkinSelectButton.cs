@@ -73,7 +73,10 @@ public class SkinSelectButton : MonoBehaviour
         // まだスキンを使っていなかったら
         if(!SaveDataManager.Inst.GetIsUsedSkin(id))
         {
-            newImage.SetActive(isUnlock);
+            if (newImage != null)
+            {
+                newImage.SetActive(isUnlock);
+            }
         }
     }
 
@@ -90,7 +93,10 @@ public class SkinSelectButton : MonoBehaviour
         // まだスキンを使っていなかったら
         if (!SaveDataManager.Inst.GetIsUsedSkin(id))
         {
-            newImage.SetActive(isUnlock);
+            if(newImage != null)
+            {
+                newImage.SetActive(isUnlock);
+            }
         }
     }
 
@@ -104,7 +110,10 @@ public class SkinSelectButton : MonoBehaviour
         {
             SkinManager.Inst.OnSelectSkin(id);
             unlockTermsText.text = "";
-            newImage.SetActive(false);
+            if (newImage != null)
+            {
+                newImage.SetActive(false);
+            }
             SaveDataManager.Inst.SaveUsedSkin(id);
         }
         else

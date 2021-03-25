@@ -37,6 +37,8 @@ public enum SubjectType
     OnFireDead,             // 炎に当たって死んだ時のイベント
     OnLanding,              // 着地した時のイベント
     OnWind,                 // 風に吹かれた時のイベント
+    OnEvaporation,          // 蒸発した時のイベント
+    OnRupture,              // 破裂した時のイベント
 }
 
 /// <summary>

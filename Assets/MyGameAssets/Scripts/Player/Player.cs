@@ -220,6 +220,7 @@ public partial class Player : MonoBehaviour
         meltIceCoroutine = null;
         physicMaterial.dynamicFriction = playerSettingsData.NormalPlayerFriction;
         sensor.m_envelopRadius = saveSensorRadius;
+        EventManager.Inst.InvokeEvent(SubjectType.OnEvaporation);
     }
 
     /// <summary>
@@ -374,6 +375,7 @@ public partial class Player : MonoBehaviour
             obj.transform.position = transform.position;
             playerLooks.SetActive(false);
             trailRenderer.enabled = false;
+            EventManager.Inst.InvokeEvent(SubjectType.OnRupture);
         }
     }
 
@@ -387,7 +389,7 @@ public partial class Player : MonoBehaviour
         obj.transform.position = transform.position;
         playerLooks.SetActive(false);
         trailRenderer.enabled = false;
-        EventManager.Inst.InvokeEvent(SubjectType.OnFireDead);
+        EventManager.Inst.InvokeEvent(SubjectType.OnEvaporation);
     }
 
     /// <summary>

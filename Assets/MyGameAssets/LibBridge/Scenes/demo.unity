@@ -315,7 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterTweenKind: 0
   autoClose: 1
-  autoCloseTime: 3
+  autoCloseTime: 2
   onFinishAutoClose:
     m_PersistentCalls:
       m_Calls:

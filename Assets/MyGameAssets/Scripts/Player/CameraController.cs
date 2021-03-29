@@ -17,15 +17,23 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         // 必要な情報のキャッシュ
-        player = PlayerAccessor.Inst.GetPlayer();
         cameraOffsetX = proCamera.OffsetX;
         cameraOffsetY = proCamera.OffsetY;
         // イベントの登録
         EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => OnGameOver(), gameObject);
-        EventManager.Inst.Subscribe(SubjectType.OnHome, Unit => OnRetry(), gameObject);
         EventManager.Inst.Subscribe(SubjectType.OnRetry, Unit => OnRetry(), gameObject);
         // カメラのターゲットにプレイヤーを追加
-        proCamera.AddCameraTarget(player.transform);
+    }
+
+    /// <summary>
+    /// Updateの後に呼ばれる
+    /// </summary>
+    void LateUpdate()
+    {
+        if(proCamera.CameraTargets.Count == 0 && proCamera.OffsetX != 0f && proCamera.OffsetY != 0f)
+        {
+            proCamera.AddCameraTarget(PlayerAccessor.Inst.GetPlayer().transform);
+        }
     }
 
     /// <summary>
@@ -46,7 +54,7 @@ public class CameraController : MonoBehaviour
     void OnRetry()
     {
         // カメラのターゲットにプレイヤーを追加
-        proCamera.AddCameraTarget(player.transform);
+        proCamera.AddCameraTarget(PlayerAccessor.Inst.GetPlayer().transform);
         // カメラのオフセットを設定
         proCamera.OffsetX = cameraOffsetX;
         proCamera.OffsetY = cameraOffsetY;

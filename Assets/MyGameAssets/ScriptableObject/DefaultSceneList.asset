@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: DefaultSceneList
   m_EditorClassIdentifier: 
   scenes:
-  - Level_01
-  - Level_02
-  - Level_03
+  - Template
+  - Template 1
+  - Template 2
   - Level_04
   - Level_05
   - Level_06
@@ -31,3 +31,5 @@ MonoBehaviour:
   - Level_16
   - Level_17
   - Level_19
+  selectColor: {r: 1, g: 1, b: 1, a: 1}
+  nonSelectColor: {r: 1, g: 0.33333334, b: 0.10980392, a: 1}

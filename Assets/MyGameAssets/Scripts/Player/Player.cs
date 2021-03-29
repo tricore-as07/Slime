@@ -379,6 +379,12 @@ public partial class Player : MonoBehaviour
     /// <param name="collision">衝突情報クラス</param>
     void CreateCollisionEffect(Collision collision)
     {
+        //プレイヤーがゲームオーバー状態で見た目のアクティブがfalseの場合
+        if(playerLooks.activeSelf == false)
+        {
+            //早期リターン
+            return;
+        }
         foreach(var contact in collision.contacts)
         {
             if(contact.otherCollider.tag == TagName.Ground)

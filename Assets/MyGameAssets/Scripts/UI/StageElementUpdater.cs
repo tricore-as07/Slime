@@ -23,7 +23,7 @@ public class StageElementUpdater : MonoBehaviour
     public void UpdateStageElement()
     {
         // ダイヤモンドの獲得情報をセーブデータから取得する
-        DiamondAcquisitionData diamondAcquisitionData = SaveDataManager.Inst.GetDiamondAcquisitionData(stageSelectButton.StageNum);
+        DiamondAcquisitionData diamondAcquisitionData = SaveDataManager.Inst.GetDiamondAcquisitionData(stageSelectButton.StageNum + 1);
         for (int i = 0; i < diamondAcquisitionData.isDiamondAcquisitionList.Count; i++)
         {
             // ダイヤモンドの数だけ取得情報を表示するUIをアクティブにする

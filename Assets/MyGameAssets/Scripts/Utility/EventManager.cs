@@ -27,7 +27,9 @@ public enum SubjectType
     OnCloseSkins,           // スキン選択UIが閉じられた時のイベント
     OnChangeSkin,           // スキンが変更された時のイベント
     OnChangeDiamondNum,     // 取得しているダイヤモンドの数が更新された時のイベント
-    OnChangeClearStageNum   // クリアしたステージ数が更新された時のイベント
+    OnChangeClearStageNum,  // クリアしたステージ数が更新された時のイベント
+    OnOpenRecommend,        // おすすめゲームを開いた時のイベント
+    OnCloseRecommend,       // おすすめゲームを閉じた時のイベント
 }
 
 /// <summary>

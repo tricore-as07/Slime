@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// それぞれのステージの要素（ダイヤモンド）を更新する
@@ -8,6 +9,7 @@ public class StageElementUpdater : MonoBehaviour
 {
     [SerializeField] List<DiamondStatus> itemList;              //アイテムのリスト
     [SerializeField] StageSelectButton stageSelectButton;       //ステージ選択ボタン
+    [SerializeField] Button button = default;                   //ボタン
 
     /// <summary>
     /// Updateが最初に呼び出される前のフレームで呼び出される
@@ -31,5 +33,14 @@ public class StageElementUpdater : MonoBehaviour
             // ダイヤモンドが取得されているかどうかを更新する
             itemList[i].UpdateColorByStatus(diamondAcquisitionData.isDiamondAcquisitionList[i]);
         }
+    }
+
+    /// <summary>
+    /// インタラクトを切り替える
+    /// </summary>
+    /// <param name="isIntaractable">インタラクトがアクティブかどうか</param>
+    public void SwitchInteractable(bool isIntaractable)
+    {
+        button.interactable = isIntaractable;
     }
 }

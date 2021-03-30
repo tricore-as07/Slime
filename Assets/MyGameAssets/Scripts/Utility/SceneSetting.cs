@@ -17,7 +17,9 @@ public class SceneSetting : MonoBehaviour
         // ホーム画面のイベントを呼ぶ
         EventManager.Inst.InvokeEvent(SubjectType.OnHome);   
         // ゲームクリアしたらクリアしたステージ数をセーブする
-        EventManager.Inst.Subscribe(SubjectType.OnGameClear,Unit => SaveDataManager.Inst.SaveClearStageNum(stageNumber));
+        EventManager.Inst.Subscribe(SubjectType.OnGameClear,Unit => SaveDataManager.Inst.SaveClearStageNum(stageNumber),gameObject);
+        EventManager.Inst.Subscribe(SubjectType.OnSkipStage,Unit => SaveDataManager.Inst.SaveClearStageNum(stageNumber), gameObject);
+        EventManager.Inst.Subscribe(SubjectType.StartFadeOut,Unit => Destroy(gameObject), gameObject);
         // シーンのアンロードイベントを登録する
         SceneManager.Instance.SubscribeSceneUnloadEvent();
     }

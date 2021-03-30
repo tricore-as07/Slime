@@ -41,8 +41,20 @@ public class StageSelectButton : MonoBehaviour
         }
         else
         {
-            image.color = sceneList.NonSelectColor;
-            text.color = sceneList.SelectColor;
+            // クリアしたステージ数を取得
+            int clearStageNum = SaveDataManager.Inst.GetClearStageNum();
+            // 開放されているステージの時
+            if (StageNum <= clearStageNum + 1)
+            {
+                image.color = sceneList.NonSelectColor;
+                text.color = sceneList.SelectColor;
+            }
+            // 開放されていないステージの時
+            else
+            {
+                image.color = sceneList.LockButtonColor;
+                text.color = sceneList.LockTextColor;
+            }
         }
     }
 

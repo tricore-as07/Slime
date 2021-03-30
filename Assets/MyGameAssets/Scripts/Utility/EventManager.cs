@@ -39,6 +39,7 @@ public enum SubjectType
     OnWind,                 // 風に吹かれた時のイベント
     OnEvaporation,          // 蒸発した時のイベント
     OnRupture,              // 破裂した時のイベント
+    OnSkipStage,            // ステージをスキップした時のイベント
 }
 
 /// <summary>

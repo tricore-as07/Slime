@@ -8,6 +8,7 @@ using VMUnityLib;
 public class LevelContntManager : SingletonMonoBehaviour<LevelContntManager>
 {
     [SerializeField] List<StageElementUpdater> levels = default;        //レベル選択に使用する要素のリスト
+    [SerializeField] SceneSettingData sceneSettingData = default;       //シーンの設定データ
 
     /// <summary>
     /// Updateが最初に呼び出される前のフレームで呼び出される
@@ -30,8 +31,16 @@ public class LevelContntManager : SingletonMonoBehaviour<LevelContntManager>
         int clearStageNum = SaveDataManager.Inst.GetClearStageNum();
         for (int i = 0; i < levels.Count; i++)
         {
-            // クリアしたステージ数以下ならアクティブ、そうでない場合は非アクティブにする
-            levels[i].gameObject.SetActive(i <= clearStageNum);
+            if(i < sceneSettingData.Scenes.Count)
+            {
+                // クリアしたステージ数以下ならアクティブ、そうでない場合は非アクティブにする
+                levels[i].SwitchInteractable(i <= clearStageNum);
+            }
+            else
+            {
+                levels[i].gameObject.SetActive(false);
+            }
+
         }
     }
 

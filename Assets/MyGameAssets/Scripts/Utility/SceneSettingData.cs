@@ -13,4 +13,8 @@ public class SceneSettingData : ScriptableObject
     public Color SelectColor => selectColor;
     [SerializeField] Color nonSelectColor = Color.white;
     public Color NonSelectColor => nonSelectColor;
+    [SerializeField] Color lockButtonColor = Color.white;
+    public Color LockButtonColor => lockButtonColor;
+    [SerializeField] Color lockTextColor = Color.white;
+    public Color LockTextColor => lockTextColor;
 }

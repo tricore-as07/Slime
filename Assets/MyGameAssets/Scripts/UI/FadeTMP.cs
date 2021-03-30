@@ -1,21 +1,28 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// TMPの文字をフェードアニメーションさせるクラス
+/// </summary>
 public class FadeTMP : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI text = default;
-    [SerializeField, Range(0, 1f)] float minAlpha = 0;
-    [SerializeField, Range(0, 1f)] float maxAlpha = 0;
-    [SerializeField] float fadeTime = 1f;
+    [SerializeField] TextMeshProUGUI text = default;        //フェードさせるテキスト
+    [SerializeField, Range(0, 1f)] float minAlpha = 0;      //最小のアルファ値
+    [SerializeField, Range(0, 1f)] float maxAlpha = 0;      //最大のアルファ値
+    [SerializeField] float fadeTime = 1f;                   //フェード時間
 
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// オブジェクトがアクティブになった時に呼ばれる
+    /// </summary>
+    void OnEnable()
     {
         StartCoroutine(Fade());
     }
 
+    /// <summary>
+    /// フェード処理
+    /// </summary>
     IEnumerator Fade()
     {
         bool fadeOut = false;

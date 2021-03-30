@@ -20,3 +20,5 @@ MonoBehaviour:
   - Stage_05
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   nonSelectColor: {r: 1, g: 0.33333334, b: 0.10980392, a: 1}
+  lockButtonColor: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
+  lockTextColor: {r: 0.53333336, g: 0.53333336, b: 0.53333336, a: 0.5019608}

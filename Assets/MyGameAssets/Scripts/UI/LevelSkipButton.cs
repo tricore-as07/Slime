@@ -26,7 +26,7 @@ public class LevelSkipButton : MonoBehaviour
     public void OnLevelSkipButton()
     {
         AdMobManager.Inst.ShowMovieAd();
-        EventManager.Inst.InvokeEvent(SubjectType.OnGameClear);
+        EventManager.Inst.InvokeEvent(SubjectType.OnSkipStage);
     }
 
     /// <summary>

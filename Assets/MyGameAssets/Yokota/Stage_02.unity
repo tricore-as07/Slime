@@ -3569,6 +3569,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneSetting
       objectReference: {fileID: 0}
+    - target: {fileID: 4610864469071857453, guid: dda7905cc5cc04df28eace219f5ff5d1,
+        type: 3}
+      propertyPath: stageNumber
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dda7905cc5cc04df28eace219f5ff5d1, type: 3}
 --- !u!114 &4610864468539692274 stripped

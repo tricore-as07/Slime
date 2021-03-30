@@ -82,6 +82,7 @@ public partial class Player : MonoBehaviour
         EventManager.Inst.Subscribe(SubjectType.OnChangeSkin, Unit => ChangeSkin(), gameObject);
         EventManager.Inst.Subscribe(SubjectType.OnGameOver, Unit => stateMachine.SendEvent((int)PlayerStateEventId.DoNotAcceptInput), gameObject);
         EventManager.Inst.Subscribe(SubjectType.OnGameClear, Unit => stateMachine.SendEvent((int)PlayerStateEventId.DoNotAcceptInput), gameObject);
+        EventManager.Inst.Subscribe(SubjectType.OnSkipStage, Unit => stateMachine.SendEvent((int)PlayerStateEventId.DoNotAcceptInput), gameObject);
         // プレイヤーの設定データを反映させる
         jumpPower = playerSettingsData.JumpPower;
         jumpPowerByIceConditionFactor = playerSettingsData.JumpPowerByIceConditionFactor;

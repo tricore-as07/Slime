@@ -256,6 +256,10 @@ public partial class Player : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         stateMachine.OnCollisionEnter(collision);
+        if(rigidbody.useGravity)
+        {
+            EventManager.Inst.InvokeEvent(SubjectType.OnLanding);
+        }
         CreateCollisionEffect(collision);
     }
 

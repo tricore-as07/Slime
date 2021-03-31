@@ -16,7 +16,6 @@ public partial class Player : MonoBehaviour
         /// </summary>
         protected internal override void Enter()
         {
-            EventManager.Inst.InvokeEvent(SubjectType.OnLanding);
             stretch = Context.sensor.m_params.fx.stretch;
             Context.sensor.m_params.fx.stretch = 0f;
         }

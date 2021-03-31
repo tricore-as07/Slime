@@ -40,6 +40,8 @@ public enum SubjectType
     OnEvaporation,          // 蒸発した時のイベント
     OnRupture,              // 破裂した時のイベント
     OnSkipStage,            // ステージをスキップした時のイベント
+    OnFallDead,             // 落下した時のイベント
+    OnPushButton,           // ボタンが押された時のイベント
 }
 
 /// <summary>

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7009005730332820075}
   - component: {fileID: 7009005730332820074}
   - component: {fileID: 7009005730332820078}
+  - component: {fileID: 6428451071038963530}
   m_Layer: 0
   m_Name: GameOverZone
   m_TagString: Untagged
@@ -125,3 +126,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6428451071038963530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7009005730332820072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b98b9d887cc145e29bf58d83f2f0042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagName: Player
+  subjectType: 31

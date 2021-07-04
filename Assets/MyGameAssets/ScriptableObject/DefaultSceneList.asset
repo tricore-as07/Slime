@@ -18,6 +18,31 @@ MonoBehaviour:
   - Stage_03
   - Stage_04
   - Stage_05
+  - Stage_06
+  - Stage_07
+  - Stage_08
+  - Stage_09
+  - Stage_10
+  - Stage_11
+  - Stage_12
+  - Stage_13
+  - Stage_14
+  - Stage_15
+  - Stage_16
+  - Stage_17
+  - Stage_18
+  - Stage_19
+  - Stage_20
+  - Stage_21
+  - Stage_22
+  - Stage_23
+  - Stage_24
+  - Stage_25
+  - Stage_26
+  - Stage_27
+  - Stage_28
+  - Stage_29
+  - Stage_30
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   nonSelectColor: {r: 1, g: 0.33333334, b: 0.10980392, a: 1}
   lockButtonColor: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}

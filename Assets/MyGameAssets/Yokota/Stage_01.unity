@@ -411,7 +411,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sceneSetting
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4610864468539692274}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6a1912e590bd496caecde09d6167c9e, type: 3}
 --- !u!1001 &337796533
@@ -1594,6 +1594,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dda7905cc5cc04df28eace219f5ff5d1, type: 3}
+--- !u!114 &4610864468539692274 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4610864469071857453, guid: dda7905cc5cc04df28eace219f5ff5d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 4610864468539692273}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe45b723ea4db4f8fab186505175d994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9209119323952290017
 PrefabInstance:
   m_ObjectHideFlags: 0
